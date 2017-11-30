@@ -1,0 +1,56 @@
+<app-header></app-header>
+<div class="container">
+    <h1>Liste des produits en stock</h1>
+    <button class="btn btn-outline-success" routerLinkActive="active" routerLink="/addProduct">Ajouter un produit
+    </button>
+    <hr class="my-4">
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom du produit</th>
+            <th scope="col">Prix unitaire</th>
+            <th scope="col">Quantité</th>
+            <th scope="col">Prix total</th>
+            <th scope="col">Date</th>
+            <th scope="col">Commandé par</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let productGroup of products">
+            <td>
+                d
+            </td>
+            <td>d</td>
+            <td>d</td>
+            <td>d</td>
+            <td>d</td>
+            <td>d</td>
+            <td>d</td>
+            <td>d</td>
+            <!--
+            <td>
+                {{productGroup}}
+            </td>-->
+            <!--<td>
+                <table>
+                    <tr *ngFor="let product of productGroup">
+                        <th scope="row">{{product.id}}</th>
+                        <td>{{product.productPrice.product.name}}</td>
+                        <td>{{product.productPrice.price}}€</td>
+                        <td>{{product.quantity}}</td>
+                        <td>{{product.productPrice.price * product.quantity}}€</td>
+                        <td>{{product.creationDate | date:'dd/MM/yyyy'}}<br>
+                            <i>{{product.creationDate | date:'HH:mm'}}</i></td>
+                        <td>{{product.user.username}}</td>
+                        <td>
+                            <button class="btn btn-danger" (click)="deleteProduct(product.id)">Supprimer</button>
+                        </td>
+                    </tr>
+                </table>
+            </td>-->
+        </tr>
+        </tbody>
+    </table>
+</div>

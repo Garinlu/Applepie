@@ -1,0 +1,11 @@
+et_platform_homepage:
+    path:     /
+    defaults: { _controller: ETPlatformBundle:Default:index }
+
+
+et_platform_products_get:
+    resource: ETPlatformBundle:Default
+    type:     rest
+    options:
+        expose: true
+        prefix: api

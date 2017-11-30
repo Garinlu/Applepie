@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Front</title>
+    <base href="/">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="{{ app.request.basepath }}/front/favicon.ico">
+    <link rel="stylesheet" href="{{ app.request.basepath }}/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+
+<app-root></app-root>
+<div ng-view></div>
+<script type="text/javascript" src="{{ app.request.basepath }}/front/inline.bundle.js"></script>
+<script type="text/javascript" src="{{ app.request.basepath }}/front/polyfills.bundle.js"></script>
+<script type="text/javascript" src="{{ app.request.basepath }}/front/styles.bundle.js"></script>
+<script type="text/javascript" src="{{ app.request.basepath }}/front/vendor.bundle.js"></script>
+<script type="text/javascript" src="{{ app.request.basepath }}/front/main.bundle.js"></script>
+</body>
+</html>

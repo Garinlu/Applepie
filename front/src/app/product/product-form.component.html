@@ -1,0 +1,27 @@
+<app-header></app-header>
+<div class="container">
+    <h1>Ajouter un produit</h1>
+    <button class="btn btn-outline-danger" routerLinkActive="active" routerLink="/products">Retour</button>
+    <hr class="my-4">
+    <form  #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+        <div class="form-group">
+            <label for="name">Nom du produit</label>
+            <input id="name" type="text" class="form-control" required ngModel
+                   name="name" auto-complete [(ngModel)]="myData" [source]="productsName"
+                   autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Quantité</label>
+            <input type="number"  class="form-control" id="quantity" required ngModel
+                   name="quantity">
+        </div>
+
+        <div class="form-group">
+            <label for="price">Prix unitaire</label>
+            <input type="number"  class="form-control" id="price" required ngModel
+                   name="price">
+        </div>
+        <button style="float: right;" class="btn btn-success" type="submit">Ajouter</button>
+    </form>
+</div>

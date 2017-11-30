@@ -29,6 +29,10 @@
 # Assets and user uploads
 /web/bundles/
 /web/uploads/
+/web/front/
+/vendor
+
+/front/node_modules/
 
 # PHPUnit
 /app/phpunit.xml
