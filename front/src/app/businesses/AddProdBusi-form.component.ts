@@ -36,9 +36,10 @@ export class AddProdBusiFormComponent implements OnInit, OnDestroy {
         });
         this.productServ.getProducts().subscribe(products => {
             this.products = products;
+            console.log(this.products);
             let productsN = [];
             products.forEach(function (element) {
-                productsN.push({key: element.id, value: element.product.name + " - " + element.price + "€"});
+                productsN.push({key: element.id, value: element.productPrice.product.name + " - " + element.productPrice.price + "€"});
 
             });
             this.productsName = productsN;
