@@ -3,8 +3,6 @@ import {Business} from './business.model';
 import 'rxjs/add/operator/map';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from 'rxjs';
-import {Product} from '../product/product.model';
-import {User} from '../user/user.model';
 
 @Injectable()
 export class BusinessService {
@@ -21,25 +19,24 @@ export class BusinessService {
     }
 
     getProductFromBusiness(id: number) {
-        const url = `/business/` + id + `/products/group`;
+        const url = `/products?business=` + id;
         return this.http.get(url);
     }
 
     putBusiness(business: Business): Observable<Business> {
-        const url = `/businesses`;
+        const url = `/business`;
         return this.http.put(url, business);
     }
 
     putBusinessProduct(id_business: number, id_product: number, quantity: number) {
-        const url = `/businesses/products`;
+        const url = `/business/product`;
         const body = {id_business: id_business, id_product: id_product, quantity: quantity};
         return this.http.put(url, body);
     }
 
     deleteProduct(id_business_product: number) {
-
         const body = {id_businessProduct: id_business_product};
-        const url = `/businesses/products`;
+        const url = `/business/product`;
         return this.http.delete(url, body);
     }
 }

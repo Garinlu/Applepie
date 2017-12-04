@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
 export class ProductFormComponent implements OnInit {
     productsName: string[] = [];
     ngOnInit() {
-        this.productService.getNameProducts().subscribe(products => {
+        this.productService.getProductsDetail().subscribe(products => {
             let productsN = [];
             products.forEach(function(element) {
                 productsN.push(element.name);

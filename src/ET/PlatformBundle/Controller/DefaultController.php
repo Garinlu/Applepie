@@ -3,13 +3,15 @@
 namespace ET\PlatformBundle\Controller;
 
 use ET\PlatformBundle\Entity\BusinessProduct;
-use ET\PlatformBundle\Entity\ProductsBuy;
-use ET\PlatformBundle\Entity\ProductsPrice;
+use ET\PlatformBundle\Entity\ProductOrder;
+use ET\PlatformBundle\Entity\Product;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use ET\PlatformBundle\Entity\Products;
+use ET\PlatformBundle\Entity\ProductDetail;
 use ET\PlatformBundle\Entity\Business;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+
 
 /**
  * @Rest\View()
@@ -30,9 +32,8 @@ class DefaultController extends Controller
     /**
      *
      * @Rest\Route("/products")
-     * Get all products buy (Historic of buying) or product of a business
+     * Get all products or products of a business
      *
-     * @return array
      */
     public function getProductsAction(Request $request)
     {
@@ -45,38 +46,47 @@ class DefaultController extends Controller
                     'No business found'
                 );
             }
-            $business = $this->getDoctrine()
-                ->getRepository('ETPlatformBundle:Business')
-                ->find($id_business);
-
-            return $this->getDoctrine()
-                ->getRepository('ETPlatformBundle:BusinessProduct')
-                ->findBy(array('business' => $business));
+            $productsMana = $this->container->get('et_platform.products');
+            $datas = $productsMana->getProductsOfBusiness($id_business);
+            return $datas;
         }
 
         return $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('ETPlatformBundle:ProductsBuy')
+            ->getRepository('ETPlatformBundle:Product')
             ->findAll();
     }
 
     /**
-     * Get all name of products
      *
+     * @Rest\Route("/dert")
+     */
+    public function getProductsFreeAction()
+    {
+
+        $productsMana = $this->container->get('et_platform.products');
+        return $productsMana->getProductsFree();
+    }
+
+    /**
+     * Get all detail of products
+     *
+     * @Rest\Route("/products/details")
      * @return array
      */
-    public function getProductsNameAction()
+    public function getProductsDetailAction()
     {
         return $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('ETPlatformBundle:Products')
+            ->getRepository('ETPlatformBundle:ProductDetail')
             ->findAll();
     }
 
     /**
      * Get all Business.
+     * @Rest\Route("/business")
      *
      * @return array
      */
@@ -103,107 +113,22 @@ class DefaultController extends Controller
     }
 
     /**
-     *
-     * Get all products of a business (formated)
-     * @Rest\Get("/business/{id}/products/group")
-     *
-     * @param Request $request
-     * @return array
-     */
-    public function getBusinessProductsGroupAction(Request $request)
-    {
-        $datas_tmp = null;
-        $id_business = $request->get('id');
-
-        if (!$id_business)
-        {
-            throw $this->createNotFoundException(
-                'No business found'
-            );
-        }
-        $business = $this->getDoctrine()
-            ->getRepository('ETPlatformBundle:Business')
-            ->find($id_business);
-
-        $datas_tmp = $this->getDoctrine()
-            ->getRepository('ETPlatformBundle:BusinessProduct')
-            ->findBy(array('business' => $business));
-
-        $datas = [];
-        $name_products = [];
-        foreach ($datas_tmp as $data)
-        {
-            $tmp = [];
-            $tmp['id'] = $data->getId();
-            $tmp['name'] = $data->getProductPrice()->getProduct()->getName();
-            $tmp['price'] = $data->getProductPrice()->getPrice();
-            $tmp['quantity'] = $data->getQuantity();
-            $tmp['creationDate'] = $data->getCreationDate();
-            $tmp['username'] = $data->getUser()->getUsername();
-            if (!array_key_exists($tmp['name'], $name_products))
-            {
-                $name_products[$tmp['name']] = count($datas);
-                $datas[$name_products[$tmp['name']]] = array(
-                    'name' => $tmp['name'],
-                    'quantity' => 0,
-                    'price' => 0,
-                    'products' => array());
-            }
-            $datas[$name_products[$tmp['name']]]['products'][] = $tmp;
-            $datas[$name_products[$tmp['name']]]['quantity'] += intval($tmp['quantity']);
-            $datas[$name_products[$tmp['name']]]['price'] +=
-                intval($tmp['price']) * intval($tmp['quantity']);
-        }
-        return $datas;
-    }
-
-    /**
      * Adding a product buying. If product an product price are already created, just add a productBuy.
      *
      * @param Request $request
-     * @return ProductsBuy
+     * @return ProductOrder
      */
     public function putProductAction(Request $request)
     {
-        $doctrine = $this->getDoctrine();
-        $repoProd = $doctrine->getRepository('ETPlatformBundle:Products');
-        $repoProdPrice = $doctrine->getRepository('ETPlatformBundle:ProductsPrice');
-        $em = $doctrine->getManager();
         $name = $request->request->get('name');
         $price = $request->request->get('price');
         $quantity = $request->request->get('quantity');
 
-        $product = new Products();
-        $product->setName($name);
+        $productsMana = $this->container->get('et_platform.products');
+        $datas = $productsMana->addProduct($name, $price, $quantity);
 
-        if (!$repoProd->findByName($product->getName()))
-        {
-            $em->persist($product);
-            $em->flush();
-        }
-        $product = $repoProd->findByName($product->getName())[0];
-        if (!$productPrice = $repoProdPrice->findBy(array(
-            'product' => $product,
-            'price' => $price))[0]
-        )
-        {
-            $productPrice = new ProductsPrice();
-            $productPrice->setProduct($product);
-            $productPrice->setPrice($price);
-        }
+        return $datas;
 
-        $em->persist($productPrice);
-        $em->flush();
-
-        $productBuy = new ProductsBuy();
-        $productBuy->setProductPrice($productPrice);
-        $productBuy->setQuantity($quantity);
-        $productBuy->setUser($this->get('security.token_storage')->getToken()->getUser());
-
-        $em->persist($productBuy);
-        $em->flush();
-
-        return $productBuy;
     }
 
     /**
@@ -214,28 +139,19 @@ class DefaultController extends Controller
      */
     public function putBusinessAction(Request $request)
     {
-        $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
         $name = $request->request->get('name');
-
-        $business = new Business();
-        $business->setName($name);
-
-        $em->persist($business);
-
-        $em->flush();
-
-        return $business;
+        $productsMana = $this->container->get('et_platform.products');
+        return $productsMana->addBusiness($name);
     }
 
     /**
+     * Add a product to the business, need the quantity
+     *
      * @param Request $request
      * @return BusinessProduct|\Exception
      */
     public function putBusinessProductAction(Request $request)
     {
-        $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
         if (!$id_product = $request->request->get('id_product'))
             return new \Exception(
                 'No product found'
@@ -249,39 +165,17 @@ class DefaultController extends Controller
                 'No quantity found'
             );
 
-        $productDetail = $em->getRepository('ETPlatformBundle:ProductsDetails')
-            ->find($id_product);
-        $business = $em->getRepository('ETPlatformBundle:Business')
-            ->find($id_business);
-
-        if ($productDetail->getQuantity() < $quantity)
-            return new \Exception(
-                'Quantity is too high'
-            );
-
-        $businessProd = new BusinessProduct();
-        $businessProd->setProductDetails($productDetail);
-        $businessProd->setBusiness($business);
-        $businessProd->setQuantity($quantity);
-        $businessProd->setUser($this->get('security.token_storage')->getToken()->getUser());
-
-        $productDetail->setQuantity($productDetail->getQuantity() - $quantity);
-
-        $em->persist($businessProd);
-        $em->merge($productDetail);
-        $em->flush();
-
-
-        return $businessProd;
+        $productsMana = $this->container->get('et_platform.products');
+        return $productsMana->addProductToBusiness($id_product, $id_business, $quantity);
     }
 
 
     /**
      * @param Request $request
      */
-    public function deleteProductBuyAction(Request $request)
+    public function deleteProductAction(Request $request)
     {
-        $id_product = $request->request->get('id_product');
+        /*$id_product = $request->request->get('id_product');
         if (!$id_product)
         {
             throw $this->createNotFoundException(
@@ -290,9 +184,9 @@ class DefaultController extends Controller
         }
         $manager = $this->getDoctrine()->getManager();
 
-        $product = $manager->getRepository('ETPlatformBundle:ProductsBuy')->find($id_product);
+        $product = $manager->getRepository('ETPlatformBundle:ProductOrder')->find($id_product);
         $manager->remove($product);
-        $manager->flush();
+        $manager->flush();*/
     }
 
     /**

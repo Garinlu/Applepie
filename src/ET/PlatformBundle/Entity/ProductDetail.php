@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Products
  *
- * @ORM\Table(name="products")
- * @ORM\Entity(repositoryClass="ET\PlatformBundle\Repository\ProductsRepository")
+ * @ORM\Table(name="product_detail")
+ * @ORM\Entity(repositoryClass="ET\PlatformBundle\Repository\ProductDetailRepository")
  */
-class Products
+class ProductDetail
 {
     /**
      * @var int
@@ -43,7 +43,7 @@ class Products
      *
      * @param string $name
      *
-     * @return Products
+     * @return ProductDetail
      */
     public function setName($name)
     {

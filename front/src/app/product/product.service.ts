@@ -13,17 +13,18 @@ export class ProductService {
         return this.http.get(url);
     }
     putProduct(product: Product): Observable<Product> {
-        const url = `/products`;
+        const url = `/product`;
         return this.http.put(url, product);
     }
     deleteProduct(id: number) {
+        /*NOT SURE, DELETE THE PRODUCT OR AN ORDER*/
         const body = {id_product: id};
-        const url = `/products/buys`;
+        const url = `/product`;
         return this.http.delete(url, body);
     }
 
-    getNameProducts(): Observable<any> {
-        const url = `/products/name`;
+    getProductsDetail(): Observable<any> {
+        const url = `/products/details`;
         return this.http.get(url);
     }
 }
