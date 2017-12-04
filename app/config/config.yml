@@ -90,6 +90,7 @@ fos_rest:
         rules:
             - { path: '^/$', stop: true }
             - { path: '^/login', stop: true }
+            - { path: '^/register', stop: true }
             - { path: '^/', priorities: ['json'], fallback_format: 'json' }
 
 fos_user:

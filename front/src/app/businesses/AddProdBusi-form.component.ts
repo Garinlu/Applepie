@@ -39,7 +39,10 @@ export class AddProdBusiFormComponent implements OnInit, OnDestroy {
             console.log(this.products);
             let productsN = [];
             products.forEach(function (element) {
-                productsN.push({key: element.id, value: element.productPrice.product.name + " - " + element.productPrice.price + "€"});
+                productsN.push({
+                    key: element.id,
+                    value: element.productDetail.name + " - " + element.price + "€ (restant : " + element.quantityReal + ")"
+                });
 
             });
             this.productsName = productsN;
@@ -52,8 +55,7 @@ export class AddProdBusiFormComponent implements OnInit, OnDestroy {
     }
 
     onSubmit(value): void {
-        if (value.quantity > this.getMaxQuantity())
-        {
+        if (value.quantity > this.getMaxQuantity()) {
             alert('Quantité trop élevé');
             return;
         }

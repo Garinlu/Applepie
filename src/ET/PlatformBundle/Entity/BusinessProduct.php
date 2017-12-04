@@ -29,10 +29,10 @@ class BusinessProduct
     private $business;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ET\PlatformBundle\Entity\ProductsPrice")
+     * @ORM\ManyToOne(targetEntity="ET\PlatformBundle\Entity\Product")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $productPrice;
+    private $product;
 
     /**
      * @ORM\ManyToOne(targetEntity="ET\PlatformBundle\Entity\User")
@@ -97,17 +97,17 @@ class BusinessProduct
     /**
      * @return mixed
      */
-    public function getProductPrice()
+    public function getProduct()
     {
-        return $this->productPrice;
+        return $this->product;
     }
 
     /**
-     * @param mixed $productPrice
+     * @param mixed $product
      */
-    public function setProductPrice($productPrice)
+    public function setProduct($product)
     {
-        $this->productPrice = $productPrice;
+        $this->product = $product;
     }
 
     /**

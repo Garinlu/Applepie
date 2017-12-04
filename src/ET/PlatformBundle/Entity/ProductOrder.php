@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * BusinessProduct
  *
- * @ORM\Table(name="products_buy")
- * @ORM\Entity(repositoryClass="ET\PlatformBundle\Repository\ProductsBuyRepository")
+ * @ORM\Table(name="product_order")
+ * @ORM\Entity(repositoryClass="ET\PlatformBundle\Repository\ProductOrderRepository")
  */
-class ProductsBuy
+class ProductOrder
 {
     /**
      * @var int
@@ -22,10 +22,26 @@ class ProductsBuy
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ET\PlatformBundle\Entity\ProductsPrice")
+     * @ORM\ManyToOne(targetEntity="ET\PlatformBundle\Entity\Product")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $productPrice;
+    private $product;
+
+    /**
+     * @return mixed
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param mixed $product
+     */
+    public function setProduct($product)
+    {
+        $this->product = $product;
+    }
 
     /**
      * @var int
@@ -61,22 +77,6 @@ class ProductsBuy
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getProductPrice()
-    {
-        return $this->productPrice;
-    }
-
-    /**
-     * @param $productPrice
-     */
-    public function setProductPrice($productPrice)
-    {
-        $this->productPrice = $productPrice;
     }
 
     /**

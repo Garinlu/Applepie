@@ -3,11 +3,13 @@
 namespace ET\PlatformBundle\Service;
 
 
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use ET\PlatformBundle\Entity\Business;
 use ET\PlatformBundle\Entity\BusinessProduct;
-use ET\PlatformBundle\Entity\Products;
-use ET\PlatformBundle\Entity\ProductsBuy;
-use ET\PlatformBundle\Entity\ProductsPrice;
+use ET\PlatformBundle\Entity\ProductDetail;
+use ET\PlatformBundle\Entity\ProductOrder;
+use ET\PlatformBundle\Entity\Product;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ETProductsManager
@@ -42,8 +44,8 @@ class ETProductsManager
         {
             $tmp = [];
             $tmp['id'] = $data->getId();
-            $tmp['name'] = $data->getProductPrice()->getProduct()->getName();
-            $tmp['price'] = $data->getProductPrice()->getPrice();
+            $tmp['name'] = $data->getProduct()->getProductDetail()->getName();
+            $tmp['price'] = $data->getProduct()->getPrice();
             $tmp['quantity'] = $data->getQuantity();
             $tmp['creationDate'] = $data->getCreationDate();
             $tmp['username'] = $data->getUser()->getUsername();
@@ -68,43 +70,47 @@ class ETProductsManager
      * @param $name
      * @param $price
      * @param $quantity
-     * @return ProductsBuy
+     * @return ProductOrder
      */
     public function addProduct($name, $price, $quantity)
     {
-        $repoProd = $this->em->getRepository('ETPlatformBundle:Products');
-        $repoProdPrice = $this->em->getRepository('ETPlatformBundle:ProductsPrice');
-        $product = new Products();
-        $product->setName($name);
+        $repoProdDetail = $this->em->getRepository('ETPlatformBundle:ProductDetail');
+        $repoProd = $this->em->getRepository('ETPlatformBundle:Product');
+        $productDetail = new ProductDetail();
+        $productDetail->setName($name);
 
-        if (!$repoProd->findByName($product->getName()))
+        if (!$repoProdDetail->findByName($productDetail->getName()))
         {
-            $this->em->persist($product);
+            $this->em->persist($productDetail);
             $this->em->flush();
         }
-        $product = $repoProd->findByName($product->getName())[0];
-        if (!$productPrice = $repoProdPrice->findBy(array(
-            'product' => $product,
-            'price' => $price))[0]
+        $productDetail = $repoProdDetail->findByName($productDetail->getName())[0];
+        if (!$product = $repoProd->findBy(array(
+            'product_detail' => $productDetail,
+            'price' => $price))
         )
         {
-            $productPrice = new ProductsPrice();
-            $productPrice->setProduct($product);
-            $productPrice->setPrice($price);
+            $product = new Product();
+            $product->setProductDetail($productDetail);
+            $product->setPrice($price);
+        }
+        else
+        {
+            $product = $product[0];
         }
 
-        $this->em->persist($productPrice);
+        $this->em->persist($product);
         $this->em->flush();
 
-        $productBuy = new ProductsBuy();
-        $productBuy->setProductPrice($productPrice);
-        $productBuy->setQuantity($quantity);
-        $productBuy->setUser($this->user);
+        $productOrder = new ProductOrder();
+        $productOrder->setProduct($product);
+        $productOrder->setQuantity($quantity);
+        $productOrder->setUser($this->user);
 
-        $this->em->persist($productBuy);
+        $this->em->persist($productOrder);
         $this->em->flush();
 
-        return $productBuy;
+        return $productOrder;
     }
 
     /**
@@ -129,18 +135,18 @@ class ETProductsManager
     public function addProductToBusiness($id_product, $id_business, $quantity)
     {
 
-        $productPrice = $this->em->getRepository('ETPlatformBundle:ProductsPrice')
+        $product = $this->em->getRepository('ETPlatformBundle:Product')
             ->find($id_product);
         $business = $this->em->getRepository('ETPlatformBundle:Business')
             ->find($id_business);
 
-        if (($this->getQuantityofProductBuy($id_product) - $this->getQuantityOfProductUsed($id_product)) < $quantity)
+        if ($product->getQuantityReal() < $quantity)
             return new \Exception(
-                'Quantity is too high'
+                'Quantity is too high '
             );
 
         $businessProd = new BusinessProduct();
-        $businessProd->setProductPrice($productPrice);
+        $businessProd->setProduct($product);
         $businessProd->setBusiness($business);
         $businessProd->setQuantity($quantity);
         $businessProd->setUser($this->user);
@@ -154,10 +160,10 @@ class ETProductsManager
     public function getQuantityOfProductUsed($id_product)
     {
         $quantity = 0;
-        $products_price = $this->em->getRepository('ETPlatformBundle:ProductsPrice')
+        $product = $this->em->getRepository('ETPlatformBundle:Product')
             ->find($id_product);
         $products_in_business = $this->em->getRepository('ETPlatformBundle:BusinessProduct')
-            ->findBy(array('productPrice' => $products_price));
+            ->findBy(array('product' => $product));
 
         foreach ($products_in_business as $product_in_business)
         {
@@ -169,21 +175,39 @@ class ETProductsManager
     public function getQuantityofProductBuy($id_product)
     {
         $quantity = 0;
-        $products_price = $this->em->getRepository('ETPlatformBundle:ProductsPrice')
+        $product = $this->em->getRepository('ETPlatformBundle:Product')
             ->find($id_product);
-        $products_buy = $this->em->getRepository('ETPlatformBundle:ProductsBuy')
-            ->findBy(array('productPrice' => $products_price));
+        $productsOrder = $this->em->getRepository('ETPlatformBundle:ProductOrder')
+            ->findBy(array('product' => $product));
 
-        foreach ($products_buy as $product_buy)
+        foreach ($productsOrder as $productOrder)
         {
-            $quantity += $product_buy->getQuantity();
+            $quantity += $productOrder->getQuantity();
         }
         return $quantity;
     }
 
+    // TODO fonction renvoyant les produits encore disponible, avec leur prix et leur quantity
     public function getProductsFree()
     {
-        // TODO fonction renvoyant les produits encore disponible, avec leur prix et leur quantity
-        //
+
+        /*$sqlQuery = "SELECT * FROM `view_products_quantity`;";
+
+        $rsm = new ResultSetMappingBuilder($this->em);
+        $rsm->addRootEntityFromClassMetadata(ViewProductsQuantity::class, 'view_products_quantity');
+        $q = $this->em->createNativeQuery($sqlQuery, $rsm);
+
+        return $q->getResult();
+
+
+        $rsm = new ResultSetMapping();
+
+        $sql = 'SELECT product_price_id, quantity FROM `products_buy`';
+
+        $query = $this->em->createNativeQuery($sql, $rsm);
+        return $query->getSQL();
+        $projects = $query->getResult();
+//        $query = $this->em->createNativeQuery('SELECT * FROM view_products_quantity', $rsm);
+        return array($projects);*/
     }
 }
