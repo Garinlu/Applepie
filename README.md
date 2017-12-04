@@ -5,7 +5,7 @@ Applepie is a web application. The aim goal is to manage products from the stock
 
 
 ## Database
-![alt text](github_media/Applepie.png "Database diagram")
+![alt text](Applepie.png "Database diagram")
 
 This schema have been created on 12/01/2017.
 
