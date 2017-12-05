@@ -34,7 +34,7 @@ export class AddProdBusiFormComponent implements OnInit, OnDestroy {
         this.sub = this.route.params.subscribe(params => {
             this.id_business = +params['id'];
         });
-        this.productServ.getProducts().subscribe(products => {
+        this.productServ.getProductsFree().subscribe(products => {
             this.products = products;
             console.log(this.products);
             let productsN = [];

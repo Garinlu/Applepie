@@ -11,4 +11,18 @@ namespace ET\PlatformBundle\Repository;
  */
 class ProductRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return array
+     */
+    public function findFreeProduct() {
+        $qb = $this
+            ->createQueryBuilder('p')
+            ->addSelect('p')
+            ->where('p.quantity_real > 0')
+            ->getQuery();
+
+        return $qb
+            ->getResult()
+            ;
+    }
 }

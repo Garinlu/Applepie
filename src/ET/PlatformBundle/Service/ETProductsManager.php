@@ -208,27 +208,4 @@ class ETProductsManager
         return $quantity;
     }
 
-    // TODO fonction renvoyant les produits encore disponible, avec leur prix et leur quantity
-    public function getProductsFree()
-    {
-
-        /*$sqlQuery = "SELECT * FROM `view_products_quantity`;";
-
-        $rsm = new ResultSetMappingBuilder($this->em);
-        $rsm->addRootEntityFromClassMetadata(ViewProductsQuantity::class, 'view_products_quantity');
-        $q = $this->em->createNativeQuery($sqlQuery, $rsm);
-
-        return $q->getResult();
-
-
-        $rsm = new ResultSetMapping();
-
-        $sql = 'SELECT product_price_id, quantity FROM `products_buy`';
-
-        $query = $this->em->createNativeQuery($sql, $rsm);
-        return $query->getSQL();
-        $projects = $query->getResult();
-//        $query = $this->em->createNativeQuery('SELECT * FROM view_products_quantity', $rsm);
-        return array($projects);*/
-    }
 }

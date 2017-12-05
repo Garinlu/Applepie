@@ -27,4 +27,9 @@ export class ProductService {
         const url = `/products/details`;
         return this.http.get(url);
     }
+
+    getProductsFree(): Observable<any> {
+        const url = `/products/free`;
+        return this.http.get(url);
+    }
 }

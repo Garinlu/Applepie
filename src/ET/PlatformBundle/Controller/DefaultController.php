@@ -32,7 +32,8 @@ class DefaultController extends Controller
     /**
      *
      * @Rest\Route("/products")
-     * Get all products or products of a business
+     *
+     * Get all products or products of a business (if key 'business')
      *
      */
     public function getProductsAction(Request $request)
@@ -59,13 +60,14 @@ class DefaultController extends Controller
     }
 
     /**
+     * Return products which quantity is superior than 0.
      *
-     * @Rest\Route("/dert")
+     * @Rest\Route("/products/free")
      */
     public function getProductsFreeAction()
     {
-        $productsMana = $this->container->get('et_platform.products');
-        return $productsMana->getProductsFree();
+        return $this->getDoctrine()->getManager()->getRepository('ETPlatformBundle:Product')
+            ->findFreeProduct();
     }
 
     /**
