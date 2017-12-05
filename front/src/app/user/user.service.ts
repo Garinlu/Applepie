@@ -31,8 +31,8 @@ export class UserService {
         return this.http.get(`/user/login`).map(user => this.user as User);
     }
 
-    getUser(): Observable<User> {
-        const url = `/user`;
-        return this.http.get(url).map(response => response as User);
+    getUserNotBusiness(id_business): Observable<User[]> {
+        const url = `/business/users/` + id_business;
+        return this.http.get(url).map(response => response as User[]);
     }
 }

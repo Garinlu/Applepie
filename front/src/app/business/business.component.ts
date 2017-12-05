@@ -43,7 +43,6 @@ export class BusinessComponent implements OnInit {
                     tmpBool.splice(prod.name, 0, false);
                 });
                 this.showDetails = tmpBool;
-                console.log(this.showDetails);
             });
 
     }

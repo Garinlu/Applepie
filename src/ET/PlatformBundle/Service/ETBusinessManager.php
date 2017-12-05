@@ -36,4 +36,38 @@ class ETBusinessManager
         $this->em->flush();
         return $business;
     }
+
+    /**
+     *
+     * Add a business at an user
+     *
+     * @param $id_user
+     * @param $id_business
+     * @return bool
+     */
+    public function addUserToBusiness($id_user, $id_business)
+    {
+        $repoBusiness = $this->em->getRepository('ETPlatformBundle:Business');
+        $repoUser = $this->em->getRepository('ETPlatformBundle:User');
+        $business = $repoBusiness->find($id_business);
+        $user = $repoUser->find($id_user);
+        $user->addBusiness($business);
+        $this->em->persist($user);
+        $this->em->flush();
+
+        return true;
+    }
+
+    public function getUsersNotBusiness($id_business)
+    {
+        $business = $this->em->getRepository('ETPlatformBundle:Business')->find($id_business);
+        $users_tmp = $this->em->getRepository('ETPlatformBundle:User')->findAll();
+        $users = [];
+        foreach ($users_tmp as $user)
+        {
+            if (!$user->hasBusiness($business))
+                $users[] = $user;
+        }
+        return $users;
+    }
 }

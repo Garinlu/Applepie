@@ -7,6 +7,7 @@ import {IndexComponent} from './index/index.component';
 import {BusinessComponent} from './business/business.component';
 import {BusinessFormComponent} from './business/business-form.component';
 import {AddProdBusiFormComponent} from './businesses/AddProdBusi-form.component';
+import {AddBusiUserFormComponent} from './business/AddBusiUser-form.component';
 
 const APP_ROUTES: Routes = [
     {
@@ -40,6 +41,10 @@ const APP_ROUTES: Routes = [
     {
         path: 'addBusinessProduct/:id',
         component: AddProdBusiFormComponent
+    },
+    {
+        path: 'addBusinessUser/:id',
+        component: AddBusiUserFormComponent
     },
     { path: '**', redirectTo: 'index' }
 ];

@@ -10,12 +10,13 @@ export class BusinessService {
 
 
     getBusinesses(): Observable<Business[]> {
-        const url = `/business/`;
+        const url = `/business/all`;
         return this.http.get(url).map(response => response as Business[]);
     }
 
     getBusiness(id: number): Observable<Business> {
-        return this.getBusinesses().map(businesses => businesses.find(business => business.id === id));
+        const url = `/business/` + id;
+        return this.http.get(url).map(response => response as Business);
     }
 
     getProductFromBusiness(id: number) {

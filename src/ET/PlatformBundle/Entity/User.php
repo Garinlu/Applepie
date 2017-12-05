@@ -50,32 +50,6 @@ class User extends BaseUser
     }
 
     /**
-     * @return mixed
-     */
-    public function getBusiness()
-    {
-        return $this->business;
-    }
-
-    /**
-     * @param mixed $business
-     */
-    public function setBusiness($business)
-    {
-        $this->business = $business;
-    }
-
-    public function removeBusiness(Business $business)
-    {
-        $this->business->removeElement($business) ;
-    }
-
-    public function addBusiness($business)
-    {
-        $this->business->add($business);
-    }
-
-    /**
      * @return string
      */
     public function getFirstname()
@@ -105,5 +79,36 @@ class User extends BaseUser
     public function setLastname($lastname)
     {
         $this->lastname = $lastname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBusiness()
+    {
+        return $this->business;
+    }
+
+    /**
+     * @param mixed $business
+     */
+    public function setBusiness($business)
+    {
+        $this->business = $business;
+    }
+
+    public function removeBusiness(Business $business)
+    {
+        $this->business->removeElement($business);
+    }
+
+    public function addBusiness($business)
+    {
+        $this->business->add($business);
+    }
+
+    public function hasBusiness($business)
+    {
+        return $this->business->contains($business);
     }
 }

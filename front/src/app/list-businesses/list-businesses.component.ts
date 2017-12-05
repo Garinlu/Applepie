@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Business} from '../business/business.model';
-import {UserService} from '../user/user.service';
 import {Router} from '@angular/router';
+import {BusinessService} from '../business/business.service';
 
 @Component({
   selector: 'app-list-businesses',
@@ -12,12 +12,12 @@ export class ListBusinessesComponent implements OnInit {
   myBusiness: Business[];
 
   ngOnInit(): void {
-    this.userServ.getUser().subscribe(user => {
-      this.myBusiness = user.business;
+    this.busiServ.getBusinesses().subscribe(businesses => {
+      this.myBusiness = businesses;
     });
   }
 
-  constructor(private userServ: UserService, private router: Router) {
+  constructor(private busiServ: BusinessService, private router: Router) {
   }
 
   goToDetail(id: number): void {

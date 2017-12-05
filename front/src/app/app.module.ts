@@ -28,6 +28,7 @@ import {AlertService} from './alert/alert.service';
 import {Ng2AutoCompleteModule} from 'ng2-auto-complete';
 import {BusinessFormComponent} from './business/business-form.component';
 import {AddProdBusiFormComponent} from './businesses/AddProdBusi-form.component';
+import {AddBusiUserFormComponent} from './business/AddBusiUser-form.component';
 import { ListBusinessesComponent } from './list-businesses/list-businesses.component';
 
 @NgModule({
@@ -45,6 +46,7 @@ import { ListBusinessesComponent } from './list-businesses/list-businesses.compo
         BusinessesComponent,
         BusinessFormComponent,
         AddProdBusiFormComponent,
+        AddBusiUserFormComponent,
         AlertComponent,
         ListBusinessesComponent
     ],

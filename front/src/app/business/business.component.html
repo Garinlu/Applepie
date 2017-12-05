@@ -4,11 +4,12 @@
     <div *ngIf="business">
         <div class="jumbotron"><a class="btn btn-primary btn-lg" routerLink="/businesses" routerLinkActive="active"
                                   role="button">Retour aux chantiers</a>
+            <a class="btn btn-info btn-lg" [routerLink]="['/addBusinessUser', business.id]" style="float: right"
+               role="button">Ajouter un utilisateur sur le chantier</a>
             <h1 class="display-3">{{business.name}}</h1>
             <p class="lead">Description</p>
             <hr class="my-4">
             <p class="lead">
-
             </p>
 
         </div>
@@ -46,7 +47,7 @@
                             <td>{{product.quantity}}</td>
                             <td>{{product.price}}€</td>
                             <td>{{product.creationDate | date:'dd/MM/yyyy'}}<br>
-                            <i>{{product.creationDate | date:'HH:mm'}}</i></td>
+                                <i>{{product.creationDate | date:'HH:mm'}}</i></td>
                             <td>{{product.username}}</td>
                         </tr>
                         </tbody>

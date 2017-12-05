@@ -36,7 +36,6 @@ export class AddProdBusiFormComponent implements OnInit, OnDestroy {
         });
         this.productServ.getProductsFree().subscribe(products => {
             this.products = products;
-            console.log(this.products);
             let productsN = [];
             products.forEach(function (element) {
                 productsN.push({
@@ -55,10 +54,6 @@ export class AddProdBusiFormComponent implements OnInit, OnDestroy {
     }
 
     onSubmit(value): void {
-        if (value.quantity > this.getMaxQuantity()) {
-            alert('Quantité trop élevé');
-            return;
-        }
         this.businessServ.putBusinessProduct(this.id_business, this.productChoose, value.quantity).subscribe(
             () => this.router.navigate(['/business', this.id_business])
         );
