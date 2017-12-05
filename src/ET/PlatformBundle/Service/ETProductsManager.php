@@ -114,6 +114,27 @@ class ETProductsManager
     }
 
     /**
+     *
+     * Add a business at an user
+     *
+     * @param $id_user
+     * @param $id_business
+     * @return bool
+     */
+    public function addUserToBusiness($id_user, $id_business)
+    {
+        $repoBusiness = $this->em->getRepository('ETPlatformBundle:Business');
+        $repoUser = $this->em->getRepository('ETPlatformBundle:User');
+        $business = $repoBusiness->find($id_business);
+        $user = $repoUser->find($id_user);
+        $user->addBusiness($business);
+        $this->em->persist($user);
+        $this->em->flush();
+
+        return true;
+    }
+
+    /**
      * @param $name
      * @return Business
      */

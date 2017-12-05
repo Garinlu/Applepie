@@ -64,7 +64,6 @@ class DefaultController extends Controller
      */
     public function getProductsFreeAction()
     {
-
         $productsMana = $this->container->get('et_platform.products');
         return $productsMana->getProductsFree();
     }
@@ -209,10 +208,17 @@ class DefaultController extends Controller
     }
 
     /**
+     *
+     * @Rest\Route("/business/user")
      * @param Request $request
      */
     public function postBusinessUserAction(Request $request)
     {
+        $id_user = $request->request->get("id_user");
+        $id_business = $request->request->get("id_business");
 
+
+        $productsMana = $this->container->get('et_platform.products');
+        return $productsMana->addUserToBusiness($id_user, $id_business);
     }
 }

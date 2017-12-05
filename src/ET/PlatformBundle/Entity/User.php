@@ -34,10 +34,20 @@ class User extends BaseUser
     private $lastname;
 
     /**
+     * @var Business
+     *
      * @ORM\ManyToMany(targetEntity="ET\PlatformBundle\Entity\Business")
      * @ORM\JoinColumn(nullable=false)
      */
     private $business;
+
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->business = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -55,12 +65,15 @@ class User extends BaseUser
         $this->business = $business;
     }
 
-
-    public function __construct()
+    public function removeBusiness(Business $business)
     {
-        parent::__construct();
+        $this->business->removeElement($business) ;
     }
 
+    public function addBusiness($business)
+    {
+        $this->business->add($business);
+    }
 
     /**
      * @return string
