@@ -10,9 +10,10 @@ use ET\PlatformBundle\Entity\BusinessProduct;
 use ET\PlatformBundle\Entity\ProductDetail;
 use ET\PlatformBundle\Entity\ProductOrder;
 use ET\PlatformBundle\Entity\Product;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class ETProductsManager
+class ETProductManager
 {
     private $em;
     private $user;
@@ -135,19 +136,6 @@ class ETProductsManager
     }
 
     /**
-     * @param $name
-     * @return Business
-     */
-    public function addBusiness($name)
-    {
-        $business = new Business();
-        $business->setName($name);
-        $this->em->persist($business);
-        $this->em->flush();
-        return $business;
-    }
-
-    /**
      * @param $id_product
      * @param $id_business
      * @param $quantity
@@ -162,9 +150,7 @@ class ETProductsManager
             ->find($id_business);
 
         if ($product->getQuantityReal() < $quantity)
-            return new \Exception(
-                'Quantity is too high '
-            );
+            throw new HttpException(500, 'La quantité est trop élevée. Merci de mettre une valeur inférieure ou égale à celle écrit à côté du nom du produit.');
 
         $businessProd = new BusinessProduct();
         $businessProd->setProduct($product);
@@ -178,34 +164,5 @@ class ETProductsManager
         return $businessProd;
     }
 
-    public function getQuantityOfProductUsed($id_product)
-    {
-        $quantity = 0;
-        $product = $this->em->getRepository('ETPlatformBundle:Product')
-            ->find($id_product);
-        $products_in_business = $this->em->getRepository('ETPlatformBundle:BusinessProduct')
-            ->findBy(array('product' => $product));
-
-        foreach ($products_in_business as $product_in_business)
-        {
-            $quantity += $product_in_business->getQuantity();
-        }
-        return $quantity;
-    }
-
-    public function getQuantityofProductBuy($id_product)
-    {
-        $quantity = 0;
-        $product = $this->em->getRepository('ETPlatformBundle:Product')
-            ->find($id_product);
-        $productsOrder = $this->em->getRepository('ETPlatformBundle:ProductOrder')
-            ->findBy(array('product' => $product));
-
-        foreach ($productsOrder as $productOrder)
-        {
-            $quantity += $productOrder->getQuantity();
-        }
-        return $quantity;
-    }
 
 }

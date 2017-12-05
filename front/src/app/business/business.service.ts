@@ -10,7 +10,7 @@ export class BusinessService {
 
 
     getBusinesses(): Observable<Business[]> {
-        const url = `/business`;
+        const url = `/business/`;
         return this.http.get(url).map(response => response as Business[]);
     }
 
@@ -19,12 +19,12 @@ export class BusinessService {
     }
 
     getProductFromBusiness(id: number) {
-        const url = `/products?business=` + id;
+        const url = `/product?business=` + id;
         return this.http.get(url);
     }
 
     putBusiness(business: Business): Observable<Business> {
-        const url = `/business`;
+        const url = `/business/`;
         return this.http.put(url, business);
     }
 

@@ -1,10 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {Location}                 from '@angular/common';
 import {BusinessService} from './business.service';
 import 'rxjs/add/operator/switchMap';
-import {Business} from './business.model';
-import {Product} from '../product/product.model';
 
 
 @Component({

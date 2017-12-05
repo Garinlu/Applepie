@@ -13,6 +13,9 @@ services:
         # this means you cannot fetch services directly from the container via $container->get()
         # if you need to do this, you can override this setting on individual services
         public: false
-    et_platform.products:
-        class: ET\PlatformBundle\Service\ETProductsManager
+    et_platform.product:
+        class: ET\PlatformBundle\Service\ETProductManager
+        public: true
+    et_platform.business:
+        class: ET\PlatformBundle\Service\ETBusinessManager
         public: true

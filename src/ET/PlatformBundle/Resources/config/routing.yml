@@ -9,3 +9,19 @@ et_platform_products_get:
     options:
         expose: true
         prefix: api
+
+et_platform_product:
+    resource: ETPlatformBundle:Product
+    prefix: /product
+    type:     rest
+    options:
+        expose: true
+        prefix: api
+
+et_platform_business:
+    resource: ETPlatformBundle:Business
+    prefix: /business
+    type:     rest
+    options:
+        expose: true
+        prefix: api

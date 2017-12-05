@@ -9,6 +9,7 @@ import {ProductService} from '../product/product.service';
 })
 export class ProductsComponent implements OnInit {
     products;
+    showDetails: boolean[];
 
     columns = [
         {name: 'Id'},
@@ -22,23 +23,23 @@ export class ProductsComponent implements OnInit {
 
     ngOnInit(): void {
         this.productService.getProducts().subscribe(listProducts => {
-            let tmpProducts = [];
-            let indexKnowing = [];
-            listProducts.forEach(function (product) {
-                let name = product.productPrice.product.name;
-                if(!indexKnowing.hasOwnProperty(name)){
-                    tmpProducts.push({name: name, products: []});
-                    indexKnowing[name] = tmpProducts.length-1;
-                }
-                tmpProducts[indexKnowing[name]].products.push(product);
-
+            this.products = listProducts;
+            let tmpBool = [];
+            this.products.forEach(function (prod) {
+                tmpBool.splice(prod.name, 0, false);
             });
-            this.products = tmpProducts;
-            console.log(this.products);
+            this.showDetails = tmpBool;
+            console.log(this.showDetails);
         });
     }
 
+
+    actionDetail(name: string) {
+        this.showDetails[name] = !this.showDetails[name];
+        return;
+    }
+
     deleteProduct(id: number): void {
-        this.productService.deleteProduct(id).subscribe(() => location.reload());
+        this.productService.deleteProductOrder(id).subscribe(() => location.reload());
     }
 }

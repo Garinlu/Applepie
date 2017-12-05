@@ -9,27 +9,27 @@ export class ProductService {
     constructor(private http: HttpClient) {}
 
     getProducts(): Observable<any> {
-        const url = `/products`;
+        const url = `/product/`;
         return this.http.get(url);
     }
     putProduct(product: Product): Observable<Product> {
-        const url = `/product`;
+        const url = `/product/`;
         return this.http.put(url, product);
     }
-    deleteProduct(id: number) {
+    deleteProductOrder(id: number) {
         /*NOT SURE, DELETE THE PRODUCT OR AN ORDER*/
-        const body = {id_product: id};
-        const url = `/product`;
+        const body = {id_product_order: id};
+        const url = `/product/order`;
         return this.http.delete(url, body);
     }
 
     getProductsDetail(): Observable<any> {
-        const url = `/products/details`;
+        const url = `/product/details`;
         return this.http.get(url);
     }
 
     getProductsFree(): Observable<any> {
-        const url = `/products/free`;
+        const url = `/product/free`;
         return this.http.get(url);
     }
 }
