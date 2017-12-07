@@ -1,9 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {BusinessService} from './business.service';
 import 'rxjs/add/operator/switchMap';
 
 
+declare let $: any;
 @Component({
     selector: 'business',
     templateUrl: './business.component.html',
@@ -14,12 +15,12 @@ export class BusinessComponent implements OnInit {
     @Input() productsGroup;
     @Input() products;
     showDetails: boolean[];
+    productChoose;
+    @ViewChild('myModal') myModal;
 
-
-
-    deleteProduct(id: number): void {
-        this.businessService.deleteProduct(id).subscribe(() => location.reload());
-    }
+    /*    deleteProduct(id: number): void {
+     this.businessService.deleteProduct(id).subscribe(() => location.reload());
+     }*/
 
     constructor(private businessService: BusinessService,
                 private route: ActivatedRoute,
@@ -58,4 +59,9 @@ export class BusinessComponent implements OnInit {
         this.showDetails[name] = !this.showDetails[name];
         return;
     }
+
+    deleteProduct(product) {
+        this.productChoose = product;
+    }
+
 }

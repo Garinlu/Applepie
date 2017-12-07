@@ -88,6 +88,7 @@
                             <th>Prix</th>
                             <th>Date</th>
                             <th>Ajouté par</th>
+                            <th>Supprimer</th>
                         </tr>
                         </thead>
                         <tbody *ngFor="let product of products">
@@ -98,6 +99,9 @@
                             <td>{{product.creationDate | date:'dd/MM/yyyy'}}<br>
                                 <i>{{product.creationDate | date:'HH:mm'}}</i></td>
                             <td>{{product.user.firstname + ' ' + product.user.lastname}}</td>
+                            <td>
+                                <button class="ui inverted red button" (click)="deleteProduct(product)">DELETE</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
