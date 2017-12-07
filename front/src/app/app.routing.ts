@@ -19,7 +19,7 @@ const APP_ROUTES: Routes = [
         component: LoginComponent
     },
     {
-        path: 'products',
+        path: 'productsGroup',
         component: ProductsComponent
     },
     {

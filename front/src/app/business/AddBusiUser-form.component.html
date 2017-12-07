@@ -1,13 +1,19 @@
 <app-header></app-header>
 <div class="container">
-    <h1>Ajouter un Chantier</h1>
-    <button class="btn btn-outline-danger" routerLinkActive="active" routerLink="/businesses">Retour</button>
+    <h1>Ajouter un utilisateur au chantier</h1>
+    <button class="btn btn-outline-danger" routerLinkActive="active" [routerLink]="['/business', id_business]">Retour</button>
     <hr class="my-4">
     <form  #f="ngForm" (ngSubmit)="onSubmit(f.value)">
         <div class="form-group">
-            <label for="name">Utilisateurs</label>
+            <label for="name">Utilisateur</label>
             <input id="name" type="text" class="form-control" required ngModel
-                   name="name">
+                   name="id_prod" auto-complete [source]="users_name"
+                   placeholder="Nom de l'utilisateur"
+                   select-value-of="key"
+                   accept-user-input="true"
+                   no-match-found-text="Aucun utilisateur trouvé ou non assigné à ce chantier"
+                   (valueChanged)="myCallback($event)"
+                   autocomplete="off">
         </div>
         <button style="float: right;" class="btn btn-success" type="submit">Ajouter</button>
     </form>

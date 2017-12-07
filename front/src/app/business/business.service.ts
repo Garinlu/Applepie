@@ -19,8 +19,8 @@ export class BusinessService {
         return this.http.get(url).map(response => response as Business);
     }
 
-    getProductFromBusiness(id: number) {
-        const url = `/product?business=` + id;
+    getProductFromBusiness(id: number, group: boolean) {
+        const url = `/product?business=` + id + `&group=` + group;
         return this.http.get(url);
     }
 
@@ -32,6 +32,12 @@ export class BusinessService {
     putBusinessProduct(id_business: number, id_product: number, quantity: number) {
         const url = `/business/product`;
         const body = {id_business: id_business, id_product: id_product, quantity: quantity};
+        return this.http.put(url, body);
+    }
+
+    putBusinessUser(id_business: number, id_user: number) {
+        const url = `/business/user`;
+        const body = {id_business: id_business, id_user: id_user};
         return this.http.put(url, body);
     }
 

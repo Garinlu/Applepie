@@ -25,11 +25,12 @@ class ETProductManager
     }
 
     /**
-     * Return products used in a business, classified by group
-     * @param $id_business
+     * Return productsGroup used in a business, classified by group if required($group)
+     * @param int $id_business
+     * @param bool $group
      * @return array
      */
-    public function getProductsOfBusiness($id_business)
+    public function getProductsOfBusiness($id_business, $group)
     {
         $business = $this->em
             ->getRepository('ETPlatformBundle:Business')
@@ -37,34 +38,38 @@ class ETProductManager
 
         $datas_tmp = $this->em
             ->getRepository('ETPlatformBundle:BusinessProduct')
-            ->findBy(array('business' => $business));
-
-        $datas = [];
-        $name_products = [];
-        foreach ($datas_tmp as $data)
+            ->findBy(array('business' => $business),
+                array('id' => 'DESC'));
+        if ($group == 'true')
         {
-            $tmp = [];
-            $tmp['id'] = $data->getId();
-            $tmp['name'] = $data->getProduct()->getProductDetail()->getName();
-            $tmp['price'] = $data->getProduct()->getPrice();
-            $tmp['quantity'] = $data->getQuantity();
-            $tmp['creationDate'] = $data->getCreationDate();
-            $tmp['username'] = $data->getUser()->getUsername();
-            if (!array_key_exists($tmp['name'], $name_products))
+            $datas = [];
+            $name_products = [];
+            foreach ($datas_tmp as $data)
             {
-                $name_products[$tmp['name']] = count($datas);
-                $datas[$name_products[$tmp['name']]] = array(
-                    'name' => $tmp['name'],
-                    'quantity' => 0,
-                    'price' => 0,
-                    'products' => array());
+                $tmp = [];
+                $tmp['id'] = $data->getId();
+                $tmp['name'] = $data->getProduct()->getProductDetail()->getName();
+                $tmp['price'] = $data->getProduct()->getPrice();
+                $tmp['quantity'] = $data->getQuantity();
+                $tmp['creationDate'] = $data->getCreationDate();
+                $tmp['username'] = $data->getUser()->getUsername();
+                if (!array_key_exists($tmp['name'], $name_products))
+                {
+                    $name_products[$tmp['name']] = count($datas);
+                    $datas[$name_products[$tmp['name']]] = array(
+                        'name' => $tmp['name'],
+                        'quantity' => 0,
+                        'price' => 0,
+                        'productsGroup' => array());
+                }
+                $datas[$name_products[$tmp['name']]]['productsGroup'][] = $tmp;
+                $datas[$name_products[$tmp['name']]]['quantity'] += intval($tmp['quantity']);
+                $datas[$name_products[$tmp['name']]]['price'] +=
+                    intval($tmp['price']) * intval($tmp['quantity']);
             }
-            $datas[$name_products[$tmp['name']]]['products'][] = $tmp;
-            $datas[$name_products[$tmp['name']]]['quantity'] += intval($tmp['quantity']);
-            $datas[$name_products[$tmp['name']]]['price'] +=
-                intval($tmp['price']) * intval($tmp['quantity']);
+            return $datas;
         }
-        return $datas;
+        return $datas_tmp;
     }
 
     /**

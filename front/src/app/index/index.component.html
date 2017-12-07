@@ -1,15 +1,22 @@
 <app-header></app-header>
-<div class="jumbotron">
-    <h1 class="display-3">Bonjour !</h1>
-    <p class="lead">Bienvenue sur l'application de gestion de chantier <b>Applepie</b></p>
-    <hr class="my-4">
-    <p>
-        Chaque porduit utilisé sur un chantier et provenant du stock doit être noté dans l'application.
-    </p>
-    <p class="lead">
-        <a class="btn btn-primary btn-lg" routerLink="/businesses" routerLinkActive="active" role="button">Listes des
-            chantiers</a>
-    </p>
+<div class="ui grid container">
+    <div class="row">
+        <div class="column">
+            <div class="ui message">
+                <h1>Bonjour !</h1>
+                <p class="lead">Bienvenue sur l'application de gestion de chantier <b>Applepie</b></p>
+                <hr class="my-4">
+                <p>
+                    Chaque porduit utilisé sur un chantier et provenant du stock doit être noté dans l'application.
+                </p>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" routerLink="/businesses" routerLinkActive="active" role="button">Listes
+                        des
+                        chantiers</a>
+                </p>
 
+                <app-list-businesses></app-list-businesses>
+            </div>
+        </div>
+    </div>
 </div>
-<app-list-businesses></app-list-businesses>

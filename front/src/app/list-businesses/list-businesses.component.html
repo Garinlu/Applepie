@@ -1,20 +1,38 @@
-<table class="table table-dark">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nom de chantier</th>
-        <th scope="col">Status</th>
-        <th scope="col">Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let business of myBusiness">
-        <th scope="row">{{business.id}}</th>
-        <td>{{business.name}}</td>
-        <td>{{business.status}}</td>
-        <td>
-            <button class="btn btn-info" (click)="goToDetail(business.id)">Détails</button>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div class="ui middle aligned one column centered grid">
+    <div class="row">
+        <div class="column">
+            <table class="ui celled table">
+                <thead>
+                <tr>
+                    <th scope="col">Nom de chantier</th>
+                    <th scope="col" width="50px">Status du chantier</th>
+                    <th scope="col" width="50px">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let business of myBusiness" [ngClass]="(!business.status)? 'negative' : ''">
+                    <td>{{business.name}}</td>
+                    <td><div class="ui toggle checkbox">
+                        <input *ngIf="business.status" type="checkbox" name="public" checked disabled>
+                        <input *ngIf="!business.status" type="checkbox" name="public" disabled>
+                        <label></label>
+                    </div>
+                    </td>
+                    <td>
+                        <button *ngIf="business.status" class="ui right labeled icon button"
+                                (click)="goToDetail(business.id)">
+                            <i class="right arrow icon"></i>
+                            Détails
+                        </button>
+                        <button *ngIf="!business.status" class="ui right labeled icon button disabled"
+                                (click)="goToDetail(business.id)">
+                            <i class="right arrow icon"></i>
+                            Détails
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

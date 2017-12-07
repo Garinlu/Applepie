@@ -1,12 +1,17 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+
+
+import {SuiModule} from 'ng2-semantic-ui';
+
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {Ng2AutoCompleteModule} from 'ng2-auto-complete';
+
 
 import {AppInterceptor} from './app.interceptor';
 import {Routing} from './app.routing';
-
 
 import {AppComponent} from './app.component';
 import {ProductComponent} from './product/product.component';
@@ -25,7 +30,6 @@ import { IndexComponent } from './index/index.component';
 import { FooterComponent } from './footer/footer.component';
 import { UserComponent } from './user/user.component';
 import {AlertService} from './alert/alert.service';
-import {Ng2AutoCompleteModule} from 'ng2-auto-complete';
 import {BusinessFormComponent} from './business/business-form.component';
 import {AddProdBusiFormComponent} from './businesses/AddProdBusi-form.component';
 import {AddBusiUserFormComponent} from './business/AddBusiUser-form.component';
@@ -56,8 +60,8 @@ import { ListBusinessesComponent } from './list-businesses/list-businesses.compo
         ReactiveFormsModule,
         HttpClientModule,
         Routing,
-        NgbModule.forRoot(),
-        Ng2AutoCompleteModule
+        Ng2AutoCompleteModule,
+        SuiModule
     ],
     providers: [ProductService, BusinessService, AppService, UserService, AlertService,
         {

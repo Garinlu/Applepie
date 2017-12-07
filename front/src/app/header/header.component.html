@@ -1,23 +1,18 @@
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" routerLink="/index" routerLinkActive="active">
-        <img src="/img/logo.png" alt="Eurotoiture" style="max-width: 150px;">
-    </a>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/businesses" routerLinkActive="active">Les chantiers</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/products" routerLinkActive="active">Le stock</a>
-            </li>
-        </ul>
-        <!--<b>{{ user }}</b>-->
-        <button class="btn btn-outline-danger" (click)="logout()">Déconnexion</button>
+<nav>
+    <div class="ui secondary pointing menu">
+        <a style="margin-right: 2%" routerLink="/index" routerLinkActive="active">
+            <img src="/img/logo.png" alt="Eurotoiture" style="height: 60px">
+        </a>
+        <a class="item" routerLink="/businesses" routerLinkActive="active">
+            Les chantiers
+        </a>
+        <a class="item" routerLink="/products" routerLinkActive="active">
+            Le stock
+        </a>
+        <div class="right menu">
+            <a class="ui item" (click)="logout()">
+                Logout
+            </a>
+        </div>
     </div>
 </nav>

@@ -18,10 +18,15 @@ import {UserService} from '../user/user.service';
 export class AddBusiUserFormComponent implements OnInit, OnDestroy {
     id_business: number;
     private sub: any;
-    users;
+    user_select;
     users_name;
 
     constructor(private router: Router, private route: ActivatedRoute, private userServ: UserService, private businessServ: BusinessService) {
+    }
+
+
+    myCallback(val) {
+        this.user_select = val;
     }
 
     ngOnInit() {
@@ -29,7 +34,6 @@ export class AddBusiUserFormComponent implements OnInit, OnDestroy {
             this.id_business = +params['id'];
         });
         this.userServ.getUserNotBusiness(this.id_business).subscribe(users => {
-            this.users = users;
             let usersT = [];
             users.forEach(function (element) {
                 usersT.push({
@@ -47,10 +51,11 @@ export class AddBusiUserFormComponent implements OnInit, OnDestroy {
         this.sub.unsubscribe();
     }
 
-    onSubmit(value): void {
-        /*this.businessServ.putBusinessProduct(this.id_business, this.productChoose, value.quantity).subscribe(
+
+    onSubmit(): void {
+        this.businessServ.putBusinessUser(this.id_business, this.user_select).subscribe(
             () => this.router.navigate(['/business', this.id_business])
-        );*/
+        );
     }
 
 }

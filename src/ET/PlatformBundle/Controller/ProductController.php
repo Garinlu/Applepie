@@ -15,7 +15,7 @@ class ProductController extends Controller
 {
     /**
      * @Rest\Route("/")
-     * Get all products or products of a business (if key 'business')
+     * Get all productsGroup or productsGroup of a business (if key 'business')
      *
      */
     public function getProductsAction(Request $request)
@@ -23,6 +23,9 @@ class ProductController extends Controller
         if (!empty($request->query->keys()))
         {
             $id_business = $request->get('business');
+            $id_business = (int) $id_business;
+            $group = $request->get('group');
+
             if (!$id_business)
             {
                 throw $this->createNotFoundException(
@@ -30,7 +33,7 @@ class ProductController extends Controller
                 );
             }
             $productsMana = $this->container->get('et_platform.product');
-            $datas = $productsMana->getProductsOfBusiness($id_business);
+            $datas = $productsMana->getProductsOfBusiness($id_business, $group);
             return $datas;
         }
 
@@ -46,18 +49,18 @@ class ProductController extends Controller
             $name = $product->getProductDetail()->getName();
             if (!array_key_exists($name, $whichIndex))
             {
-                $datas[$index] = array('name' => $name, 'quantity' => 0,'products' => array());
+                $datas[$index] = array('name' => $name, 'quantity' => 0,'productsGroup' => array());
                 $whichIndex[$name] = $index;
                 $index++;
             }
-            $datas[$whichIndex[$name]]['products'][] = $product;
+            $datas[$whichIndex[$name]]['productsGroup'][] = $product;
             $datas[$whichIndex[$name]]['quantity'] += $product->getQuantityReal();
         }
         return $datas;
     }
 
     /**
-     * Return products which quantity is superior than 0.
+     * Return productsGroup which quantity is superior than 0.
      *
      * @Rest\Route("/free")
      */
@@ -68,7 +71,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Get all detail of products
+     * Get all detail of productsGroup
      *
      * @Rest\Route("/details")
      * @return array

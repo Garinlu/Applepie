@@ -11,6 +11,7 @@ import 'rxjs/add/operator/switchMap';
 })
 export class BusinessComponent implements OnInit {
     @Input() business;
+    @Input() productsGroup;
     @Input() products;
     showDetails: boolean[];
 
@@ -35,14 +36,21 @@ export class BusinessComponent implements OnInit {
             });
 
         this.route.paramMap
-            .switchMap((params: ParamMap) => this.businessService.getProductFromBusiness(+params.get('id')))
+            .switchMap((params: ParamMap) => this.businessService.getProductFromBusiness(+params.get('id'), true))
             .subscribe(data => {
-                this.products = data;
+                this.productsGroup = data;
                 let tmpBool = [];
-                this.products.forEach(function (prod) {
+                this.productsGroup.forEach(function (prod) {
                     tmpBool.splice(prod.name, 0, false);
                 });
                 this.showDetails = tmpBool;
+            });
+
+        this.route.paramMap
+            .switchMap((params: ParamMap) => this.businessService.getProductFromBusiness(+params.get('id'), false))
+            .subscribe(datas => {
+                this.products = datas;
+                console.log(this.products);
             });
 
     }

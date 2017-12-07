@@ -23,6 +23,21 @@ class ETBusinessManager
         $this->user = $tokenStorage->getToken()->getUser();
     }
 
+    /**
+     * @param Business[] $business
+     * @return array
+     */
+    public function getClassifiedBusiness($business)
+    {
+        $business_on = array();
+        $business_off = array();
+        foreach ($business as $busi)
+        {
+            ($busi->getStatus()) ? $business_on[] = $busi : $business_off[] = $busi;
+        }
+        return array_merge($business_on, $business_off);
+    }
+
 
     /**
      * @param $name
@@ -34,6 +49,7 @@ class ETBusinessManager
         $business->setName($name);
         $this->em->persist($business);
         $this->em->flush();
+        $this->addUserToBusiness($this->user->getId(), $business->getId());
         return $business;
     }
 

@@ -16,7 +16,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  */
 class BusinessController extends Controller
 {
-
     /**
      * Get all my business
      * @Rest\Route("/all")
@@ -25,7 +24,8 @@ class BusinessController extends Controller
      */
     public function getBusinessesAction()
     {
-        return $this->get('security.token_storage')->getToken()->getUser()->getBusiness();
+        return  $this->container->get('et_platform.business')
+            ->getClassifiedBusiness($this->get('security.token_storage')->getToken()->getUser()->getBusiness());
     }
 
     /**
@@ -42,11 +42,8 @@ class BusinessController extends Controller
                 'Aucun business trouvé'
             );
         }
+        $this->areYouInBusiness($id_business);
 
-        if (!$this->areYouInBusiness($id_business))
-            throw new HttpException(500,
-                'Vous n\'êtes pas autorisé à editer ce business'
-            );
         return $this
             ->getDoctrine()
             ->getManager()
@@ -62,10 +59,7 @@ class BusinessController extends Controller
     {
         $id_business = $request->get("id");
 
-        if (!$this->areYouInBusiness($id_business))
-            throw new HttpException(500,
-                'Vous n\'êtes pas autorisé à editer ce business'
-            );
+        $this->areYouInBusiness($id_business);
 
 
         $productsMana = $this->container->get('et_platform.business');
@@ -77,15 +71,17 @@ class BusinessController extends Controller
      * @Rest\Route("/user")
      * @param Request $request
      */
-    public function postBusinessUserAction(Request $request)
+    public function putBusinessUserAction(Request $request)
     {
         $id_user = $request->request->get("id_user");
+        if (!$id_user)
+            throw new HttpException(500,
+                'Merci de choisir un utilisateur parmis la liste (liste qui apparait lors du clique dans la case)'
+            );
+
         $id_business = $request->request->get("id_business");
 
-        if (!$this->areYouInBusiness($id_business))
-            throw new HttpException(500,
-                'Vous n\'êtes pas autorisé à editer ce business'
-            );
+        $this->areYouInBusiness($id_business);
 
 
         $productsMana = $this->container->get('et_platform.business');
@@ -128,10 +124,7 @@ class BusinessController extends Controller
                 'Aucune quantité trouvée'
             );
 
-        if (!$this->areYouInBusiness($id_business))
-            throw new HttpException(500,
-                'Vous n\'êtes pas autorisé à editer ce business'
-            );
+        $this->areYouInBusiness($id_business);
         $productsMana = $this->container->get('et_platform.product');
         return $productsMana->addProductToBusiness($id_product, $id_business, $quantity);
     }
@@ -156,10 +149,7 @@ class BusinessController extends Controller
         $manager = $this->getDoctrine()->getManager();
         $businessProduct = $manager->getRepository('ETPlatformBundle:BusinessProduct')
             ->find($id_businessProduct);
-        if (!$this->areYouInBusiness($businessProduct->getBusiness()->getId()))
-            throw new HttpException(500,
-                'Vous n\'êtes pas autorisé à editer ce business'
-            );
+        $this->areYouInBusiness($businessProduct->getBusiness()->getId());
         $manager->remove($businessProduct);
         $manager->flush();
         return true;
@@ -172,7 +162,9 @@ class BusinessController extends Controller
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN'))
             return true;
         $business = $this->getDoctrine()->getManager()->getRepository('ETPlatformBundle:Business')->find($id_business);
-        return ($user->hasBusiness($business));
+        if (!$user->hasBusiness($business)) throw new HttpException(500,
+            'Vous n\'êtes pas autorisé à editer ce business'
+        );
     }
 
 }

@@ -38,7 +38,7 @@ class Business
     /**
      * @return bool
      */
-    public function isStatus()
+    public function getStatus()
     {
         return $this->status;
     }
