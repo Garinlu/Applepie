@@ -2,6 +2,8 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {BusinessService} from './business.service';
 import 'rxjs/add/operator/switchMap';
+import {ConfirmModal} from '../modal/modal.component';
+import {SuiModalService} from "ng2-semantic-ui"
 
 
 declare let $: any;
@@ -16,15 +18,11 @@ export class BusinessComponent implements OnInit {
     @Input() products;
     showDetails: boolean[];
     productChoose;
-    @ViewChild('myModal') myModal;
-
-    /*    deleteProduct(id: number): void {
-     this.businessService.deleteProduct(id).subscribe(() => location.reload());
-     }*/
 
     constructor(private businessService: BusinessService,
                 private route: ActivatedRoute,
-                private router: Router) {
+                private router: Router,
+                private modalService: SuiModalService) {
     }
 
     ngOnInit(): void {
@@ -60,8 +58,18 @@ export class BusinessComponent implements OnInit {
         return;
     }
 
-    deleteProduct(product) {
+    deleteProduct(id: number): void {
+        this.businessService.deleteProductFromBusiness(id).subscribe(() => location.reload());
+    }
+
+    clickDeleteProduct(product) {
         this.productChoose = product;
+        console.log(product);
+        this.modalService
+            .open(new ConfirmModal("Suppression", "Êtes vous sûr de vouloir supprimer du chantier cette utilisation :" +
+                " Nom : " + this.productChoose.product.productDetail.name + " / Quantité : "
+                + this.productChoose.quantity))
+            .onApprove(() => this.deleteProduct(this.productChoose.id));
     }
 
 }

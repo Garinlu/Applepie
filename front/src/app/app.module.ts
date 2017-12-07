@@ -34,6 +34,7 @@ import {BusinessFormComponent} from './business/business-form.component';
 import {AddProdBusiFormComponent} from './businesses/AddProdBusi-form.component';
 import {AddBusiUserFormComponent} from './business/AddBusiUser-form.component';
 import { ListBusinessesComponent } from './list-businesses/list-businesses.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
     declarations: [
@@ -52,7 +53,8 @@ import { ListBusinessesComponent } from './list-businesses/list-businesses.compo
         AddProdBusiFormComponent,
         AddBusiUserFormComponent,
         AlertComponent,
-        ListBusinessesComponent
+        ListBusinessesComponent,
+        ModalComponent
     ],
     imports: [
         BrowserModule,
@@ -70,7 +72,8 @@ import { ListBusinessesComponent } from './list-businesses/list-businesses.compo
             multi: true
         }
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [ModalComponent]
 })
 export class AppModule {
 

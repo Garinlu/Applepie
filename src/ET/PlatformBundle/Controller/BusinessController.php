@@ -24,7 +24,7 @@ class BusinessController extends Controller
      */
     public function getBusinessesAction()
     {
-        return  $this->container->get('et_platform.business')
+        return $this->container->get('et_platform.business')
             ->getClassifiedBusiness($this->get('security.token_storage')->getToken()->getUser()->getBusiness());
     }
 
@@ -133,19 +133,17 @@ class BusinessController extends Controller
      *
      * Delete a product on a business
      *
-     * @Rest\Route("/product")
+     * @Rest\Route("/product/{id}")
      * @param Request $request
      * @return bool
      */
     public function deleteBusinessProductAction(Request $request)
     {
-        $id_businessProduct = $request->request->get('id_businessProduct');
+        $id_businessProduct = $request->get('id');
         if (!$id_businessProduct)
-        {
-            throw $this->createNotFoundException(
-                'No businessproduct found'
+            throw new HttpException(500,
+                'Il semblerait que cette utilisation n\'existe pas ou plus. (id: ' . $id_businessProduct . ')'
             );
-        }
         $manager = $this->getDoctrine()->getManager();
         $businessProduct = $manager->getRepository('ETPlatformBundle:BusinessProduct')
             ->find($id_businessProduct);

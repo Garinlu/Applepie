@@ -19,8 +19,8 @@ export class BusinessService {
         return this.http.get(url).map(response => response as Business);
     }
 
-    getProductFromBusiness(id: number, group: boolean) {
-        const url = `/product?business=` + id + `&group=` + group;
+    getProductFromBusiness(id: number, bool: boolean) {
+        const url = `/product?business=` + id + `&group=` + bool;
         return this.http.get(url);
     }
 
@@ -41,9 +41,8 @@ export class BusinessService {
         return this.http.put(url, body);
     }
 
-    deleteProduct(id_business_product: number) {
-        const body = {id_businessProduct: id_business_product};
-        const url = `/business/product`;
-        return this.http.delete(url, body);
+    deleteProductFromBusiness(id_business_product) {
+        const url = `/business/product/` + id_business_product;
+        return this.http.delete(url);
     }
 }
