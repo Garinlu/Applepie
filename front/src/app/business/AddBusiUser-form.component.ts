@@ -14,7 +14,6 @@ import {UserService} from '../user/user.service';
 })
 
 
-// TODO : LINK LIST USER AND SEND THE CHOOSE ONE
 export class AddBusiUserFormComponent implements OnInit, OnDestroy {
     id_business: number;
     private sub: any;
