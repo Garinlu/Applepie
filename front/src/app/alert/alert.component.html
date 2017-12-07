@@ -1,1 +1,6 @@
-<div *ngIf="message" [ngClass]="{ 'alert': message, 'alert-success': message.type === 'success', 'alert-danger': message.type === 'error' }">{{message.text}}</div>
+<div *ngIf="message" class="ui negative message">
+    <i class="close icon"></i>
+    <div class="header">
+        {{message.text}}
+    </div>
+</div>

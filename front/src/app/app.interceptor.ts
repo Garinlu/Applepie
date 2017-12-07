@@ -24,7 +24,7 @@ export class AppInterceptor implements HttpInterceptor {
                         this.router.navigate(['./login']);
                     }
                     else if (err.status === 500) {
-                        let err_mess = JSON.parse(err.error).error.exception[0].message;
+                        let err_mess = err.error.error.exception[0].message;
                         if (err_mess) {
                             this.alertService.error(err_mess);
                         }

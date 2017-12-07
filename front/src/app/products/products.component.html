@@ -1,41 +1,48 @@
 <app-header></app-header>
-<div class="container">
-    <h1>Liste des produits en stock</h1>
-    <button class="btn btn-outline-success" routerLinkActive="active" routerLink="/addProduct">Ajouter un produit
-    </button>
-    <hr class="my-4">
-    <table class="table table-dark">
-        <thead>
-        <tr>
-            <th>Nom du produit</th>
-            <th>Quantité totale</th>
-        </tr>
-        </thead>
-        <tbody *ngFor="let productGroup of products" (click)="actionDetail(productGroup.name)">
-        <tr>
-            <td>{{productGroup.name}}</td>
-            <td>{{productGroup.quantity}}</td>
-        </tr>
-        <tr *ngIf="showDetails[productGroup.name]" class="nothover">
-            <td></td>
-            <td colspan="2">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Prix</th>
-                        <th>Quantité</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr *ngFor="let product of productGroup.productsGroup">
-                        <td>{{product.price}}€</td>
-                        <td>{{product.quantityReal}}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div class="ui container">
+    <div class="ui message">
+        <h1 class="ui header centered">Liste des produits en stock</h1>
 
+        <a [routerLink]="['/addProduct']">
+            <button class="ui inverted blue button">
+                <i class="add circle icon"></i>
+                Ajouter un produit
+            </button>
+        </a>
+        <hr class="my-4">
+        <table class="ui celled table">
+            <thead>
+            <tr>
+                <th>Nom du produit</th>
+                <th>Quantité totale</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let productGroup of products" (click)="actionDetail(productGroup.name)">
+            <tr [ngClass]="(productGroup.quantity < 1)? 'negative' : ''">
+                <td>{{productGroup.name}}</td>
+                <td>{{productGroup.quantity}}</td>
+            </tr>
+            <tr *ngIf="showDetails[productGroup.name]" class="nothover">
+                <td></td>
+                <td colspan="2">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Prix</th>
+                            <th>Quantité</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let product of productGroup.productsGroup"
+                            [ngClass]="(product.quantityReal < 1)? 'negative' : ''">
+                            <td>{{product.price}}€</td>
+                            <td>{{product.quantityReal}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

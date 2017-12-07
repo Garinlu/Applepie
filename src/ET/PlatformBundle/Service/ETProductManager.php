@@ -52,7 +52,8 @@ class ETProductManager
                 $tmp['price'] = $data->getProduct()->getPrice();
                 $tmp['quantity'] = $data->getQuantity();
                 $tmp['creationDate'] = $data->getCreationDate();
-                $tmp['username'] = $data->getUser()->getUsername();
+                $tmp['firstname'] = $data->getUser()->getFirstname();
+                $tmp['lastname'] = $data->getUser()->getLastname();
                 if (!array_key_exists($tmp['name'], $name_products))
                 {
                     $name_products[$tmp['name']] = count($datas);

@@ -3,8 +3,9 @@
 <div class="ui container">
     <div *ngIf="business">
         <div class="ui message">
-            <a routerLink="/businesses" routerLinkActive="active">
-                <button *ngIf="business.status" class="ui left labeled icon button">
+
+            <a routerLink="/businesses" routerLinkActive="active" style="float: left">
+                <button class="ui left labeled icon button">
                     <i class="left arrow icon"></i>
                     Retour à la liste des chantiers
                 </button>
@@ -17,7 +18,8 @@
                 </button>
             </a>
 
-            <h1 class="display-3">{{business.name}}</h1>
+            <h1 class="ui header centered">{{business.name}}</h1>
+
             <hr class="my-4">
             <p class="lead"></p>
 
@@ -68,7 +70,7 @@
                                         <td>{{product.price}}€</td>
                                         <td>{{product.creationDate | date:'dd/MM/yyyy'}}<br>
                                             <i>{{product.creationDate | date:'HH:mm'}}</i></td>
-                                        <td>{{product.username}}</td>
+                                        <td>{{product.firstname + ' ' + product.lastname}}</td>
                                     </tr>
                                     </tbody>
                                 </table>

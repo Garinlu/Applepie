@@ -1,20 +1,28 @@
 <app-header></app-header>
-<div class="container">
-    <h1>Ajouter un utilisateur au chantier</h1>
-    <button class="btn btn-outline-danger" routerLinkActive="active" [routerLink]="['/business', id_business]">Retour</button>
-    <hr class="my-4">
-    <form  #f="ngForm" (ngSubmit)="onSubmit(f.value)">
-        <div class="form-group">
-            <label for="name">Utilisateur</label>
-            <input id="name" type="text" class="form-control" required ngModel
-                   name="id_prod" auto-complete [source]="users_name"
-                   placeholder="Nom de l'utilisateur"
-                   select-value-of="key"
-                   accept-user-input="true"
-                   no-match-found-text="Aucun utilisateur trouvé ou non assigné à ce chantier"
-                   (valueChanged)="myCallback($event)"
-                   autocomplete="off">
+<div class="ui container">
+    <div class="ui message">
+        <a routerLinkActive="active" [routerLink]="['/business', id_business]">
+            <button class="ui left labeled icon button">
+                <i class="left arrow icon"></i>
+                Retour au détail du chantier
+            </button>
+        </a>
+        <hr class="my-4">
+        <div class="ui form">
+            <h4 class="ui dividing header">Ajouter un utilisateur au chantier</h4>
+
+            <div class="field">
+                <sui-select [(ngModel)]="user_select" [isSearchable]="true" (ngModelChange)="onChange($event)"
+                            icon="list"
+                            placeholder="Choisissez l'utilisateur à ajouter à la gestion de ce chantier">
+                    <sui-select-option *ngFor="let user of list_users"
+                                       [value]="user.id + '; ' + user.firstname + ' ' + user.lastname">
+                    </sui-select-option>
+                </sui-select>
+            </div>
+            <div class="field">
+                <button class="ui inverted green button" (click)="addUserToBusiness()">Ajouter</button>
+            </div>
         </div>
-        <button style="float: right;" class="btn btn-success" type="submit">Ajouter</button>
-    </form>
+    </div>
 </div>

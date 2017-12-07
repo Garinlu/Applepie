@@ -19,9 +19,9 @@ import {ProductService} from '../product/product.service';
 export class AddProdBusiFormComponent implements OnInit, OnDestroy {
     id_business: number;
     private sub: any;
-    productsName;
     products;
     productChoose;
+    quantity;
 
     constructor(private router: Router, private route: ActivatedRoute, private productServ: ProductService, private businessServ: BusinessService) {
     }
@@ -36,28 +36,26 @@ export class AddProdBusiFormComponent implements OnInit, OnDestroy {
         });
         this.productServ.getProductsFree().subscribe(products => {
             this.products = products;
-            let productsN = [];
-            products.forEach(function (element) {
-                productsN.push({
-                    key: element.id,
-                    value: element.productDetail.name + " - " + element.price + "€ (restant : " + element.quantityReal + ")"
-                });
-
-            });
-            this.productsName = productsN;
 
         });
+        this.quantity = 1;
     }
 
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
 
-    onSubmit(value): void {
-        this.businessServ.putBusinessProduct(this.id_business, this.productChoose, value.quantity).subscribe(
+    onChange(model:Array<string>) {
+        this.productChoose = model.toString().split(';')[0];
+        console.log(this.quantity);
+    }
+
+    addProdToBusiness(): void {
+        this.businessServ.putBusinessProduct(this.id_business, this.productChoose, this.quantity).subscribe(
             () => this.router.navigate(['/business', this.id_business])
         );
     }
+
 
     getMaxQuantity(): number {
         if (!this.productChoose)
