@@ -50,7 +50,6 @@ export class BusinessComponent implements OnInit {
             .switchMap((params: ParamMap) => this.businessService.getProductFromBusiness(+params.get('id'), false))
             .subscribe(datas => {
                 this.products = datas;
-                console.log(this.products);
             });
 
     }
