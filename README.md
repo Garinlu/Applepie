@@ -17,6 +17,7 @@ Angular4 : front ;
 * Clone or download the project
 * Go inside the project
 * Launch ```composer install```. You must have a database.
+* You need to have mysql as environment variable. If not, execute ```set PATH=%PATH%;C:\PATH_TO\mysql\```
 * Execute this bash command ```mysql -u "root" -p "" -h "localhost" "softeurotoiture" < "script.sql"```   _("root" is your db username, the empty string is your password and "softeurotoiture" is your db name)_
 * Go in front folder
 * Launch ```npm install```
