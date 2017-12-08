@@ -24,6 +24,11 @@ export class BusinessService {
         return this.http.get(url);
     }
 
+    getUsersFromBusiness(id: number) {
+        const url = `/business/` + id + `/users`;
+        return this.http.get(url);
+    }
+
     putBusiness(business: Business): Observable<Business> {
         const url = `/business/`;
         return this.http.put(url, business);
@@ -41,8 +46,19 @@ export class BusinessService {
         return this.http.put(url, body);
     }
 
+    postBusinessStatus(id_business: number) {
+        const url = `/business/status`;
+        const body = {id_business: id_business};
+        return this.http.post(url, body);
+    }
+
     deleteProductFromBusiness(id_business_product) {
         const url = `/business/product/` + id_business_product;
+        return this.http.delete(url);
+    }
+
+    deleteUserFromBusiness(id_business, id_user) {
+        const url = `/business/` + id_business + `/user/` + id_user;
         return this.http.delete(url);
     }
 }

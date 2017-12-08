@@ -13,7 +13,6 @@
 
             <div class="field">
                 <sui-select [(ngModel)]="user_select" [isSearchable]="true" (ngModelChange)="onChange($event)"
-                            icon="list"
                             placeholder="Choisissez l'utilisateur à ajouter à la gestion de ce chantier">
                     <sui-select-option *ngFor="let user of list_users"
                                        [value]="user.id + '; ' + user.firstname + ' ' + user.lastname">

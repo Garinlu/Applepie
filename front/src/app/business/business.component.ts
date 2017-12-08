@@ -14,6 +14,8 @@ export class BusinessComponent implements OnInit {
     @Input() business;
     @Input() productsGroup;
     @Input() products;
+    @Input() users;
+    @Input() users_print;
     showDetails: boolean[];
     productChoose;
 
@@ -49,6 +51,19 @@ export class BusinessComponent implements OnInit {
                 this.products = datas;
             });
 
+        this.route.paramMap
+            .switchMap((params: ParamMap) => this.businessService.getUsersFromBusiness(+params.get('id')))
+            .subscribe(users => {
+                this.users = users;
+                let users_tmp = [];
+                this.users.forEach(function (user) {
+                    console.log(user);
+                    users_tmp[user.id] = true;
+                });
+                this.users_print = users_tmp;
+                console.log(this.users_print);
+            });
+
     }
 
     actionDetail(name: string) {
@@ -56,18 +71,36 @@ export class BusinessComponent implements OnInit {
         return;
     }
 
-    deleteProduct(id: number): void {
-        this.businessService.deleteProductFromBusiness(id).subscribe(() => location.reload());
-    }
-
     clickDeleteProduct(product) {
         this.productChoose = product;
-        console.log(product);
         this.modalService
             .open(new ConfirmModal("Suppression", "Êtes vous sûr de vouloir supprimer du chantier cette utilisation :" +
                 " Nom : " + this.productChoose.product.productDetail.name + " / Quantité : "
                 + this.productChoose.quantity))
-            .onApprove(() => this.deleteProduct(this.productChoose.id));
+            .onApprove(() => this.businessService.deleteProductFromBusiness(this.productChoose.id).subscribe(() => location.reload()));
     }
 
+    deleteUser(id) {
+        this.modalService
+            .open(new ConfirmModal("Suppression", "Êtes vous sûr de vouloir supprimer cet utilisateur du chantier ?"))
+            .onApprove(() => this.route.paramMap
+                .switchMap((params: ParamMap) => this.businessService.deleteUserFromBusiness(+params.get('id'), id))
+                .subscribe(() => {
+                    this.users_print[id] = false
+                })
+            )
+        ;
+
+    }
+
+    changeStatus() {
+        this.modalService
+            .open(new ConfirmModal("Suppression", "Êtes vous sûr de vouloir changer le status de ce chantier ? Si vous " +
+                "le désactivé, seul un administrateur pourra le réactiver."))
+            .onApprove(() => this.route.paramMap
+                .switchMap((params: ParamMap) => this.businessService.postBusinessStatus(+params.get('id')))
+                .subscribe(() => this.router.navigate(['/businesses'])))
+            .onDeny(() => location.reload());
+
+    }
 }

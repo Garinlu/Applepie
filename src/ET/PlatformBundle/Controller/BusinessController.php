@@ -25,11 +25,11 @@ class BusinessController extends Controller
     public function getBusinessesAction()
     {
         return $this->container->get('et_platform.business')
-            ->getClassifiedBusiness($this->get('security.token_storage')->getToken()->getUser()->getBusiness());
+            ->getClassifiedStatusBusiness($this->get('security.token_storage')->getToken()->getUser()->getBusiness());
     }
 
     /**
-     * Get all Business or only one if param id isset.
+     * Get a Business only if param id isset.
      * @Rest\Route("/{id}")
      *
      */
@@ -51,6 +51,26 @@ class BusinessController extends Controller
     }
 
     /**
+     * Get all user of business
+     * @Rest\Route("/{id}/users")
+     *
+     */
+    public function getUsersOfBusinessAction(Request $request)
+    {
+        $id_business = $request->get('id');
+        if (!$id_business)
+        {
+            throw new HttpException(500,
+                'Aucun business trouvé'
+            );
+        }
+        $this->areYouInBusiness($id_business);
+
+        $productsMana = $this->container->get('et_platform.business');
+        return $productsMana->getUsersBusiness($id_business, true);
+    }
+
+    /**
      *
      * @Rest\Route("/users/{id}")
      * @param Request $request
@@ -63,7 +83,7 @@ class BusinessController extends Controller
 
 
         $productsMana = $this->container->get('et_platform.business');
-        return $productsMana->getUsersNotBusiness($id_business);
+        return $productsMana->getUsersBusiness($id_business, false);
     }
 
     /**
@@ -130,6 +150,21 @@ class BusinessController extends Controller
     }
 
     /**
+     * Change status of a business
+     *
+     * @Rest\Route("/status")
+     * @param Request $request
+     * @return Business
+     */
+    public function postBusinessStatusAction(Request $request)
+    {
+        $id_business = $request->request->get('id_business');
+        $this->areYouInBusiness($id_business);
+        $productsMana = $this->container->get('et_platform.business');
+        return $productsMana->changeStatus($id_business);
+    }
+
+    /**
      *
      * Delete a product on a business
      *
@@ -151,6 +186,33 @@ class BusinessController extends Controller
         $manager->remove($businessProduct);
         $manager->flush();
         return true;
+    }
+
+    /**
+     *
+     * Delete a user on a business
+     *
+     * @Rest\Route("{id_business}/user/{id_user}")
+     * @param Request $request
+     * @return bool
+     */
+    public function deleteBusinessUserAction(Request $request)
+    {
+        $id_business = $request->get('id_business');
+        $id_user = $request->get('id_user');
+        if (!$id_user)
+            throw new HttpException(500,
+                'Il semblerait que l\'utilisateur n\'existe pas. (id: ' . $id_user . ')'
+            );
+        if (!$id_business)
+            throw new HttpException(500,
+                'Il semblerait que le chantier n\'existe pas. (id: ' . $id_business . ')'
+            );
+
+
+        $this->areYouInBusiness($id_business);
+        $busiMana = $this->container->get('et_platform.business');
+        return $busiMana->deleteUserFromBusiness($id_user, $id_business);
     }
 
 

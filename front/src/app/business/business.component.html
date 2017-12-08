@@ -20,7 +20,35 @@
             <h1 class="ui header centered">{{business.name}}</h1>
 
             <hr class="my-4">
+            <br>
+            <div class="ui green ribbon label">Configuration</div>
+            <br>
+            <br>
+            <div class="ui toggle checkbox">
+                <input *ngIf="business.status" type="checkbox" name="public" checked (change)="changeStatus()">
+                <input *ngIf="!business.status" type="checkbox" name="public" (change)="changeStatus()">
+                <label>Status du chantier</label>
+            </div>
+            <br>
 
+            <hr class="my-4">
+            <br>
+            <div class="ui red ribbon label">Utilisateurs</div>
+            <br>
+            <br>
+            <div *ngFor="let user of users" class="ui image label">
+                <div *ngIf="users_print[user.id]">
+                    {{user.firstname}} {{user.lastname}}
+                    <i class="delete icon" (click)="deleteUser(user.id)"></i>
+                </div>
+            </div>
+            <br>
+            <hr class="my-4">
+
+            <br>
+            <div class="ui blue ribbon label">Produits</div>
+            <br>
+            <br>
             <a [routerLink]="['/addBusinessProduct', business.id]">
                 <button class="ui inverted blue button">
                     <i class="add circle icon"></i>
@@ -98,7 +126,8 @@
                                 <i>{{product.creationDate | date:'HH:mm'}}</i></td>
                             <td>{{product.user.firstname + ' ' + product.user.lastname}}</td>
                             <td>
-                                <button class="ui inverted red button" (click)="clickDeleteProduct(product)">DELETE</button>
+                                <button class="ui inverted red button" (click)="clickDeleteProduct(product)">DELETE
+                                </button>
                             </td>
                         </tr>
                         </tbody>
