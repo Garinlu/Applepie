@@ -52,7 +52,7 @@ class ETBusinessManager
         $users = [];
         foreach ($users_tmp as $user)
         {
-            if ((!$is_business && !$user->hasBusiness($business)) || ($is_business && ($user->hasBusiness($business) || $user->hasRole('ROLE_ADMIN'))))
+            if ((!$is_business && !$user->hasBusiness($business) && !$user->hasRole('ROLE_ADMIN')) || ($is_business && ($user->hasBusiness($business) || $user->hasRole('ROLE_ADMIN'))))
                 $users[] = $user;
         }
         return $users;
