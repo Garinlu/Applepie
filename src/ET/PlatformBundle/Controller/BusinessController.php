@@ -51,11 +51,18 @@ class BusinessController extends Controller
             );
         }
         $this->areYouInBusiness($id_business);
-
-        return $this
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $business = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('ETPlatformBundle:Business')->find($id_business);
+        if ($business->getStatus() == 0 && !$user->hasRole("ROLE_ADMIN"))
+        {
+            throw new HttpException(500,
+                'Ce chantier n\'est plus actif. Seul un administrateur peut le visualiser/modifier.'
+            );
+        }
+        return $business;
     }
 
     /**
