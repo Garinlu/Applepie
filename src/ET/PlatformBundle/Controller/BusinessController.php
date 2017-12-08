@@ -24,8 +24,16 @@ class BusinessController extends Controller
      */
     public function getBusinessesAction()
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        if ($user->hasRole('ROLE_ADMIN'))
+        {
+            $productsMana = $this->container->get('et_platform.business');
+            return $productsMana->getClassifiedStatusBusiness(
+                $this->getDoctrine()->getManager()->getRepository('ETPlatformBundle:Business')->findAll()
+            );
+        }
         return $this->container->get('et_platform.business')
-            ->getClassifiedStatusBusiness($this->get('security.token_storage')->getToken()->getUser()->getBusiness());
+            ->getClassifiedStatusBusiness($user->getBusiness());
     }
 
     /**
