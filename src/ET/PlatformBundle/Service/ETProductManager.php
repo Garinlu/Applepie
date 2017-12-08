@@ -74,6 +74,35 @@ class ETProductManager
     }
 
     /**
+     * Return products, sort by name
+     * @return array
+     */
+    public function getProducts()
+    {
+        $productsDetail = $this->em->getRepository('ETPlatformBundle:ProductDetail')
+            ->findBy(array(), array('name' => 'ASC'));
+        $datasProd = array();
+
+        foreach ($productsDetail as $productDetail)
+        {
+            $products = $this->em->getRepository('ETPlatformBundle:Product')
+                ->findBy(array('product_detail' => $productDetail));
+            $quantity = 0;
+
+            foreach ($products as $product)
+            {
+                $quantity += $product->getQuantityReal();
+            }
+
+            $datasProd[] = array(
+                'name' => $productDetail->getName(),
+                'quantity' => $quantity,
+                'productsGroup' => $products);
+        }
+        return $datasProd;
+    }
+
+    /**
      * @param $name
      * @param $price
      * @param $quantity
@@ -99,6 +128,7 @@ class ETProductManager
         {
             $product = new Product();
             $product->setProductDetail($productDetail);
+            $product->setQuantityReal(0);
             $product->setPrice($price);
         }
         else

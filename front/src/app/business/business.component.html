@@ -1,5 +1,4 @@
 <app-header></app-header>
-
 <div class="ui container">
     <div *ngIf="business">
         <div class="ui message">
@@ -21,7 +20,6 @@
             <h1 class="ui header centered">{{business.name}}</h1>
 
             <hr class="my-4">
-            <p class="lead"></p>
 
             <a [routerLink]="['/addBusinessProduct', business.id]">
                 <button class="ui inverted blue button">

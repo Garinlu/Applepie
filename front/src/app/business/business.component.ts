@@ -1,12 +1,10 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {BusinessService} from './business.service';
 import 'rxjs/add/operator/switchMap';
 import {ConfirmModal} from '../modal/modal.component';
 import {SuiModalService} from "ng2-semantic-ui"
 
-
-declare let $: any;
 @Component({
     selector: 'business',
     templateUrl: './business.component.html',

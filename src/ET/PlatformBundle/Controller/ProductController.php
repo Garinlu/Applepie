@@ -37,25 +37,8 @@ class ProductController extends Controller
             return $datas;
         }
 
-        $products = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('ETPlatformBundle:Product')
-            ->findAll();
-        $datas = [];
-        $index = 0;
-        $whichIndex = [];
-        foreach ($products as $product) {
-            $name = $product->getProductDetail()->getName();
-            if (!array_key_exists($name, $whichIndex))
-            {
-                $datas[$index] = array('name' => $name, 'quantity' => 0,'productsGroup' => array());
-                $whichIndex[$name] = $index;
-                $index++;
-            }
-            $datas[$whichIndex[$name]]['productsGroup'][] = $product;
-            $datas[$whichIndex[$name]]['quantity'] += $product->getQuantityReal();
-        }
+        $productsMana = $this->container->get('et_platform.product');
+        $datas = $productsMana->getProducts();
         return $datas;
     }
 
@@ -103,9 +86,7 @@ class ProductController extends Controller
         $datas = $productsMana->addProduct($name, $price, $quantity);
 
         return $datas;
-
     }
-
 
     /**
      *
