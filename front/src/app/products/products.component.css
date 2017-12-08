@@ -1,3 +1,15 @@
 .table tbody tr:hover td, .table tbody tr:hover th {
-    background-color: #eeeeea;
+    background-color: #dcdbd6;
+}
+
+.table {
+    border-color: #afafaf !important;
+}
+
+.ui.celled.table tr td, .ui.celled.table tr th {
+    border-color: #afafaf !important;
+}
+
+.ui.message{
+    box-shadow: 0.3px 0.3px 1px 1.3px #b9b9b9;
 }
