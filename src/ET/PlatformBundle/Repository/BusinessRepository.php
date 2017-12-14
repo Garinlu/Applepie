@@ -12,4 +12,11 @@ namespace ET\PlatformBundle\Repository;
 class BusinessRepository extends \Doctrine\ORM\EntityRepository
 {
 
+    public function getNumberBusiness()
+    {
+        $q = $this->createQueryBuilder('p')
+            ->select('COUNT(p)');
+        return $q->getQuery()->getSingleScalarResult();
+    }
+
 }

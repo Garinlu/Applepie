@@ -3,7 +3,6 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
-
 import {SuiModule} from 'ng2-semantic-ui';
 
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';

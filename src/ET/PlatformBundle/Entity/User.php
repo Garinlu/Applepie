@@ -84,7 +84,7 @@ class User extends BaseUser
     /**
      * @return mixed
      */
-    public function getBusiness()
+    public function getBusiness($offset)
     {
         return $this->business;
     }

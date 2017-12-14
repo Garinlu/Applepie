@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from '../product/product.service';
 
+import * as _ from "lodash";
 
 @Component({
     selector: 'productsGroup',
@@ -8,8 +9,10 @@ import {ProductService} from '../product/product.service';
     styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
+    products_all;
     products;
     showDetails: boolean[];
+    dataSearch;
 
     columns = [
         {name: 'Id'},
@@ -23,7 +26,8 @@ export class ProductsComponent implements OnInit {
 
     ngOnInit(): void {
         this.productService.getProducts().subscribe(listProducts => {
-            this.products = listProducts;
+            this.products_all = listProducts;
+            this.products = this.products_all;
             let tmpBool = [];
             this.products.forEach(function (prod) {
                 tmpBool.splice(prod.name, 0, false);
@@ -41,5 +45,12 @@ export class ProductsComponent implements OnInit {
 
     deleteProduct(id: number): void {
         this.productService.deleteProductOrder(id).subscribe(() => location.reload());
+    }
+
+    setFilter() {
+        this.products = _.filter(this.products_all, function (o) {
+            let reg = new RegExp(this.dataSearch, "i");
+            return (reg.test(o.name));
+        }.bind(this));
     }
 }

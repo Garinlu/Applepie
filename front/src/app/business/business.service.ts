@@ -9,9 +9,9 @@ export class BusinessService {
     constructor(private http: HttpClient) {}
 
 
-    getBusinesses(): Observable<Business[]> {
-        const url = `/business/all`;
-        return this.http.get(url).map(response => response as Business[]);
+    getBusinesses(page: number){
+        const url = `/business/all?page=` + page;
+        return this.http.get(url);
     }
 
     getBusiness(id: number): Observable<Business> {

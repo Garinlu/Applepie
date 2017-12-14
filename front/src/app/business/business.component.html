@@ -39,7 +39,7 @@
             <div *ngFor="let user of users" class="ui image label">
                 <div *ngIf="users_print[user.id]">
                     {{user.firstname}} {{user.lastname}}
-                    <i class="delete icon" (click)="deleteUser(user.id)"></i>
+                    <i class="delete icon" (click)="deleteUser(user.id)" style="cursor: pointer;"></i>
                 </div>
             </div>
             <br>
@@ -58,6 +58,18 @@
 
             <p class="lead"></p>
 
+            <div class="row">
+                <div class="column">
+                    <div class="ui action icon input">
+                        <input id="search_busi" type="text" placeholder="Recherche..."
+                               [(ngModel)]="dataSearch" (keyup)="setFilter()">
+                        <select class="ui compact selection dropdown" [(ngModel)]="typeSearch">
+                            <option value="product">Nom du produit</option>
+                            <option value="user">Nom d'utilisateur</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
             <sui-tabset>
                 <div class="ui top attached tabular menu">
                     <a class="item" suiTabHeader="1">Vue générale</a>

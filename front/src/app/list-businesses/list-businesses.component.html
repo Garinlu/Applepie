@@ -1,6 +1,17 @@
 <div class="ui middle aligned one column centered grid">
     <div class="row">
         <div class="column">
+            <div class="ui action icon input">
+                <input id="search_busi" type="text" placeholder="Recherche..."
+                       [(ngModel)]="dataSearch" (keyup)="setFilter()">
+                <select class="ui compact selection dropdown">
+                    <option value="all">Nom du chantier</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
             <table class="ui celled table">
                 <thead>
                 <tr>
@@ -12,11 +23,12 @@
                 <tbody>
                 <tr *ngFor="let business of myBusiness" [ngClass]="(!business.status)? 'negative' : ''">
                     <td>{{business.name}}</td>
-                    <td><div class="ui toggle checkbox">
-                        <input *ngIf="business.status" type="checkbox" name="public" checked disabled>
-                        <input *ngIf="!business.status" type="checkbox" name="public" disabled>
-                        <label></label>
-                    </div>
+                    <td>
+                        <div class="ui toggle checkbox">
+                            <input *ngIf="business.status" type="checkbox" name="public" checked disabled>
+                            <input *ngIf="!business.status" type="checkbox" name="public" disabled>
+                            <label></label>
+                        </div>
                     </td>
                     <td>
                         <button *ngIf="business.status" class="ui right labeled icon button"
@@ -33,6 +45,12 @@
                 </tr>
                 </tbody>
             </table>
+            <div class="ui pagination menu">
+                <a class="active item" *ngFor="let i of listPage" [ngClass]="{'active': i ===currentPage}"
+                (click)="goToPage(i)">
+                    {{i}}
+                </a>
+            </div>
         </div>
     </div>
 </div>

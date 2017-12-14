@@ -10,6 +10,17 @@
             </button>
         </a>
         <hr class="my-4">
+        <div class="row">
+            <div class="column">
+                <div class="ui action icon input">
+                    <input id="search_busi" type="text" placeholder="Recherche..."
+                           [(ngModel)]="dataSearch" (keyup)="setFilter()">
+                    <select class="ui compact selection dropdown">
+                        <option value="all">Nom du produit</option>
+                    </select>
+                </div>
+            </div>
+        </div>
         <table class="ui celled table">
             <thead>
             <tr>

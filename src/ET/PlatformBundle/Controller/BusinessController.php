@@ -16,24 +16,40 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  */
 class BusinessController extends Controller
 {
+    private $NB_BUSINESS_PAGE = 100;
+
     /**
      * Get all my business
      * @Rest\Route("/all")
      *
      * @return array
      */
-    public function getBusinessesAction()
+    public function getBusinessesAction(Request $request)
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        $offset = $this->pagination($request->get('page'));
+        $productsMana = $this->container->get('et_platform.business');
         if ($user->hasRole('ROLE_ADMIN'))
         {
-            $productsMana = $this->container->get('et_platform.business');
-            return $productsMana->getClassifiedStatusBusiness(
-                $this->getDoctrine()->getManager()->getRepository('ETPlatformBundle:Business')->findAll()
-            );
+            $repoBusi = $this->getDoctrine()->getManager()->getRepository('ETPlatformBundle:Business');
+            return array('business' => $productsMana->getClassifiedStatusBusiness(
+                $repoBusi->findBy(array(), array('id' => 'DESC'), $this->NB_BUSINESS_PAGE, $offset)
+            ),
+                'nb_pages' => $repoBusi->getNumberBusiness() / $this->NB_BUSINESS_PAGE);
         }
-        return $this->container->get('et_platform.business')
-            ->getClassifiedStatusBusiness($user->getBusiness());
+        $list_busi = $user->getBusiness();
+        $from = $offset;
+        $to = $offset + $this->NB_BUSINESS_PAGE;
+        $i = 1;
+        foreach ($list_busi as $busi)
+        {
+            if ($i < $from || $i > $to)
+                $list_busi->removeElement($busi);
+        }
+        return array('business' => $this->container->get('et_platform.business')
+            ->getClassifiedStatusBusiness($list_busi),
+            'nb_pages' => count($user->getBusiness()) / $this->NB_BUSINESS_PAGE);
     }
 
     /**
@@ -242,4 +258,23 @@ class BusinessController extends Controller
         );
     }
 
+
+    /**
+     * @param $page
+     * @return int|null
+     */
+    public function pagination($page)
+    {
+        $offset = 0;
+        if (!empty($page))
+        {
+            if (!intval($page))
+                return null;
+            $page = intval($page);
+            if ($page < 1)
+                return null;
+            $offset = ($page - 1) * $this->NB_BUSINESS_PAGE;
+        }
+        return $offset;
+    }
 }
