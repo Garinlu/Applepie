@@ -12,6 +12,11 @@ export class ProductService {
         const url = `/product/`;
         return this.http.get(url);
     }
+
+    getOrders(): Observable<any> {
+        const url = `/product/orders`;
+        return this.http.get(url);
+    }
     putProduct(product: Product): Observable<Product> {
         const url = `/product/`;
         return this.http.put(url, product);

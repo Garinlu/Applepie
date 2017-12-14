@@ -43,6 +43,17 @@ class ProductController extends Controller
     }
 
     /**
+     * @Rest\Route("/orders")
+     * Get all productsGroup or productsGroup of a business (if key 'business')
+     *
+     */
+    public function getOrdersAction(Request $request)
+    {
+        return $this->getDoctrine()->getManager()->getRepository('ETPlatformBundle:ProductOrder')
+            ->findBy(array(), array('id' => 'DESC'));
+    }
+
+    /**
      * Return productsGroup which quantity is superior than 0.
      *
      * @Rest\Route("/free")

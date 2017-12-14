@@ -8,6 +8,7 @@ import {BusinessComponent} from './business/business.component';
 import {BusinessFormComponent} from './business/business-form.component';
 import {AddProdBusiFormComponent} from './businesses/AddProdBusi-form.component';
 import {AddBusiUserFormComponent} from './business/AddBusiUser-form.component';
+import {OrdersComponent} from './orders/orders.component';
 
 const APP_ROUTES: Routes = [
     {
@@ -19,12 +20,16 @@ const APP_ROUTES: Routes = [
         component: LoginComponent
     },
     {
-        path: 'productsGroup',
+        path: 'businesses',
+        component: BusinessesComponent
+    },
+    {
+        path: 'products',
         component: ProductsComponent
     },
     {
-        path: 'businesses',
-        component: BusinessesComponent
+        path: 'orders',
+        component: OrdersComponent
     },
     {
         path: 'business/:id',

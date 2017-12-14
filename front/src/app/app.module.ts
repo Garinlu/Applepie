@@ -34,6 +34,7 @@ import {AddProdBusiFormComponent} from './businesses/AddProdBusi-form.component'
 import {AddBusiUserFormComponent} from './business/AddBusiUser-form.component';
 import { ListBusinessesComponent } from './list-businesses/list-businesses.component';
 import { ModalComponent } from './modal/modal.component';
+import { OrdersComponent } from './orders/orders.component';
 
 @NgModule({
     declarations: [
@@ -53,7 +54,8 @@ import { ModalComponent } from './modal/modal.component';
         AddBusiUserFormComponent,
         AlertComponent,
         ListBusinessesComponent,
-        ModalComponent
+        ModalComponent,
+        OrdersComponent
     ],
     imports: [
         BrowserModule,
