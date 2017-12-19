@@ -1,21 +1,12 @@
-<app-header></app-header>
 <div class="ui container">
+    <a routerLink="/businesses" routerLinkActive="active">
+        <button class="ui left labeled icon button">
+            <i class="left arrow icon"></i>
+            Retour à la liste des chantiers
+        </button>
+    </a>
     <div *ngIf="business">
         <div class="ui message">
-
-            <a routerLink="/businesses" routerLinkActive="active" style="float: left">
-                <button class="ui left labeled icon button">
-                    <i class="left arrow icon"></i>
-                    Retour à la liste des chantiers
-                </button>
-            </a>
-
-            <a [routerLink]="['/addBusinessUser', business.id]" style="float: right">
-                <button class="ui inverted blue button">
-                    <i class="icon user"></i>
-                    Ajouter un utilisateur au chantier
-                </button>
-            </a>
 
             <h1 class="ui header centered">{{business.name}}</h1>
 
@@ -35,6 +26,12 @@
             <br>
             <div class="ui red ribbon label">Utilisateurs</div>
             <br>
+            <a [routerLink]="['/addBusinessUser', business.id]" style="float: right">
+                <button class="ui inverted red button">
+                    <i class="icon user"></i>
+                    Ajouter un utilisateur au chantier
+                </button>
+            </a>
             <br>
             <div *ngFor="let user of users" class="ui image label">
                 <div *ngIf="users_print[user.id]">
@@ -48,16 +45,22 @@
             <br>
             <div class="ui blue ribbon label">Produits</div>
             <br>
-            <br>
-            <a [routerLink]="['/addBusinessProduct', business.id]">
+            <a [routerLink]="['/addBusinessProduct', business.id]" style="float: right;">
                 <button class="ui inverted blue button">
                     <i class="add circle icon"></i>
                     Ajouter un produit au chantier
                 </button>
             </a>
+            <br>
+            <br>
 
-            <p class="lead"></p>
 
+            <div class="ui teal message">
+                <i class="icon euro"></i>
+                <b>
+                    Somme totale dépensée sur le chantier :
+                    {{priceTot | number}}€</b>
+            </div>
             <div class="row">
                 <div class="column">
                     <div class="ui action icon input">

@@ -9,47 +9,54 @@ import {BusinessFormComponent} from './business/business-form.component';
 import {AddProdBusiFormComponent} from './businesses/AddProdBusi-form.component';
 import {AddBusiUserFormComponent} from './business/AddBusiUser-form.component';
 import {OrdersComponent} from './orders/orders.component';
+import {HeaderComponent} from './header/header.component';
 
 const APP_ROUTES: Routes = [
-    {
-        path: 'index',
-        component: IndexComponent
-    },
+
     {
         path: 'login',
         component: LoginComponent
     },
-    {
-        path: 'businesses',
-        component: BusinessesComponent
-    },
-    {
-        path: 'products',
-        component: ProductsComponent
-    },
-    {
-        path: 'orders',
-        component: OrdersComponent
-    },
-    {
-        path: 'business/:id',
-        component: BusinessComponent
-    },
-    {
-        path: 'addProduct',
-        component: ProductFormComponent
-    },
-    {
-        path: 'addBusiness',
-        component: BusinessFormComponent
-    },
-    {
-        path: 'addBusinessProduct/:id',
-        component: AddProdBusiFormComponent
-    },
-    {
-        path: 'addBusinessUser/:id',
-        component: AddBusiUserFormComponent
+    { path: '', component: HeaderComponent,
+        children: [
+            {
+                path: 'index',
+                component: IndexComponent
+            },
+            {
+                path: 'businesses',
+                component: BusinessesComponent
+            },
+            {
+                path: 'products',
+                component: ProductsComponent
+            },
+            {
+                path: 'orders',
+                component: OrdersComponent
+            },
+            {
+                path: 'business/:id',
+                component: BusinessComponent
+            },
+            {
+                path: 'addProduct',
+                component: ProductFormComponent
+            },
+            {
+                path: 'addBusiness',
+                component: BusinessFormComponent
+            },
+            {
+                path: 'addBusinessProduct/:id',
+                component: AddProdBusiFormComponent
+            },
+            {
+                path: 'addBusinessUser/:id',
+                component: AddBusiUserFormComponent
+            }
+        ]
+
     },
     { path: '**', redirectTo: 'index' }
 ];

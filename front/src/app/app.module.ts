@@ -26,7 +26,6 @@ import {AlertComponent} from './alert/alert.component';
 import {UserService} from './user/user.service';
 import { HeaderComponent } from './header/header.component';
 import { IndexComponent } from './index/index.component';
-import { FooterComponent } from './footer/footer.component';
 import { UserComponent } from './user/user.component';
 import {AlertService} from './alert/alert.service';
 import {BusinessFormComponent} from './business/business-form.component';
@@ -41,7 +40,6 @@ import { OrdersComponent } from './orders/orders.component';
         AppComponent,
         UserComponent,
         HeaderComponent,
-        FooterComponent,
         LoginComponent,
         IndexComponent,
         ProductsComponent,

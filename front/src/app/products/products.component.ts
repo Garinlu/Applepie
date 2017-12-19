@@ -33,7 +33,7 @@ export class ProductsComponent implements OnInit {
                 tmpBool.splice(prod.name, 0, false);
             });
             this.showDetails = tmpBool;
-            console.log(this.showDetails);
+
         });
     }
 

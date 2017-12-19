@@ -1,21 +1,35 @@
-<nav>
-    <div class="ui secondary pointing menu">
-        <a style="margin-right: 2%" routerLink="/index" routerLinkActive="active">
-            <img src="/img/logo.png" alt="Eurotoiture" style="height: 60px">
-        </a>
-        <a class="item" routerLink="/businesses" routerLinkActive="active">
-            Les chantiers
-        </a>
-        <a class="item" routerLink="/products" routerLinkActive="active">
-            Le stock
-        </a>
-        <a class="item" routerLink="/orders" routerLinkActive="active">
-            Les commandes
-        </a>
-        <div class="right menu">
-            <a class="ui item" (click)="logout()">
-                Logout
+<div *ngIf="user">
+    <nav>
+        <div class="ui left fixed vertical menu">
+            <div class="item">
+                <a style="margin-right: 2%" [routerLink]="['index']">
+                    <img src="/img/logo.png" alt="Eurotoiture" style="height: 50px">
+                </a>
+            </div>
+            <a class="item" [routerLink]="['businesses']">
+                Les chantiers
+            </a>
+            <a class="item" [routerLink]="['products']">
+                Le stock
+            </a>
+            <a class="item" [routerLink]="['orders']">
+                Les commandes
             </a>
         </div>
+    </nav>
+
+    <alert></alert>
+    <router-outlet></router-outlet>
+
+    <div class="ui right fixed vertical menu" *ngIf="user" style="margin-left:100px;">
+        <div class="item">
+            <i class="{{user.gender}} icon"></i> {{user.firstname}} {{user.lastname}}
+        </div>
+        <div class="item">
+            Rôle : {{role}}
+        </div>
+        <a class="item" (click)="logout()">
+            Déconnexion
+        </a>
     </div>
-</nav>
+</div>

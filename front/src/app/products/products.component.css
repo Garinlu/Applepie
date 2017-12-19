@@ -1,3 +1,7 @@
 .table tbody tr:hover td, .table tbody tr:hover th {
     background-color: #eeeeea;
 }
+
+.tr_hover {
+    background-color: #49a0bb;
+}

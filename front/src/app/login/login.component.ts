@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from '../user/user.service';
+import * as _ from "lodash";
+import {AlertService} from '../alert/alert.service';
 
 @Component({
     selector: 'app-login',
@@ -13,7 +15,7 @@ export class LoginComponent {
 
     error: string = '';
 
-    constructor(private userService: UserService, private router: Router) {
+    constructor(private userService: UserService, private router: Router, private alertService: AlertService) {
 
     }
 
@@ -21,13 +23,16 @@ export class LoginComponent {
         this.userService.login(this.username, this.password)
             .subscribe(
                 data => {
-                    console.log(data);
+                    this.router.navigate(['/index']);
                 },
                 error => {
-                    this.error = error.message;
-                    console.log(error);
+                    if (_.includes(error.url, 'login')) {
+                        this.alertService.error('Connexion impossible. Veuillez vérifier vos identifiants.');
+                    }
                 }
             );
     }
+
+    //TODO register : url
 
 }

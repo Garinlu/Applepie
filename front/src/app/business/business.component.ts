@@ -23,6 +23,7 @@ export class BusinessComponent implements OnInit {
     productChoose;
     dataSearch;
     typeSearch = 'product';
+    priceTot = 0;
 
     constructor(private businessService: BusinessService,
                 private route: ActivatedRoute,
@@ -56,6 +57,7 @@ export class BusinessComponent implements OnInit {
             .subscribe(datas => {
                 this.products_all = datas;
                 this.products = this.products_all;
+                this.getSumPrice();
             });
 
         this.route.paramMap
@@ -128,5 +130,14 @@ export class BusinessComponent implements OnInit {
                 }.bind(this));
                 break;
         }
+        this.getSumPrice();
+    }
+
+    getSumPrice() {
+        let priceTot = 0;
+        this.products.forEach(function (prod) {
+            priceTot += prod.product.price * prod.quantity;
+        });
+        this.priceTot = priceTot;
     }
 }

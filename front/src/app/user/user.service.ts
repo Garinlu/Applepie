@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Rx';
 import {User} from './user.model';
+import {RequestOptions} from '@angular/http';
 
 @Injectable()
 export class UserService {
@@ -13,7 +14,7 @@ export class UserService {
 
     login(username: string, password: string) {
         let url = '/login_check';
-        let body = new FormData();
+        let body     = new URLSearchParams();
         body.append('username', username);
         body.append('password', password);
 
@@ -29,6 +30,10 @@ export class UserService {
 
     checkLogin(): Observable<User> {
         return this.http.get(`/user/login`).map(user => this.user as User);
+    }
+
+    getMe():Observable<User> {
+        return this.http.get('/user/me').map(user => user as User);
     }
 
     getUserNotBusiness(id_business): Observable<User[]> {

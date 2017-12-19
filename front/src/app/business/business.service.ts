@@ -19,8 +19,8 @@ export class BusinessService {
         return this.http.get(url).map(response => response as Business);
     }
 
-    getProductFromBusiness(id: number, bool: boolean) {
-        const url = `/product?business=` + id + `&group=` + bool;
+    getProductFromBusiness(id: number, grouped: boolean) {
+        const url = `/product?business=` + id + `&group=` + grouped;
         return this.http.get(url);
     }
 
