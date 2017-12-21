@@ -13,6 +13,11 @@ This schema have been created on 12/01/2017.
 Symfony3 : API Rest backend ; use Doctrine 2, FOSRest, FOSUser.
 Angular4 : front ;
 
+## What you need
+* MySQL Database
+* NPM with angular/cli
+* Composer
+
 ## Installation
 * Clone or download the project
 * Go inside the project
