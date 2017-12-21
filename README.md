@@ -15,7 +15,7 @@ Angular4 : front ;
 
 ## What you need
 * MySQL Database
-* NPM with angular/cli
+* NPM with angular/cli (Install NPM and execute ```npm install -g @angular/cli```)
 * Composer
 
 ## Installation
