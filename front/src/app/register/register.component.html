@@ -1,0 +1,35 @@
+<!--[if lt IE 9]>
+<script>
+  document.createElement('video');
+</script>
+<![endif]-->
+<video autoplay loop poster="./video/Winterfell.jpg" id="bgvid"
+       style="background-url: url(./video/Winterfell.jpg) no-repeat;">
+  <source src="./video/Winterfell.mp4" type="video/mp4"/>
+  <source src="./video/Winterfell.webm" type="video/webm"/>
+  <source src="./video/Winterfell.ogv" type="video/ogg"/>
+  Ici l'alternative à la vidéo : un lien de téléchargement, un message, etc.
+</video>
+
+<div id="header">
+  <img src="./img/logo.png" alt="Eurotoiture"/>
+</div>
+<div [hidden]="!error" class="alert alert-danger" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+
+</div>
+<alert></alert>
+
+<div class="contents">
+  <input type="mail" [(ngModel)]="email" #ctrl="ngModel" required placeholder="Mail">
+  <input type="text" [(ngModel)]="username" #ctrl="ngModel" required placeholder="username">
+  <input type="password" [(ngModel)]="password" #ctrl="ngModel" required placeholder="password">
+  <input type="text" [(ngModel)]="firstname" #ctrl="ngModel" required placeholder="firstname">
+  <input type="text" [(ngModel)]="lastname" #ctrl="ngModel" required placeholder="lastname">
+  <button (click)="register()" class="btn btn-success">Inscription</button>
+</div>
+
+<div id="footer">
+  Eurotoiture 2017. Tout droits réservés.
+</div>

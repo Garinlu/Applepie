@@ -33,6 +33,4 @@ export class LoginComponent {
             );
     }
 
-    //TODO register : url
-
 }

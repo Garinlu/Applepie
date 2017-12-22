@@ -10,12 +10,16 @@ import {AddProdBusiFormComponent} from './businesses/AddProdBusi-form.component'
 import {AddBusiUserFormComponent} from './business/AddBusiUser-form.component';
 import {OrdersComponent} from './orders/orders.component';
 import {HeaderComponent} from './header/header.component';
+import {RegisterComponent} from "./register/register.component";
 
 const APP_ROUTES: Routes = [
-
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'register',
+        component: RegisterComponent
     },
     { path: '', component: HeaderComponent,
         children: [
