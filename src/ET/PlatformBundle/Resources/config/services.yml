@@ -14,3 +14,6 @@ services:
     et_platform.business:
         class: ET\PlatformBundle\Service\ETBusinessManager
         public: true
+    et_platform.user:
+        class: ET\PlatformBundle\Service\ETUserManager
+        public: true

@@ -5,6 +5,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpFoundation\Request;
 
 
 /**
@@ -32,4 +33,15 @@ class DefaultController extends Controller
     {
         return $this->get('security.token_storage')->getToken()->getUser();
     }
+
+    /**
+     * @Rest\Route("/createUser")
+     */
+    public function postCreateUserAction(Request $request)
+    {
+        $userManager = $this->container->get('et_platform.user');
+        $response = $userManager->createUser(json_decode($request->getContent(), true)["user"]);
+        return $response;
+    }
+
 }
