@@ -35,6 +35,18 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Rest\Route("/user/all")
+     *
+     * @return mixed
+     */
+    public function getAllUserAction()
+    {
+        $userManager = $this->container->get('et_platform.user');
+        $response = $userManager->getAllUsers();
+        return $response;
+    }
+
+    /**
      * @Rest\Route("/createUser")
      */
     public function postCreateUserAction(Request $request)

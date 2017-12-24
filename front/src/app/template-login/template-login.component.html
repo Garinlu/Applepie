@@ -1,0 +1,28 @@
+<!--[if lt IE 9]>
+<script>
+  document.createElement('video');
+</script>
+<![endif]-->
+<video autoplay loop poster="./video/Winterfell.jpg" id="bgvid"
+       style="background-url: url(./video/Winterfell.jpg) no-repeat;">
+  <source src="./video/Winterfell.mp4" type="video/mp4"/>
+  <source src="./video/Winterfell.webm" type="video/webm"/>
+  <source src="./video/Winterfell.ogv" type="video/ogg"/>
+  Ici l'alternative à la vidéo : un lien de téléchargement, un message, etc.
+</video>
+
+<div id="header">
+  <img src="./img/logo.png" alt="Eurotoiture"/>
+</div>
+<div [hidden]="!error" class="alert alert-danger" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+
+</div>
+<alert></alert>
+<div class="contents">
+<router-outlet></router-outlet>
+</div>
+<div id="footer">
+  Eurotoiture 2017. Tout droits réservés.
+</div>

@@ -20,11 +20,13 @@ class ETUserManager
 
     private $tokenStorage;
     private $userManager;
+    private $em;
 
-    public function __construct(TokenStorageInterface $tokenStorage, \FOS\UserBundle\Model\UserManager $userManager)
+    public function __construct(TokenStorageInterface $tokenStorage, \FOS\UserBundle\Model\UserManager $userManager, \Doctrine\ORM\EntityManager $em)
     {
         $this->tokenStorage = $tokenStorage;
         $this->userManager = $userManager;
+        $this->em = $em;
     }
 
     public function whoAmI()
@@ -91,5 +93,10 @@ class ETUserManager
         $response = new JsonResponse();
         $response->setData($errors);
         return $response;
+    }
+
+    public function getAllUsers()
+    {
+        return $this->em->getRepository('ETPlatformBundle:User')->findAll();
     }
 }

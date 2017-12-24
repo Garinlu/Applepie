@@ -23,12 +23,14 @@ export class LoginComponent {
         this.userService.login(this.username, this.password)
             .subscribe(
                 data => {
-                    this.router.navigate(['/index']);
                 },
                 error => {
                     if (_.includes(error.url, 'login')) {
                         this.alertService.error('Connexion impossible. Veuillez vérifier vos identifiants.');
                     }
+                },
+                () => {
+                    this.router.navigate(['/index']);
                 }
             );
     }

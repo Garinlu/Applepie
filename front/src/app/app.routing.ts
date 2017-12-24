@@ -1,4 +1,4 @@
-import { Routes, RouterModule } from '@angular/router';
+import {Routes, RouterModule} from '@angular/router';
 import {ProductsComponent} from './products/products.component';
 import {ProductFormComponent} from './product/product-form.component';
 import {BusinessesComponent} from './businesses/businesses.component';
@@ -11,17 +11,24 @@ import {AddBusiUserFormComponent} from './business/AddBusiUser-form.component';
 import {OrdersComponent} from './orders/orders.component';
 import {HeaderComponent} from './header/header.component';
 import {RegisterComponent} from "./register/register.component";
+import {TemplateLoginComponent} from "./template-login/template-login.component";
+import {UsersComponent} from "./users/users.component";
 
 const APP_ROUTES: Routes = [
     {
-        path: 'login',
-        component: LoginComponent
+        path: '', component: TemplateLoginComponent,
+        children: [
+            {
+                path: 'login',
+                component: LoginComponent
+            },
+            {
+                path: 'register',
+                component: RegisterComponent
+            }]
     },
     {
-        path: 'register',
-        component: RegisterComponent
-    },
-    { path: '', component: HeaderComponent,
+        path: '', component: HeaderComponent,
         children: [
             {
                 path: 'index',
@@ -34,6 +41,10 @@ const APP_ROUTES: Routes = [
             {
                 path: 'products',
                 component: ProductsComponent
+            },
+            {
+                path: 'users',
+                component: UsersComponent
             },
             {
                 path: 'orders',
@@ -62,7 +73,7 @@ const APP_ROUTES: Routes = [
         ]
 
     },
-    { path: '**', redirectTo: 'index' }
+    {path: '**', redirectTo: 'index'}
 ];
 
 export const Routing = RouterModule.forRoot(APP_ROUTES, {useHash: true});

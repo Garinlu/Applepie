@@ -10,7 +10,7 @@ import * as _ from "lodash";
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
 
     user: User;
     role;
@@ -20,21 +20,29 @@ export class HeaderComponent implements OnInit{
 
     ngOnInit(): void {
         this.userService.getMe().subscribe(user => {
-            this.user = user as User;
-            if (_.includes(this.user.roles, 'ROLE_ADMIN')) {
-                this.role = 'ADMINISTRATEUR';
-            } else {
-                this.role = 'UTILISATEUR';
-            }
-        },
-        error => {
-            if (_.includes(error.url, 'login'))
-                this.router.navigate(['/login']);
-        });
+                this.user = user as User;
+                if (_.includes(this.user.roles, 'ROLE_ADMIN')) {
+                    this.role = 'ADMINISTRATEUR';
+                } else {
+                    this.role = 'UTILISATEUR';
+                }
+            },
+            error => {
+                if (_.includes(error.url, 'login'))
+                    this.router.navigate(['/login']);
+            });
     }
 
     logout() {
-        this.userService.logout();
-        this.router.navigate(['/login']);
+        this.userService.logout().subscribe(data => {
+                this.router.navigate(['/login'])
+            },
+            error => {
+                this.router.navigate(['/login'])
+            },
+            () => {
+                this.router.navigate(['/login'])
+            });
+
     }
 }

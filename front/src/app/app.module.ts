@@ -35,6 +35,8 @@ import { ListBusinessesComponent } from './list-businesses/list-businesses.compo
 import { ModalComponent } from './modal/modal.component';
 import { OrdersComponent } from './orders/orders.component';
 import { RegisterComponent } from './register/register.component';
+import { TemplateLoginComponent } from './template-login/template-login.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
     declarations: [
@@ -55,7 +57,9 @@ import { RegisterComponent } from './register/register.component';
         ListBusinessesComponent,
         ModalComponent,
         OrdersComponent,
-        RegisterComponent
+        RegisterComponent,
+        TemplateLoginComponent,
+        UsersComponent
     ],
     imports: [
         BrowserModule,

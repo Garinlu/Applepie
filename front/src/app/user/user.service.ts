@@ -19,8 +19,7 @@ export class UserService {
         body.append('_password', password);
 
         return this.http
-            .post(url, body)
-            .map((data: Response) => data.json());
+            .post(url, body);
     }
 
     register(email: string, username: string, password: string, firstname: string, lastname: string) {
@@ -52,16 +51,15 @@ export class UserService {
     }
 
     logout() {
-        return this.http.get('/logout')
-            .subscribe();
-    }
-
-    checkLogin(): Observable<User> {
-        return this.http.get(`/user/login`).map(user => this.user as User);
+        return this.http.get('/logout');
     }
 
     getMe(): Observable<User> {
         return this.http.get('/user/me').map(user => user as User);
+    }
+
+    getAll(): Observable<User[]> {
+        return this.http.get('/user/all').map(users => users as User[]);
     }
 
     getUserNotBusiness(id_business): Observable<User[]> {

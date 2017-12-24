@@ -25,12 +25,14 @@ export class RegisterComponent {
         this.userService.register(this.email, this.username, this.password, this.firstname, this.lastname)
             .subscribe(
                 data => {
-                    if (data) {
-                        this.alertService.error('Erreur');
+                },
+                error => {
+                    if (_.includes(error.url, 'login')) {
+                        this.alertService.error('Connexion impossible. Veuillez vérifier vos identifiants.');
                     }
-                    else {
-                        this.router.navigate(['/index']);
-                    }
+                },
+                () => {
+                    this.router.navigate(['/index']);
                 }
             );
     }

@@ -1,0 +1,7 @@
+button, a {
+    display: block!important;
+}
+input {
+    display: block;
+    margin: 5px auto;
+}
