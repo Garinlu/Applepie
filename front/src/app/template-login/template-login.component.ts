@@ -10,6 +10,8 @@ export class TemplateLoginComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+      console.log('tp log');
   }
 
 }

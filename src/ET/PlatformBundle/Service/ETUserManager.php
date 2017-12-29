@@ -82,6 +82,8 @@ class ETUserManager
         $user->setLastname($userData['lastname']);
         $user->setEmail($userData['email']);
         $user->setPlainPassword($userData['plainPassword']);
+        if (isset($userData['role']))
+            $user->setRoles([$userData['role']]);
         $user->setEnabled(true);
 
         if (count($errors) == 0) {

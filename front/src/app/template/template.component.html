@@ -20,9 +20,12 @@
             </a>
         </div>
     </nav>
-
-    <alert></alert>
-    <router-outlet></router-outlet>
+    <div class="ui container">
+        <div class="ui message">
+            <alert></alert>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 
     <div class="ui right fixed vertical menu" *ngIf="user" style="margin-left:100px;">
         <div class="item">

@@ -24,36 +24,5 @@ class DefaultController extends Controller
         return $this->render('ETPlatformBundle:Default:index.html.twig');
     }
 
-    /**
-     * @Rest\Route("/user/me")
-     *
-     * @return mixed
-     */
-    public function getMeAction()
-    {
-        return $this->get('security.token_storage')->getToken()->getUser();
-    }
-
-    /**
-     * @Rest\Route("/user/all")
-     *
-     * @return mixed
-     */
-    public function getAllUserAction()
-    {
-        $userManager = $this->container->get('et_platform.user');
-        $response = $userManager->getAllUsers();
-        return $response;
-    }
-
-    /**
-     * @Rest\Route("/createUser")
-     */
-    public function postCreateUserAction(Request $request)
-    {
-        $userManager = $this->container->get('et_platform.user');
-        $response = $userManager->createUser(json_decode($request->getContent(), true)["user"]);
-        return $response;
-    }
 
 }

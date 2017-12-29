@@ -22,32 +22,23 @@ export class UserService {
             .post(url, body);
     }
 
-    register(email: string, username: string, password: string, firstname: string, lastname: string) {
-        let url = '/createUser';
+    register(email: string, username: string, password: string, passwordVerif: string, firstname: string, lastname: string, role: string) {
+        let url = '/user/createUser';
         let b = {
             user:
                 {
                     email: email,
                     username: username,
                     plainPassword: password,
-                    plainPasswordVerif: password,
+                    plainPasswordVerif: passwordVerif,
                     firstname: firstname,
                     lastname: lastname,
-
-
+                    role: role,
                 }
         };
-        let body = new FormData();
-        body.append('email', email);
-        body.append('username', username);
-        body.append('plainPassword', password);
-        body.append('plainPasswordVerif', password);
-        body.append('firstname', firstname);
-        body.append('lastname', lastname);
 
         return this.http
-            .post(url, JSON.stringify(b))
-            .map((data: Response) => data.json());
+            .post(url, JSON.stringify(b));
     }
 
     logout() {
@@ -65,5 +56,11 @@ export class UserService {
     getUserNotBusiness(id_business): Observable<User[]> {
         const url = `/business/users/` + id_business;
         return this.http.get(url).map(response => response as User[]);
+    }
+
+    delete(id: string) {
+        let url = '/user/' + id;
+        return this.http
+            .delete(url);
     }
 }

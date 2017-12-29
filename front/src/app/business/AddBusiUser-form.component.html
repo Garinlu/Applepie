@@ -1,26 +1,22 @@
-<div class="ui container">
-    <div class="ui message">
-        <a routerLinkActive="active" [routerLink]="['/business', id_business]">
-            <button class="ui left labeled icon button">
-                <i class="left arrow icon"></i>
-                Retour au détail du chantier
-            </button>
-        </a>
-        <hr class="my-4">
-        <div class="ui form">
-            <h4 class="ui dividing header">Ajouter un utilisateur au chantier</h4>
+<a routerLinkActive="active" [routerLink]="['/business', id_business]">
+    <button class="ui left labeled icon button">
+        <i class="left arrow icon"></i>
+        Retour au détail du chantier
+    </button>
+</a>
+<hr class="my-4">
+<div class="ui form">
+    <h4 class="ui dividing header">Ajouter un utilisateur au chantier</h4>
 
-            <div class="field">
-                <sui-select [(ngModel)]="user_select" [isSearchable]="true" (ngModelChange)="onChange($event)"
-                            placeholder="Choisissez l'utilisateur à ajouter à la gestion de ce chantier">
-                    <sui-select-option *ngFor="let user of list_users"
-                                       [value]="user.id + '; ' + user.firstname + ' ' + user.lastname">
-                    </sui-select-option>
-                </sui-select>
-            </div>
-            <div class="field">
-                <button class="ui inverted green button" (click)="addUserToBusiness()">Ajouter</button>
-            </div>
-        </div>
+    <div class="field">
+        <sui-select [(ngModel)]="user_select" [isSearchable]="true" (ngModelChange)="onChange($event)"
+                    placeholder="Choisissez l'utilisateur à ajouter à la gestion de ce chantier">
+            <sui-select-option *ngFor="let user of list_users"
+                               [value]="user.id + '; ' + user.firstname + ' ' + user.lastname">
+            </sui-select-option>
+        </sui-select>
+    </div>
+    <div class="field">
+        <button class="ui inverted green button" (click)="addUserToBusiness()">Ajouter</button>
     </div>
 </div>

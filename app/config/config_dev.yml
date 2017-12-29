@@ -29,7 +29,7 @@ monolog:
             process_psr_3_messages: false
             host: 127.0.0.1:9911
         # uncomment to get logging in your browser
-        # you may have to allow bigger header sizes in your Web server configuration
+        # you may have to allow bigger template sizes in your Web server configuration
         #firephp:
         #    type: firephp
         #    level: info

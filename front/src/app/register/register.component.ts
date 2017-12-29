@@ -14,25 +14,30 @@ export class RegisterComponent {
     email: string;
     username: string;
     password: string;
+    passwordVerif: string;
     firstname: string;
     lastname: string;
+    role;
 
     constructor(private userService: UserService, private router: Router, private alertService: AlertService) {
 
     }
 
     public register() {
-        this.userService.register(this.email, this.username, this.password, this.firstname, this.lastname)
+        console.log(this.role);
+
+        this.userService.register(this.email, this.username, this.password, this.passwordVerif, this.firstname, this.lastname, this.role)
             .subscribe(
                 data => {
-                },
-                error => {
-                    if (_.includes(error.url, 'login')) {
-                        this.alertService.error('Connexion impossible. Veuillez vérifier vos identifiants.');
+                    if (data) {
+                        let string = "";
+                        _.forEach(data, function (value) {
+                            string += value + " ";
+                        });
+                        this.alertService.error(string);
+                    } else {
+                        this.router.navigate(['/users']);
                     }
-                },
-                () => {
-                    this.router.navigate(['/index']);
                 }
             );
     }

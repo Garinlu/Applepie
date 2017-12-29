@@ -1,34 +1,30 @@
-<div class="ui container">
-    <div class="ui message">
-        <a routerLinkActive="active" [routerLink]="['/business', id_business]">
-            <button class="ui left labeled icon button">
-                <i class="left arrow icon"></i>
-                Retour au détail du chantier
-            </button>
-        </a>
-        <hr class="my-4">
-        <div class="ui form">
-            <h4 class="ui dividing header">Ajouter un produit au chantier</h4>
-            <br>
+<a routerLinkActive="active" [routerLink]="['/business', id_business]">
+    <button class="ui left labeled icon button">
+        <i class="left arrow icon"></i>
+        Retour au détail du chantier
+    </button>
+</a>
+<hr class="my-4">
+<div class="ui form">
+    <h4 class="ui dividing header">Ajouter un produit au chantier</h4>
+    <br>
 
-            <div class="field">
-                <sui-select [(ngModel)]="productChoose" [isSearchable]="true" (ngModelChange)="onChange($event)"
-                            icon="list"
-                            placeholder="Choisissez le produit à ajouter à ce chantier">
-                    <sui-select-option *ngFor="let product of products"
-                                       [value]="product.id + '; ' + product.productDetail.name + ' - ' + product.price + '€ (restant : ' + product.quantityReal + ')'">
-                    </sui-select-option>
-                </sui-select>
-            </div>
-            <div class="field">
-                <label for="quantity">Quantité</label>
-                <input [(ngModel)]="quantity" id="quantity" type="number" class="form-control" required ngModel
-                       name="quantity" min="1" max="{{getMaxQuantity()}}">
-            </div>
+    <div class="field">
+        <sui-select [(ngModel)]="productChoose" [isSearchable]="true" (ngModelChange)="onChange($event)"
+                    icon="list"
+                    placeholder="Choisissez le produit à ajouter à ce chantier">
+            <sui-select-option *ngFor="let product of products"
+                               [value]="product.id + '; ' + product.productDetail.name + ' - ' + product.price + '€ (restant : ' + product.quantityReal + ')'">
+            </sui-select-option>
+        </sui-select>
+    </div>
+    <div class="field">
+        <label for="quantity">Quantité</label>
+        <input [(ngModel)]="quantity" id="quantity" type="number" class="form-control" required ngModel
+               name="quantity" min="1" max="{{getMaxQuantity()}}">
+    </div>
 
-            <div class="field">
-                <button class="ui inverted green button" (click)="addProdToBusiness()">Ajouter</button>
-            </div>
-        </div>
+    <div class="field">
+        <button class="ui inverted green button" (click)="addProdToBusiness()">Ajouter</button>
     </div>
 </div>

@@ -24,7 +24,7 @@ import {AppService} from './app.service';
 import {LoginComponent} from './login/login.component';
 import {AlertComponent} from './alert/alert.component';
 import {UserService} from './user/user.service';
-import { HeaderComponent } from './header/header.component';
+import { TemplateComponent } from './template/template.component';
 import { IndexComponent } from './index/index.component';
 import { UserComponent } from './user/user.component';
 import {AlertService} from './alert/alert.service';
@@ -42,7 +42,7 @@ import { UsersComponent } from './users/users.component';
     declarations: [
         AppComponent,
         UserComponent,
-        HeaderComponent,
+        TemplateComponent,
         LoginComponent,
         IndexComponent,
         ProductsComponent,

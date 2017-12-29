@@ -25,3 +25,11 @@ et_platform_business:
     options:
         expose: true
         prefix: api
+
+et_platform_user:
+    resource: ETPlatformBundle:User
+    prefix: /user
+    type:     rest
+    options:
+        expose: true
+        prefix: api

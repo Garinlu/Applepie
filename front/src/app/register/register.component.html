@@ -1,8 +1,56 @@
-<a [routerLink]="['/login']">Connexion</a>
-<input type="mail" [(ngModel)]="email" required placeholder="Mail">
-<input type="text" [(ngModel)]="username" required placeholder="username">
-<input type="password" [(ngModel)]="password" required placeholder="password">
-<input type="text" [(ngModel)]="firstname" required placeholder="firstname">
-<input type="text" [(ngModel)]="lastname" required placeholder="lastname">
-<button (click)="register()" class="ui button blue inverted">Inscription</button>
+<a routerLinkActive="active" [routerLink]="['/users']">
+    <button class="ui left labeled icon button">
+        <i class="left arrow icon"></i>
+        Retour
+    </button>
+</a>
 
+<h1 class="ui header centered">Ajouter un utilisateur à l'application</h1>
+<br>
+
+<hr class="my-4">
+<div class="ui form">
+    <div class="field">
+        <div class="two fields">
+            <div class="field">
+                <input type="text" [(ngModel)]="firstname" placeholder="Prénom">
+            </div>
+            <div class="field">
+                <input type="text" [(ngModel)]="lastname" placeholder="Nom">
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <div class="two fields">
+            <div class="field">
+                <input type="email" [(ngModel)]="email" required placeholder="Mail">
+            </div>
+            <div class="field">
+                <input type="text" [(ngModel)]="username" required placeholder="Pseudo">
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <div class="two fields">
+            <div class="field">
+                <input type="password" [(ngModel)]="password" required placeholder="Mot de passe">
+            </div>
+            <div class="field">
+                <input type="password" [(ngModel)]="passwordVerif" required placeholder="Confirmation">
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <div class="two fields">
+            <div class="field">
+                <sui-select placeholder="Choisir le rôle de l'utilisateur" [(ngModel)]="role">
+                    <sui-select-option value="ROLE_ADMIN"></sui-select-option>
+                    <sui-select-option value="ROLE_USER"></sui-select-option>
+                </sui-select>
+            </div>
+            <div class="field">
+                <div (click)="register()" class="ui button" tabindex="0">Ajouter l'utilisateur</div>
+            </div>
+        </div>
+    </div>
+</div>

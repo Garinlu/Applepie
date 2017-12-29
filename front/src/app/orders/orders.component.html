@@ -1,36 +1,32 @@
-<div class="ui container">
-    <div class="ui message">
-        <h1 class="ui header centered">Historique des commandes</h1>
+<h1 class="ui header centered">Historique des commandes</h1>
 
-        <a [routerLink]="['/addProduct']">
-            <button class="ui inverted blue button">
-                <i class="add circle icon"></i>
-                Ajouter une commande
-            </button>
-        </a>
-        <hr class="my-4">
-        <table class="ui celled table">
-            <thead>
-            <tr>
-                <th>Nom du produit</th>
-                <th>Quantité</th>
-                <th>Prix</th>
-                <th>Prix total</th>
-                <th>Commandé par</th>
-                <th>Commandé le</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let order of orders">
-                <td>{{order.product.productDetail.name}}</td>
-                <td>{{order.quantity}}</td>
-                <td>{{order.product.price}}€</td>
-                <td>{{order.product.price * order.quantity}}€</td>
-                <td>{{order.user.firstname}} {{order.user.lastname}}</td>
-                <td>{{order.creationDate | date:'dd/MM/yyyy'}}<br>
-                    <i>{{order.creationDate | date:'HH:mm'}}</i></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+<a [routerLink]="['/addProduct']">
+    <button class="ui inverted blue button">
+        <i class="add circle icon"></i>
+        Ajouter une commande
+    </button>
+</a>
+<hr class="my-4">
+<table class="ui celled table">
+    <thead>
+    <tr>
+        <th>Nom du produit</th>
+        <th>Quantité</th>
+        <th>Prix</th>
+        <th>Prix total</th>
+        <th>Commandé par</th>
+        <th>Commandé le</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let order of orders">
+        <td>{{order.product.productDetail.name}}</td>
+        <td>{{order.quantity}}</td>
+        <td>{{order.product.price}}€</td>
+        <td>{{order.product.price * order.quantity}}€</td>
+        <td>{{order.user.firstname}} {{order.user.lastname}}</td>
+        <td>{{order.creationDate | date:'dd/MM/yyyy'}}<br>
+            <i>{{order.creationDate | date:'HH:mm'}}</i></td>
+    </tr>
+    </tbody>
+</table>

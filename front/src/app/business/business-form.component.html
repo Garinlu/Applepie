@@ -1,26 +1,22 @@
-<div class="ui container">
-    <div class="ui message">
-        <h1 class="ui header centered">Ajouter un Chantier</h1>
-        <a routerLinkActive="active" [routerLink]="['/businesses']">
-            <button class="ui left labeled icon button">
-                <i class="left arrow icon"></i>
-                Retour à la liste des chantiers
-            </button>
-        </a>
-        <hr class="my-4">
-        <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
-            <div class="ui form">
-                <h4 class="ui dividing header">Nom du chantier</h4>
-                <div class="field">
-                    <input id="name" type="text" class="form-control" required ngModel
-                           name="name">
-                </div>
-                <div class="field">
-                    <div class="ui input">
-                        <button class="ui inverted green button" type="submit">Ajouter</button>
-                    </div>
-                </div>
+<h1 class="ui header centered">Ajouter un Chantier</h1>
+<a routerLinkActive="active" [routerLink]="['/businesses']">
+    <button class="ui left labeled icon button">
+        <i class="left arrow icon"></i>
+        Retour à la liste des chantiers
+    </button>
+</a>
+<hr class="my-4">
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+    <div class="ui form">
+        <h4 class="ui dividing header">Nom du chantier</h4>
+        <div class="field">
+            <input id="name" type="text" class="form-control" required ngModel
+                   name="name">
+        </div>
+        <div class="field">
+            <div class="ui input">
+                <button class="ui inverted green button" type="submit">Ajouter</button>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+</form>

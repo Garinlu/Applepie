@@ -16,7 +16,7 @@ export class LoginComponent {
     error: string = '';
 
     constructor(private userService: UserService, private router: Router, private alertService: AlertService) {
-
+console.log('login');
     }
 
     public login() {
