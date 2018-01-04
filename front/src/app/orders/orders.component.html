@@ -16,10 +16,11 @@
         <th>Prix total</th>
         <th>Commandé par</th>
         <th>Commandé le</th>
+        <th>Action</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let order of orders">
+    <tr *ngFor="let order of orders; let i = index" [(ngModel)]="orders[i]" ngDefaultControl>
         <td>{{order.product.productDetail.name}}</td>
         <td>{{order.quantity}}</td>
         <td>{{order.product.price}}€</td>
@@ -27,6 +28,9 @@
         <td>{{order.user.firstname}} {{order.user.lastname}}</td>
         <td>{{order.creationDate | date:'dd/MM/yyyy'}}<br>
             <i>{{order.creationDate | date:'HH:mm'}}</i></td>
+        <td>
+            <i (click)="delete(order.id)" class="remove icon"></i>
+        </td>
     </tr>
     </tbody>
 </table>

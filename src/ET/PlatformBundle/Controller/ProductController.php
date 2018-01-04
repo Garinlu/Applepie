@@ -1,6 +1,7 @@
 <?php
 
 namespace ET\PlatformBundle\Controller;
+
 use FOS\RestBundle\Controller\Annotations as Rest;
 
 use ET\PlatformBundle\Entity\ProductOrder;
@@ -20,14 +21,12 @@ class ProductController extends Controller
      */
     public function getProductsAction(Request $request)
     {
-        if (!empty($request->query->keys()))
-        {
+        if (!empty($request->query->keys())) {
             $id_business = $request->get('business');
-            $id_business = (int) $id_business;
+            $id_business = (int)$id_business;
             $group = $request->get('group');
 
-            if (!$id_business)
-            {
+            if (!$id_business) {
                 throw $this->createNotFoundException(
                     'No business found'
                 );
@@ -99,9 +98,37 @@ class ProductController extends Controller
         return $datas;
     }
 
+
     /**
      *
      * @Rest\Route("/order")
+     * Delete an order
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function postOrderAction(Request $request)
+    {
+        $id_order = $request->request->get('id_order');
+        if (!$id_order) {
+            throw $this->createNotFoundException(
+                'No product order found'
+            );
+        }
+        $manager = $this->getDoctrine()->getManager();
+        $productOrder = $manager->getRepository('ETPlatformBundle:ProductOrder')
+            ->find($id_order);
+        $data = $request->request->all();
+        $productOrder->setQuantity($data['quantity']);
+        $manager->merge($productOrder);
+        $manager->flush();
+        return;
+
+    }
+
+    /**
+     *
+     * @Rest\Route("/order/{id_order}")
      * Delete an order
      *
      * @param Request $request
@@ -109,16 +136,15 @@ class ProductController extends Controller
      */
     public function deleteProductOrderAction(Request $request)
     {
-        $id_product_order = $request->request->get('id_product_order');
-        if (!$id_product_order)
-        {
+        $id_order = $request->get('id_order');
+        if (!$id_order) {
             throw $this->createNotFoundException(
                 'No product order found'
             );
         }
         $manager = $this->getDoctrine()->getManager();
         $productOrder = $manager->getRepository('ETPlatformBundle:ProductOrder')
-            ->find($id_product_order);
+            ->find($id_order);
         $manager->remove($productOrder);
         $manager->flush();
         return true;

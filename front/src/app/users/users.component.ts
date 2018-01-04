@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../user/user.service";
 import * as _ from "lodash";
-import {discardPeriodicTasks} from "@angular/core/testing";
-import {ConfirmModal, ModalComponent} from "../modal/modal.component";
+import {ConfirmModal} from "../modal/modal.component";
 import {SuiModalService} from "ng2-semantic-ui";
 
 @Component({

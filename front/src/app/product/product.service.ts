@@ -17,16 +17,6 @@ export class ProductService {
         const url = `/product/orders`;
         return this.http.get(url);
     }
-    putProduct(product: Product): Observable<Product> {
-        const url = `/product/`;
-        return this.http.put(url, product);
-    }
-    deleteProductOrder(id: number) {
-        /*NOT SURE, DELETE THE PRODUCT OR AN ORDER*/
-        const body = {id_product_order: id};
-        const url = `/product/order`;
-        return this.http.delete(url, body);
-    }
 
     getProductsDetail(): Observable<any> {
         const url = `/product/details`;
@@ -36,5 +26,15 @@ export class ProductService {
     getProductsFree(): Observable<any> {
         const url = `/product/free`;
         return this.http.get(url);
+    }
+
+    putProduct(product: Product): Observable<Product> {
+        const url = `/product/`;
+        return this.http.put(url, product);
+    }
+
+    deleteOrder(id: number) {
+        const url = `/product/order/` + id;
+        return this.http.delete(url);
     }
 }

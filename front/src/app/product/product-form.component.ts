@@ -28,7 +28,7 @@ export class ProductFormComponent implements OnInit {
         const product = new Product(value.name, value.quantity, value.price);
         this.productService.putProduct(product).subscribe(mess => {
             if (mess) {
-                this.router.navigate(['/productsGroup']);
+                this.router.navigate(['/orders']);
             }
         });
     }
