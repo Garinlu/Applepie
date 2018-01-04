@@ -75,6 +75,12 @@ class ETUserManager
         ) {
             $errors[] = 'Mots de passe non identiques.';
         }
+        if (!$userData['gender']) {
+            $errors[] = 'Veuillez sélectionner un sexe.';
+        }
+        if (!$userData['role']) {
+            $errors[] = 'Veuillez sélectionner un rôle.';
+        }
 
         $user = new User();
         $user->setFirstname($userData['firstname']);
@@ -82,6 +88,7 @@ class ETUserManager
         $user->setLastname($userData['lastname']);
         $user->setEmail($userData['email']);
         $user->setPlainPassword($userData['plainPassword']);
+        $user->setGender($userData['gender']);
         if (isset($userData['role']))
             $user->setRoles([$userData['role']]);
         $user->setEnabled(true);

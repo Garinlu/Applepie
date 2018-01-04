@@ -18,28 +18,31 @@ export class RegisterComponent {
     firstname: string;
     lastname: string;
     role;
+    gender;
 
     constructor(private userService: UserService, private router: Router, private alertService: AlertService) {
 
     }
 
     public register() {
-        console.log(this.role);
-
-        this.userService.register(this.email, this.username, this.password, this.passwordVerif, this.firstname, this.lastname, this.role)
+        this.userService.register(this.email, this.username, this.password, this.passwordVerif, this.firstname, this.lastname, this.role, this.gender)
             .subscribe(
                 data => {
-                    if (data) {
+                    if (data && !_.isEmpty(_.head(data))) {
                         let string = "";
                         _.forEach(data, function (value) {
                             string += value + " ";
                         });
                         this.alertService.error(string);
-                    } else {
-                        this.router.navigate(['/users']);
+                        return;
                     }
+                    this.redirect();
                 }
             );
+    }
+    public redirect() {
+        this.router.navigate(['/users']);
+
     }
 
 }
