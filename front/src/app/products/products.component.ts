@@ -43,10 +43,6 @@ export class ProductsComponent implements OnInit {
         return;
     }
 
-    deleteProduct(id: number): void {
-        this.productService.deleteProductOrder(id).subscribe(() => location.reload());
-    }
-
     setFilter() {
         this.products = _.filter(this.products_all, function (o) {
             let reg = new RegExp(this.dataSearch, "i");
