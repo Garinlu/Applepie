@@ -33,8 +33,6 @@ export class UsersComponent implements OnInit {
                 this.users = _.remove(this.users, function (n) {
                     return n.id != id;
                 });
-                console.log(this.users);
-                console.log();
             }));
     }
 
