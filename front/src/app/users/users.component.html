@@ -27,8 +27,8 @@
         <th>Action</th>
     </tr>
     </thead>
-    <tbody *ngFor="let user of users">
-    <tr>
+    <tbody>
+    <tr *ngFor="let user of users; let i = index" [(ngModel)]="users[i]" ngDefaultControl>
         <td>{{user.firstname}} {{user.lastname}}</td>
         <td>{{user.username}}</td>
         <td>{{this.getRole(user.roles)}}</td>
