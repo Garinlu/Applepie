@@ -16,7 +16,8 @@
         <th>Prix total</th>
         <th>Commandé par</th>
         <th>Commandé le</th>
-        <th>Action</th>
+        <th>Reçu ?</th>
+        <th>Suppression</th>
     </tr>
     </thead>
     <tbody>
@@ -28,6 +29,13 @@
         <td>{{order.user.firstname}} {{order.user.lastname}}</td>
         <td>{{order.creationDate | date:'dd/MM/yyyy'}}<br>
             <i>{{order.creationDate | date:'HH:mm'}}</i></td>
+        <td>
+            <div class="ui toggle checkbox">
+                <input *ngIf="order.active" type="checkbox" name="public" checked (change)="setActive(order.id)">
+                <input *ngIf="!order.active" type="checkbox" name="public" (change)="setActive(order.id)">
+                <label></label>
+            </div>
+        </td>
         <td>
             <i (click)="delete(order.id)" class="remove icon"></i>
         </td>

@@ -25,7 +25,6 @@ export class UsersComponent implements OnInit {
     }
 
     delete(id: string) {
-        console.log(this.users);
         this.modalService
             .open(new ConfirmModal("Suppression", "Êtes vous sûr de vouloir supprimer cet utilisateur ? Vous ne pourrez pas revenir en arrière."))
             .onApprove(() => this.userServ.delete(id).subscribe(() => {

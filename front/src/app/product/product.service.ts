@@ -3,6 +3,7 @@ import {Product} from './product.model';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import {HttpClient} from "@angular/common/http";
+import {id} from "@swimlane/ngx-datatable/release/utils";
 
 @Injectable()
 export class ProductService {
@@ -28,9 +29,15 @@ export class ProductService {
         return this.http.get(url);
     }
 
-    putProduct(product: Product): Observable<Product> {
+    putProduct(product: Product) {
         const url = `/product/`;
         return this.http.put(url, product);
+    }
+
+    setActiveProduct(id_order, active) {
+        const url = `/product/order`;
+        let body = {id_order: id_order, active: active};
+        return this.http.post(url, body);
     }
 
     deleteOrder(id: number) {

@@ -10,8 +10,7 @@
     <br>
 
     <div class="field">
-        <sui-select [(ngModel)]="productChoose" [isSearchable]="true" (ngModelChange)="onChange($event)"
-                    icon="list"
+        <sui-select [(ngModel)]="productChoose" [isSearchable]="true" (ngModelChange)="onChange($event)" (ngModelClick)="onChange($event)"
                     placeholder="Choisissez le produit à ajouter à ce chantier">
             <sui-select-option *ngFor="let product of products"
                                [value]="product.id + '; ' + product.productDetail.name + ' - ' + product.price + '€ (restant : ' + product.quantityReal + ')'">

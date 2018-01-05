@@ -7,6 +7,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use ET\PlatformBundle\Entity\ProductOrder;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 
 /**
@@ -81,7 +82,7 @@ class ProductController extends Controller
     /**
      * @Rest\Route("/")
      *
-     * Adding a product buying. If product an product price are already created, just add a productBuy.
+     * Adding a product order. If this product price are already created, just add an order.
      *
      * @param Request $request
      * @return ProductOrder
@@ -102,7 +103,7 @@ class ProductController extends Controller
     /**
      *
      * @Rest\Route("/order")
-     * Delete an order
+     * Edit an order
      *
      * @param Request $request
      * @return void
@@ -110,16 +111,18 @@ class ProductController extends Controller
     public function postOrderAction(Request $request)
     {
         $id_order = $request->request->get('id_order');
+        $data = $request->request->all();
         if (!$id_order) {
-            throw $this->createNotFoundException(
-                'No product order found'
+            throw new HttpException(500,
+                'No product order id found'
             );
         }
         $manager = $this->getDoctrine()->getManager();
         $productOrder = $manager->getRepository('ETPlatformBundle:ProductOrder')
             ->find($id_order);
-        $data = $request->request->all();
-        $productOrder->setQuantity($data['quantity']);
+        if (array_key_exists('active',$data)) {
+            $productOrder->setActive($data['active']);
+        }
         $manager->merge($productOrder);
         $manager->flush();
         return;

@@ -41,6 +41,11 @@ class ProductOrder
     private $user;
 
     /**
+     * @ORM\Column(name="active", type="boolean", options={"default":false})
+     */
+    private $active;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="creationDate", type="datetime")
@@ -115,6 +120,21 @@ class ProductOrder
         $this->user = $user;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param mixed $active
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    }
 
     /**
      * @param $creationDate
