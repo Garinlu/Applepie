@@ -107,6 +107,7 @@ class ETProductManager
      * @param $price
      * @param $quantity
      * @return ProductOrder
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function addProduct($name, $price, $quantity)
     {
@@ -143,6 +144,7 @@ class ETProductManager
         $productOrder->setProduct($product);
         $productOrder->setQuantity($quantity);
         $productOrder->setUser($this->user);
+        $productOrder->setActive(0);
 
         $this->em->persist($productOrder);
         $this->em->flush();
@@ -155,6 +157,7 @@ class ETProductManager
      * @param $id_business
      * @param $quantity
      * @return BusinessProduct|\Exception
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function addProductToBusiness($id_product, $id_business, $quantity)
     {
