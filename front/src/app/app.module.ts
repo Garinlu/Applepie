@@ -37,6 +37,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { RegisterComponent } from './register/register.component';
 import { TemplateLoginComponent } from './template-login/template-login.component';
 import { UsersComponent } from './users/users.component';
+import { ShadowRowTableDirective } from './shadow-row-table.directive';
 
 @NgModule({
     declarations: [
@@ -59,7 +60,8 @@ import { UsersComponent } from './users/users.component';
         OrdersComponent,
         RegisterComponent,
         TemplateLoginComponent,
-        UsersComponent
+        UsersComponent,
+        ShadowRowTableDirective
     ],
     imports: [
         BrowserModule,

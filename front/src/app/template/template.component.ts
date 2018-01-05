@@ -19,7 +19,6 @@ export class TemplateComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log('index');
         this.userService.getMe().subscribe(user => {
                 this.user = user as User;
                 if (_.includes(this.user.roles, 'ROLE_ADMIN')) {

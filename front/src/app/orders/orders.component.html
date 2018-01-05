@@ -21,7 +21,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let order of orders; let i = index" [(ngModel)]="orders[i]" ngDefaultControl>
+    <tr *ngFor="let order of orders; let i = index" [(ngModel)]="orders[i]" ngDefaultControl aplp-shadow-row-table>
         <td>{{order.product.productDetail.name}}</td>
         <td>{{order.quantity}}</td>
         <td>{{order.product.price}}€</td>

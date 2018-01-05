@@ -34,13 +34,8 @@ export class OrdersComponent implements OnInit {
     }
 
     setActive(id_order: number) {
-        let index_order = _.findIndex(this.orders, function (n) {
-            return n.id = id_order;
-        });
-
+        let index_order = _.findIndex(this.orders, {id: id_order});
         this.productService.setActiveProduct(id_order, !this.orders[index_order].active).subscribe(data => {
-            console.log(this.orders[index_order].active);
-            console.log(!this.orders[index_order].active);
             this.orders[index_order].active = !this.orders[index_order].active;
         });
     }

@@ -21,7 +21,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let business of myBusiness" [ngClass]="(!business.status)? 'negative' : ''">
+                <tr *ngFor="let business of myBusiness" [ngClass]="(!business.status)? 'negative' : ''" aplp-shadow-row-table>
                     <td>{{business.name}}</td>
                     <td>
                         <div class="ui toggle checkbox">

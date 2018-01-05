@@ -28,7 +28,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let user of users; let i = index" [(ngModel)]="users[i]" ngDefaultControl>
+    <tr *ngFor="let user of users; let i = index" [(ngModel)]="users[i]" ngDefaultControl aplp-shadow-row-table>
         <td>{{user.firstname}} {{user.lastname}}</td>
         <td>{{user.username}}</td>
         <td>{{this.getRole(user.roles)}}</td>
