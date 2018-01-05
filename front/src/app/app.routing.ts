@@ -13,6 +13,7 @@ import {TemplateComponent} from './template/template.component';
 import {RegisterComponent} from "./register/register.component";
 import {TemplateLoginComponent} from "./template-login/template-login.component";
 import {UsersComponent} from "./users/users.component";
+import {EditUserComponent} from "./edit-user/edit-user.component";
 
 const APP_ROUTES: Routes = [
     {
@@ -33,6 +34,10 @@ const APP_ROUTES: Routes = [
             {
                 path: 'users',
                 component: UsersComponent
+            },
+            {
+                path: 'user/edit/:id',
+                component: EditUserComponent
             },
             {
                 path: 'orders',

@@ -22,9 +22,9 @@ export class TemplateComponent implements OnInit {
         this.userService.getMe().subscribe(user => {
                 this.user = user as User;
                 if (_.includes(this.user.roles, 'ROLE_ADMIN')) {
-                    this.role = 'ADMINISTRATEUR';
+                    this.role = 'administrateur';
                 } else {
-                    this.role = 'UTILISATEUR';
+                    this.role = 'utilisateur';
                 }
             },
             error => {

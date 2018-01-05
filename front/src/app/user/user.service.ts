@@ -43,12 +43,32 @@ export class UserService {
             .post(url, JSON.stringify(b));
     }
 
+    post(user: User) {
+        let url = '/user/' + user.id;
+        let b = {
+            user:
+                {
+                    firstname: user.firstname,
+                    lastname: user.lastname,
+                    roles: user.roles,
+                    gender: user.gender,
+                }
+        };
+
+        return this.http
+            .post(url, JSON.stringify(b));
+    }
+
     logout() {
         return this.http.get('/logout');
     }
 
     getMe(): Observable<User> {
         return this.http.get('/user/me').map(user => user as User);
+    }
+
+    getUser(id: number): Observable<User> {
+        return this.http.get('/user/' + id).map(user => user as User);
     }
 
     getAll(): Observable<User[]> {

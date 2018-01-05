@@ -3,6 +3,8 @@ import {UserService} from "../user/user.service";
 import * as _ from "lodash";
 import {ConfirmModal} from "../modal/modal.component";
 import {SuiModalService} from "ng2-semantic-ui";
+import {User} from "../user/user.model";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-users',
@@ -12,7 +14,7 @@ import {SuiModalService} from "ng2-semantic-ui";
 export class UsersComponent implements OnInit {
     users;
 
-    constructor(private userServ: UserService, private modalService: SuiModalService) {
+    constructor(private userServ: UserService, private modalService: SuiModalService, private router: Router) {
     }
 
     ngOnInit() {
@@ -34,4 +36,8 @@ export class UsersComponent implements OnInit {
             }));
     }
 
+    goEdit(user: User): void {
+        let link = ['/user/edit', user.id];
+        this.router.navigate(link);
+    }
 }

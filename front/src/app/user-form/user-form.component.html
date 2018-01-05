@@ -1,0 +1,75 @@
+<form *ngIf="user" (ngSubmit)="onSubmit()" #userForm="ngForm">
+  <div class="row">
+    <div class="col s8 offset-s2">
+      <div class="card-panel">
+
+        <!-- user name -->
+        <div class="form-group">
+          <label for="firstname">Prénom</label>
+          <input type="text" class="form-control" id="firstname"
+                 [(ngModel)]="user.firstname" name="firstname"
+                 pattern="^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{1,25}$"
+                 required
+                 #firstname="ngModel">
+          <div [hidden]="user.firstname.valid || user.firstname.pristine"
+               class="card-panel red accent-1">
+            Le nom est requis (1-25).
+          </div>
+        </div>
+
+        <!-- user picture -->
+        <div class="form-group">
+          <label for="lastname">Nom</label>
+          <input type="text" class="form-control" id="lastname"
+                 [(ngModel)]="user.lastname" name="lastname"
+                 pattern="^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{1,25}$"
+                 required
+                 #lastname="ngModel">
+          <div [hidden]="user.lastname.valid || user.lastname.pristine"
+               class="card-panel red accent-1">
+            Le nom est requis (1-25).
+          </div>
+        </div>
+
+        <!-- user hp -->
+        <div class="form-group">
+          <label for="gender">Sexe</label>
+          <div class="field">
+            <sui-select class="form-control" placeholder="Choisir le sexe de l'utilisateur" [(ngModel)]="user.gender" #gender="ngModel" name="gender" id="gender">
+              <sui-select-option value="male"></sui-select-option>
+              <sui-select-option value="female"></sui-select-option>
+            </sui-select>
+          </div>
+        </div>
+
+        <!-- user roles -->
+        <div class="form-group">
+          <label for="roles">Rôles</label>
+          <div *ngFor="let role of roles" class="row">
+            <input type="checkbox"
+                   class="filled-in"
+                   id="{{ role }}"
+                   [value]="role"
+                   [checked]="hasRole(role)"
+                   (change)="selectRole($event, role)"
+            />
+            <label [attr.for]="role">
+              <span>{{ role }}</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Submit button -->
+        <div class="divider"></div>
+        <div class="section center">
+          <button type="submit"
+                  class="waves-effect waves-light btn"
+                  [disabled]="!userForm.form.valid">
+            Valider</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>
+<h3 *ngIf="!user" class="center">Aucun utilisateur à éditer...</h3>

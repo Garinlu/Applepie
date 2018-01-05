@@ -34,6 +34,7 @@
         <td>{{this.getRole(user.roles)}}</td>
         <td>
             <i (click)="delete(user.id)" class="remove user icon"></i>
+            <i (click)="goEdit(user)" class="edit icon"></i>
         </td>
     </tr>
     </tbody>

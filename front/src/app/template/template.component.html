@@ -28,11 +28,12 @@
     </div>
 
     <div class="ui right fixed vertical menu" *ngIf="user" style="margin-left:100px;">
+
         <div class="item">
             <i class="{{user.gender}} icon"></i> {{user.firstname}} {{user.lastname}}
         </div>
-        <div class="item">
-            Rôle : {{role}}
+        <div class="item" [style.color]="'white'" [style.background-color]="role | userRoleColor" >
+            {{role | uppercase}}
         </div>
         <a class="item" (click)="logout()">
             Déconnexion

@@ -38,6 +38,9 @@ import { RegisterComponent } from './register/register.component';
 import { TemplateLoginComponent } from './template-login/template-login.component';
 import { UsersComponent } from './users/users.component';
 import { ShadowRowTableDirective } from './shadow-row-table.directive';
+import { UserRoleColorPipe } from './user-role-color.pipe';
+import { UserFormComponent } from './user-form/user-form.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
     declarations: [
@@ -61,7 +64,10 @@ import { ShadowRowTableDirective } from './shadow-row-table.directive';
         RegisterComponent,
         TemplateLoginComponent,
         UsersComponent,
-        ShadowRowTableDirective
+        ShadowRowTableDirective,
+        UserRoleColorPipe,
+        UserFormComponent,
+        EditUserComponent
     ],
     imports: [
         BrowserModule,

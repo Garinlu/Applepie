@@ -104,6 +104,28 @@ class ETUserManager
         return $response;
     }
 
+    public function postUser($id, $userData)
+    {
+        $user = $this->em->getRepository('ETPlatformBundle:User')->find($id);
+        if ($userData['firstname']) {
+            $user->setFirstname($userData['firstname']);
+        }
+        if ($userData['lastname']) {
+            $user->setLastname($userData['lastname']);
+        }
+        if ($userData['gender']) {
+            $user->setGender($userData['gender']);
+        }
+        if ($userData['roles']) {
+            $user->setRoles($userData['roles']);
+        }
+
+        $user->setEnabled(true);
+
+        $this->userManager->updateUser($user);
+        return;
+    }
+
     public function getAllUsers()
     {
         return $this->em->getRepository('ETPlatformBundle:User')->findAll();
