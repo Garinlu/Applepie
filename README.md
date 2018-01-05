@@ -7,11 +7,11 @@ Applepie is a web application. The aim goal is to manage products from the stock
 ## Database
 ![alt text](Applepie.png "Database diagram")
 
-This schema have been created on 12/01/2017.
+This schema has been updated on 12/04/2017.
 
 ## Technologies
 Symfony3 : API Rest backend ; use Doctrine 2, FOSRest, FOSUser.
-Angular4 : front ;
+Angular4 : front ; Semantic UI ; lodash
 
 ## What you need
 * MySQL Database
@@ -31,4 +31,4 @@ Angular4 : front ;
 The project is ready. if you don't have a Apache or Nginx (for example) environment, you can run (in the project racine) ```php bin/console server:run```.
 
 ## Contact / Comments
-Please open an issue. I always answer at every issue.
+Please open an issue if needed.
