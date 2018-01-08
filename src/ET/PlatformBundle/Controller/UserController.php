@@ -47,7 +47,6 @@ class UserController extends Controller
         !$this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN'))
             throw new HttpException('500', 'Seul un administrateur peut éditer un utilisateur différent de vous.');
 
-        $id = $request->get('id');
         $manager = $this->getDoctrine()->getManager();
 
         $user = $manager->getRepository('ETPlatformBundle:User')
