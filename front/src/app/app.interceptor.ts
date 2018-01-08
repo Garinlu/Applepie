@@ -21,7 +21,12 @@ export class AppInterceptor implements HttpInterceptor {
             .catch((err: any) => {
                 if (err instanceof HttpErrorResponse) {
                     if (err.status === 401 || err.status === 403 || err.status === 0) {
-                        this.router.navigate(['/login']);
+                        let reg = new RegExp('users', "i");
+                        if (reg.test(window.location.href)) {
+                            this.router.navigate(['/index']);
+                        } else {
+                            this.router.navigate(['/login']);
+                        }
                     }
                     else if (err.status === 500) {
                         let err_mess = err.error.error.exception[0].message;
