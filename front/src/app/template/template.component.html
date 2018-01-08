@@ -1,6 +1,6 @@
 <div *ngIf="user">
     <nav>
-        <div class="ui left fixed vertical menu">
+        <div class="ui" aplp-responsive-menu [namemenu]="'main menu'">
             <div class="item">
                 <a style="margin-right: 2%" [routerLink]="['/index']">
                     <img src="/img/logo.png" alt="Eurotoiture" style="height: 50px">
@@ -20,14 +20,14 @@
             </a>
         </div>
     </nav>
-    <div class="ui container">
+    <div class="ui container" style="margin-top: 100px">
         <div class="ui message">
             <alert></alert>
             <router-outlet></router-outlet>
         </div>
     </div>
 
-    <div class="ui right fixed vertical menu" *ngIf="user" style="margin-left:100px;">
+    <div class="ui" *ngIf="user" style="margin-left:100px;" aplp-responsive-menu [namemenu]="'user menu'">
 
         <div class="item">
             <i class="{{user.gender}} icon"></i> {{user.firstname}} {{user.lastname}}

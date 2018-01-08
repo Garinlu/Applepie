@@ -41,6 +41,7 @@ import { ShadowRowTableDirective } from './shadow-row-table.directive';
 import { UserRoleColorPipe } from './user-role-color.pipe';
 import { UserFormComponent } from './user-form/user-form.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { ResponsiveMenuDirective } from './responsive-menu.directive';
 
 @NgModule({
     declarations: [
@@ -67,7 +68,8 @@ import { EditUserComponent } from './edit-user/edit-user.component';
         ShadowRowTableDirective,
         UserRoleColorPipe,
         UserFormComponent,
-        EditUserComponent
+        EditUserComponent,
+        ResponsiveMenuDirective
     ],
     imports: [
         BrowserModule,
