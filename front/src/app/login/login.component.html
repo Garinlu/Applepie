@@ -1,4 +1,5 @@
-<a [routerLink]="['/register']">Inscription</a>
-<input type="text" [(ngModel)]="username" required>
-<input type="password" [(ngModel)]="password" required>
-<button (click)="login()" class="ui button blue inverted">CONNEXION</button>
+<div>
+    <input type="text" [(ngModel)]="username" required>
+    <input type="password" [(ngModel)]="password" required>
+    <input type="submit" (click)="login()" class="ui button blue inverted" value="CONNEXION">
+</div>
