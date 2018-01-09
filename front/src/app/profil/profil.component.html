@@ -1,0 +1,41 @@
+<h2 class="ui center aligned icon header">
+    <i class="circular users icon"></i>
+    {{me.firstname}} {{me.lastname}}
+</h2>
+<br>
+<br>
+<div class="ui grid">
+    <div class="seven wide column centered">
+        <div class="ui form">
+            <div class="field">
+                <label>Prénom</label>
+                <div class="fields">
+                    <div class="field">
+                        <input type="text" value="{{me.firstname}}" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label>Nom</label>
+                <div class="fields">
+                    <div class="field">
+                        <input type="text" value="{{me.lastname}}" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label>Pseudo</label>
+                <div class="fields">
+                    <div class="field">
+                        <input type="text" value="{{me.username}}" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="one wide column centered"></div>
+    <div class="seven wide column centered">
+        <h3 class="ui header" style="color: white; font-weight: bold">Mes chantiers</h3>
+        <app-list-businesses></app-list-businesses>
+    </div>
+</div>

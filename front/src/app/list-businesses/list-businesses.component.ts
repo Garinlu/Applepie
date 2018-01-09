@@ -20,7 +20,8 @@ export class ListBusinessesComponent implements OnInit {
         this.busiServ.getBusinesses(this.currentPage).subscribe(businesses => {
             this.myBusiness_all = businesses['business'];
             this.myBusiness = this.myBusiness_all;
-            this.listPage = _.range(1, businesses['nb_pages'] + 1);
+            if (businesses['nb_pages'] > 1)
+                this.listPage = _.range(1, businesses['nb_pages'] + 1);
         });
     }
 
@@ -38,7 +39,7 @@ export class ListBusinessesComponent implements OnInit {
         }.bind(this));
     }
 
-    goToPage(page){
+    goToPage(page) {
         this.currentPage = page;
         this.busiServ.getBusinesses(this.currentPage).subscribe(businesses => {
             this.myBusiness_all = businesses['business'];

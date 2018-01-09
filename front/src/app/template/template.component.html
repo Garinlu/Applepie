@@ -35,6 +35,9 @@
         <div class="item" [style.color]="'white'" [style.background-color]="role | userRoleColor" >
             {{role | uppercase}}
         </div>
+        <a class="item" (click)="profil()">
+            Profil
+        </a>
         <a class="item" (click)="logout()">
             Déconnexion
         </a>

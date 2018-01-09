@@ -14,6 +14,7 @@ import {RegisterComponent} from "./register/register.component";
 import {TemplateLoginComponent} from "./template-login/template-login.component";
 import {UsersComponent} from "./users/users.component";
 import {EditUserComponent} from "./edit-user/edit-user.component";
+import {ProfilComponent} from "./profil/profil.component";
 
 const APP_ROUTES: Routes = [
     {
@@ -66,6 +67,10 @@ const APP_ROUTES: Routes = [
             {
                 path: 'register',
                 component: RegisterComponent
+            },
+            {
+                path: 'profil',
+                component: ProfilComponent
             }
         ]
 

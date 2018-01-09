@@ -45,4 +45,8 @@ export class TemplateComponent implements OnInit {
             });
 
     }
+
+    profil() {
+        this.router.navigate(['/profil']);
+    }
 }

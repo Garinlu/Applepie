@@ -44,6 +44,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { ResponsiveMenuDirective } from './responsive-menu.directive';
 import { HammerDirective } from './hammer.directive';
 import {RmColumnDirective} from "./rm-column.directive";
+import { ProfilComponent } from './profil/profil.component';
 
 @NgModule({
     declarations: [
@@ -73,7 +74,8 @@ import {RmColumnDirective} from "./rm-column.directive";
         EditUserComponent,
         ResponsiveMenuDirective,
         HammerDirective,
-        RmColumnDirective
+        RmColumnDirective,
+        ProfilComponent
     ],
     imports: [
         BrowserModule,
