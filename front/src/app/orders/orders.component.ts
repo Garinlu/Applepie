@@ -3,6 +3,7 @@ import {ProductService} from '../product/product.service';
 import * as _ from "lodash";
 import {ConfirmModal} from "../modal/modal.component";
 import {SuiModalService} from "ng2-semantic-ui";
+import 'hammerjs';
 
 @Component({
     selector: 'app-orders',
@@ -38,6 +39,10 @@ export class OrdersComponent implements OnInit {
         this.productService.setActiveProduct(id_order, !this.orders[index_order].active).subscribe(data => {
             this.orders[index_order].active = !this.orders[index_order].active;
         });
+    }
+
+    doSwipe(id: number) {
+        this.delete(id);
     }
 
 }

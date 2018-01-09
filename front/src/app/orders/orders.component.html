@@ -7,7 +7,7 @@
     </button>
 </a>
 <hr class="my-4">
-<table class="ui celled table">
+<table class="ui celled unstackable table">
     <thead>
     <tr>
         <th>Nom du produit</th>
@@ -17,17 +17,20 @@
         <th>Commandé par</th>
         <th>Commandé le</th>
         <th>Reçu ?</th>
-        <th>Suppression</th>
+        <th aplp-rm-column>Suppression</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let order of orders; let i = index" [(ngModel)]="orders[i]" ngDefaultControl aplp-shadow-row-table>
-        <td>{{order.product.productDetail.name}}</td>
-        <td>{{order.quantity}}</td>
-        <td>{{order.product.price}}€</td>
-        <td>{{order.product.price * order.quantity}}€</td>
-        <td>{{order.user.firstname}} {{order.user.lastname}}</td>
-        <td>{{order.creationDate | date:'dd/MM/yyyy'}}<br>
+    <tr *ngFor="let order of orders; let i = index" [(ngModel)]="orders[i]"
+        ngDefaultControl
+        aplp-shadow-row-table>
+
+        <td aplp-hammer [id]="order.id" (onGesture)="doSwipe($event)">{{order.product.productDetail.name}}</td>
+        <td aplp-hammer [id]="order.id" (onGesture)="doSwipe($event)">{{order.quantity}}</td>
+        <td aplp-hammer [id]="order.id" (onGesture)="doSwipe($event)">{{order.product.price}}€</td>
+        <td aplp-hammer [id]="order.id" (onGesture)="doSwipe($event)">{{order.product.price * order.quantity}}€</td>
+        <td aplp-hammer [id]="order.id" (onGesture)="doSwipe($event)">{{order.user.firstname}} {{order.user.lastname}}</td>
+        <td aplp-hammer [id]="order.id" (onGesture)="doSwipe($event)">{{order.creationDate | date:'dd/MM/yyyy'}}<br>
             <i>{{order.creationDate | date:'HH:mm'}}</i></td>
         <td>
             <div class="ui toggle checkbox">
@@ -36,7 +39,7 @@
                 <label></label>
             </div>
         </td>
-        <td>
+        <td aplp-rm-column>
             <i (click)="delete(order.id)" class="remove icon"></i>
         </td>
     </tr>

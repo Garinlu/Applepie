@@ -42,6 +42,8 @@ import { UserRoleColorPipe } from './user-role-color.pipe';
 import { UserFormComponent } from './user-form/user-form.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { ResponsiveMenuDirective } from './responsive-menu.directive';
+import { HammerDirective } from './hammer.directive';
+import {RmColumnDirective} from "./rm-column.directive";
 
 @NgModule({
     declarations: [
@@ -69,7 +71,9 @@ import { ResponsiveMenuDirective } from './responsive-menu.directive';
         UserRoleColorPipe,
         UserFormComponent,
         EditUserComponent,
-        ResponsiveMenuDirective
+        ResponsiveMenuDirective,
+        HammerDirective,
+        RmColumnDirective
     ],
     imports: [
         BrowserModule,
