@@ -15,7 +15,6 @@ export class ProfilComponent implements OnInit {
 
     ngOnInit() {
         this.me = this.template.user;
-        console.log(this.me);
     }
 
 }
