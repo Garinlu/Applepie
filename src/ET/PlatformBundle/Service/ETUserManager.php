@@ -135,6 +135,6 @@ class ETUserManager
 
     public function getAllUsers()
     {
-        return $this->em->getRepository('ETPlatformBundle:User')->findAll();
+        return $this->em->getRepository('ETPlatformBundle:User')->findBy(array('enabled' => true));
     }
 }

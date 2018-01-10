@@ -30,11 +30,10 @@ class BusinessController extends Controller
 
         $offset = $this->pagination($request->get('page'));
         $productsMana = $this->container->get('et_platform.business');
-        if ($user->hasRole('ROLE_ADMIN'))
-        {
+        if ($user->hasRole('ROLE_ADMIN')) {
             $repoBusi = $this->getDoctrine()->getManager()->getRepository('ETPlatformBundle:Business');
             return array('business' => $productsMana->getClassifiedStatusBusiness(
-                $repoBusi->findBy(array(), array('id' => 'DESC'), $this->NB_BUSINESS_PAGE, $offset)
+                $repoBusi->findBy(array('active' => true), array('id' => 'DESC'), $this->NB_BUSINESS_PAGE, $offset)
             ),
                 'nb_pages' => $repoBusi->getNumberBusiness() / $this->NB_BUSINESS_PAGE);
         }
@@ -42,8 +41,7 @@ class BusinessController extends Controller
         $from = $offset;
         $to = $offset + $this->NB_BUSINESS_PAGE;
         $i = 1;
-        foreach ($list_busi as $busi)
-        {
+        foreach ($list_busi as $busi) {
             if ($i < $from || $i > $to)
                 $list_busi->removeElement($busi);
         }
@@ -60,8 +58,7 @@ class BusinessController extends Controller
     public function getBusinessAction(Request $request)
     {
         $id_business = $request->get('id');
-        if (!$id_business)
-        {
+        if (!$id_business) {
             throw new HttpException(500,
                 'Aucun business trouvé'
             );
@@ -72,8 +69,7 @@ class BusinessController extends Controller
             ->getDoctrine()
             ->getManager()
             ->getRepository('ETPlatformBundle:Business')->find($id_business);
-        if ($business->getStatus() == 0 && !$user->hasRole("ROLE_ADMIN"))
-        {
+        if (!$business->isActive() && !$user->hasRole("ROLE_ADMIN")) {
             throw new HttpException(500,
                 'Ce chantier n\'est plus actif. Seul un administrateur peut le visualiser/modifier.'
             );
@@ -89,8 +85,7 @@ class BusinessController extends Controller
     public function getUsersOfBusinessAction(Request $request)
     {
         $id_business = $request->get('id');
-        if (!$id_business)
-        {
+        if (!$id_business) {
             throw new HttpException(500,
                 'Aucun business trouvé'
             );
@@ -268,8 +263,7 @@ class BusinessController extends Controller
     public function pagination($page)
     {
         $offset = 0;
-        if (!empty($page))
-        {
+        if (!empty($page)) {
             if (!intval($page))
                 return null;
             $page = intval($page);

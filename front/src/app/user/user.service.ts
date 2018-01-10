@@ -53,7 +53,7 @@ export class UserService {
                     lastname: user.lastname,
                     roles: user.roles,
                     gender: user.gender,
-                    phone: user.phone,
+                    phone: user.phone
                 }
         };
 

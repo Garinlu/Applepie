@@ -1,5 +1,5 @@
 export class Business {
-    constructor(public id, public name: string, public address: string) {
+    constructor(public id, public name: string, public address: string, public active: boolean) {
 
     }
 }

@@ -34,7 +34,7 @@ class ETBusinessManager
         $business_off = array();
         foreach ($business as $busi)
         {
-            ($busi->getStatus()) ? $business_on[] = $busi : $business_off[] = $busi;
+            ($busi->isActive()) ? $business_on[] = $busi : $business_off[] = $busi;
         }
         return array_merge($business_on, $business_off);
     }
