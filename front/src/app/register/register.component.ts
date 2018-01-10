@@ -3,31 +3,32 @@ import {AlertService} from "../alert/alert.service";
 import {UserService} from "../user/user.service";
 import {Router} from "@angular/router";
 import * as _ from "lodash";
+import {User} from "../user/user.model";
 
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
-
-    email: string;
-    username: string;
-    password: string;
+export class RegisterComponent implements OnInit{
+    user: User;
     passwordVerif: string;
-    firstname: string;
-    lastname: string;
-    role;
-    gender;
-    phone;
 
     constructor(private userService: UserService, private router: Router, private alertService: AlertService) {
 
     }
 
+    ngOnInit(): void {
+        this.user = new User();
+    }
+
     public register() {
-        this.userService.register(this.email, this.username, this.password, this.passwordVerif, this.firstname,
-            this.lastname, this.role, this.gender, this.phone)
+        if (this.user.password != this.passwordVerif) {
+            this.alertService.error('Mots de passes pas identiques.');
+            return;
+        }
+
+        this.userService.register(this.user)
             .subscribe(
                 data => {
                     if (data && !_.isEmpty(_.head(data))) {
@@ -42,6 +43,7 @@ export class RegisterComponent {
                 }
             );
     }
+
     public redirect() {
         this.router.navigate(['/users']);
 

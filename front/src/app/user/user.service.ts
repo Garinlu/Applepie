@@ -22,22 +22,10 @@ export class UserService {
             .post(url, body);
     }
 
-    register(email: string, username: string, password: string, passwordVerif: string, firstname: string,
-             lastname: string, role: string, gender: string, phone: string) {
+    register(user: User) {
         let url = '/user/createUser';
         let b = {
-            user:
-                {
-                    email: email,
-                    username: username,
-                    plainPassword: password,
-                    plainPasswordVerif: passwordVerif,
-                    firstname: firstname,
-                    lastname: lastname,
-                    role: role,
-                    gender: gender,
-                    phone: phone
-                }
+            user: user
         };
 
         return this.http
@@ -47,14 +35,7 @@ export class UserService {
     post(user: User) {
         let url = '/user/' + user.id;
         let b = {
-            user:
-                {
-                    firstname: user.firstname,
-                    lastname: user.lastname,
-                    roles: user.roles,
-                    gender: user.gender,
-                    phone: user.phone
-                }
+            user: user
         };
 
         return this.http

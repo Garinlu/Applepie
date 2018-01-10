@@ -8,27 +8,27 @@
 </a>
 
 <hr class="my-4">
-<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+<form #f="ngForm" (ngSubmit)="onSubmit()">
     <div class="ui form">
         <h4 class="ui dividing header">Nom du produit</h4>
         <div class="field">
             <div class="ui input">
                 <input id="name" type="text" required ngModel
-                       name="name" auto-complete [(ngModel)]="myData" [source]="productsName"
+                       name="name" auto-complete [(ngModel)]="product.name" [source]="productsName"
                        autocomplete="off">
             </div>
         </div>
         <h4 class="ui dividing header">Quantité</h4>
         <div class="field">
             <div class="ui input">
-                <input type="number" id="quantity" required ngModel
+                <input [(ngModel)]="product.quantity" type="number" id="quantity" required ngModel
                        name="quantity">
             </div>
         </div>
         <h4 class="ui dividing header">Prix unitaire</h4>
         <div class="field">
             <div class="ui input">
-                <input type="number" id="price" required ngModel
+                <input [(ngModel)]="product.price" type="number" id="price" required ngModel
                        name="price">
             </div>
         </div>

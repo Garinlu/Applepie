@@ -70,15 +70,14 @@ class ETUserManager
         if (!$userData['username'] || $this->userManager->findUserByUsername($userData['username'])) {
             $errors[] = "Nom d'utilisateur existant.";
         }
-        if (!$userData['plainPassword'] || !$userData['plainPasswordVerif']
-            || $userData['plainPasswordVerif'] != $userData['plainPassword']
+        if (!$userData['password']
         ) {
-            $errors[] = 'Mots de passe non identiques.';
+            $errors[] = 'Veuillez ajouter un mot de passe.';
         }
         if (!$userData['gender']) {
             $errors[] = 'Veuillez sélectionner un sexe.';
         }
-        if (!$userData['role']) {
+        if (!$userData['roles']) {
             $errors[] = 'Veuillez sélectionner un rôle.';
         }
         if (!$userData['phone']) {
@@ -90,10 +89,10 @@ class ETUserManager
         $user->setUsername($userData['username']);
         $user->setLastname($userData['lastname']);
         $user->setEmail($userData['email']);
-        $user->setPlainPassword($userData['plainPassword']);
+        $user->setPlainPassword($userData['password']);
         $user->setGender($userData['gender']);
-        if (isset($userData['role']))
-            $user->setRoles([$userData['role']]);
+        if (isset($userData['roles']))
+            $user->setRoles([$userData['roles']]);
         $user->setPhone($userData['phone']);
         $user->setEnabled(true);
 

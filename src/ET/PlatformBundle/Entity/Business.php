@@ -40,7 +40,7 @@ class Business
      *
      * @ORM\Column(name="active", type="boolean", options={"default":true})
      */
-    private $active;
+    private $active = true;
 
     /**
      * Get id

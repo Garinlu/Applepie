@@ -10,13 +10,17 @@ import {Router} from '@angular/router';
         .ng-invalid { border-color: red; }
     `]
 })
-export class BusinessFormComponent {
+export class BusinessFormComponent implements OnInit{
+    business: Business;
 
     constructor(private businessService: BusinessService, private router: Router) {
     }
-    onSubmit(value): void {
-        const business = new Business(0, value.name, value.address);
-        this.businessService.putBusiness(business).subscribe(mess => {
+    ngOnInit() {
+        this.business = new Business();
+    }
+
+    onSubmit(): void {
+        this.businessService.putBusiness(this.business).subscribe(mess => {
             if (mess) {
                 this.router.navigate(['/businesses']);
             }

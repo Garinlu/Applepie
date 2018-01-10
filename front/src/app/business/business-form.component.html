@@ -6,16 +6,16 @@
     </button>
 </a>
 <hr class="my-4">
-<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+<form #f="ngForm" (ngSubmit)="onSubmit()">
     <div class="ui form">
         <h4 class="ui dividing header">Nom du chantier</h4>
         <div class="field">
-            <input id="name" type="text" class="form-control" required ngModel
+            <input [(ngModel)]="business.name" id="name" type="text" class="form-control" required ngModel
                    name="name">
         </div>
         <h4 class="ui dividing header">Adresse du chantier</h4>
         <div class="field">
-            <input id="address" type="text" class="form-control" required ngModel
+            <input [(ngModel)]="business.address" id="address" type="text" class="form-control" required ngModel
                    name="address">
         </div>
         <div class="field">

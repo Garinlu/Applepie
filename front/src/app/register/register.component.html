@@ -13,33 +13,33 @@
     <div class="field">
         <div class="two fields">
             <div class="field">
-                <input type="text" [(ngModel)]="firstname" placeholder="Prénom">
+                <input type="text" [(ngModel)]="user.firstname" placeholder="Prénom">
             </div>
             <div class="field">
-                <input type="text" [(ngModel)]="lastname" placeholder="Nom">
+                <input type="text" [(ngModel)]="user.lastname" placeholder="Nom">
             </div>
         </div>
     </div>
     <div class="field">
         <div class="two fields">
             <div class="field">
-                <input type="email" [(ngModel)]="email" required placeholder="Mail">
+                <input type="email" [(ngModel)]="user.email" required placeholder="Mail">
             </div>
             <div class="field">
-                <input type="text" [(ngModel)]="username" required placeholder="Pseudo">
+                <input type="text" [(ngModel)]="user.username" required placeholder="Pseudo">
             </div>
         </div>
     </div>
     <div class="field">
         <div class="three fields">
             <div class="field">
-                <input type="password" [(ngModel)]="password" required placeholder="Mot de passe">
+                <input type="password" [(ngModel)]="user.password" required placeholder="Mot de passe">
             </div>
             <div class="field">
                 <input type="password" [(ngModel)]="passwordVerif" required placeholder="Confirmation">
             </div>
             <div class="field">
-                <input type="text" [(ngModel)]="phone" required placeholder="Téléphone">
+                <input type="text" [(ngModel)]="user.phone" required placeholder="Téléphone">
             </div>
         </div>
     </div>
@@ -47,13 +47,13 @@
         <div class="two fields">
             <div class="two fields">
                 <div class="field">
-                    <sui-select placeholder="Choisir le rôle de l'utilisateur" [(ngModel)]="role">
+                    <sui-select placeholder="Choisir le rôle de l'utilisateur" [(ngModel)]="user.roles">
                         <sui-select-option value="ROLE_ADMIN"></sui-select-option>
                         <sui-select-option value="ROLE_USER"></sui-select-option>
                     </sui-select>
                 </div>
                 <div class="field">
-                    <sui-select placeholder="Choisir le sexe de l'utilisateur" [(ngModel)]="gender">
+                    <sui-select placeholder="Choisir le sexe de l'utilisateur" [(ngModel)]="user.gender">
                         <sui-select-option value="male"></sui-select-option>
                         <sui-select-option value="female"></sui-select-option>
                     </sui-select>

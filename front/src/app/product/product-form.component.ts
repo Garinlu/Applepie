@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
     `]
 })
 export class ProductFormComponent implements OnInit {
+    product: Product;
     productsName: string[] = [];
     ngOnInit() {
         this.productService.getProductsDetail().subscribe(products => {
@@ -21,12 +22,12 @@ export class ProductFormComponent implements OnInit {
             this.productsName = productsN;
 
         });
+        this.product = new Product();
     }
     constructor(private productService: ProductService, private router: Router) {
     }
-    onSubmit(value): void {
-        const product = new Product(value.name, value.quantity, value.price);
-        this.productService.putProduct(product).subscribe(mess => {
+    onSubmit(): void {
+        this.productService.putProduct(this.product).subscribe(mess => {
             if (mess) {
                 this.router.navigate(['/orders']);
             }
