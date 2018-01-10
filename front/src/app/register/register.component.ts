@@ -19,13 +19,15 @@ export class RegisterComponent {
     lastname: string;
     role;
     gender;
+    phone;
 
     constructor(private userService: UserService, private router: Router, private alertService: AlertService) {
 
     }
 
     public register() {
-        this.userService.register(this.email, this.username, this.password, this.passwordVerif, this.firstname, this.lastname, this.role, this.gender)
+        this.userService.register(this.email, this.username, this.password, this.passwordVerif, this.firstname,
+            this.lastname, this.role, this.gender, this.phone)
             .subscribe(
                 data => {
                     if (data && !_.isEmpty(_.head(data))) {

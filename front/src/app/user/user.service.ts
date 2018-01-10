@@ -23,7 +23,7 @@ export class UserService {
     }
 
     register(email: string, username: string, password: string, passwordVerif: string, firstname: string,
-             lastname: string, role: string, gender: string) {
+             lastname: string, role: string, gender: string, phone: string) {
         let url = '/user/createUser';
         let b = {
             user:
@@ -36,6 +36,7 @@ export class UserService {
                     lastname: lastname,
                     role: role,
                     gender: gender,
+                    phone: phone
                 }
         };
 
@@ -52,6 +53,7 @@ export class UserService {
                     lastname: user.lastname,
                     roles: user.roles,
                     gender: user.gender,
+                    phone: user.phone,
                 }
         };
 

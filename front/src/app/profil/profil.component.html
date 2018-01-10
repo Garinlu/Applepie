@@ -32,6 +32,14 @@
                 </div>
             </div>
             <div class="field">
+                <label>Téléphone</label>
+                <div class="fields">
+                    <div class="field">
+                        <input type="text" [(ngModel)]="me.phone" value="{{me.phone}}">
+                    </div>
+                </div>
+            </div>
+            <div class="field">
                 <div class="fields">
                     <div class="field">
                         <button class="ui inverted red button" (click)="updateUser()">Mettre à jour</button>
