@@ -124,7 +124,7 @@ class ETUserManager
             $user->setRoles($userData['roles']);
         }
         if ($userData['phone']) {
-            $user->setRoles($userData['phone']);
+            $user->setPhone($userData['phone']);
         }
 
         $user->setEnabled(true);

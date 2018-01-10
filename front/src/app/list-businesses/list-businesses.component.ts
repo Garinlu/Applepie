@@ -22,7 +22,6 @@ export class ListBusinessesComponent implements OnInit {
             this.myBusiness = this.myBusiness_all;
             if (businesses['nb_pages'] > 1)
                 this.listPage = _.range(1, businesses['nb_pages'] + 1);
-            console.log(this.myBusiness[0].active);
         });
     }
 

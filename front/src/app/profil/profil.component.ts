@@ -21,10 +21,9 @@ export class ProfilComponent implements OnInit {
 
     updateUser() {
         this.userService.post(this.me)
-            .subscribe();
-
-        let link = ['/profil'];
-        this.router.navigate(link);
+            .subscribe(data => {
+                location.reload();
+            });
     }
 
 }
