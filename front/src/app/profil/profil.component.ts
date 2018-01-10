@@ -10,11 +10,18 @@ import {TemplateComponent} from "../template/template.component";
 export class ProfilComponent implements OnInit {
     me: User;
 
-    constructor(private template: TemplateComponent) {
+    constructor(private template: TemplateComponent, private userService: UserService, private router: Router) {
     }
 
     ngOnInit() {
         this.me = this.template.user;
+    }
+
+    updateUser() {
+        this.userService.post(this.me)
+            .subscribe(data => {
+                location.reload();
+            });
     }
 
 }

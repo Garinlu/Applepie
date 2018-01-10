@@ -34,7 +34,7 @@ class ETBusinessManager
         $business_off = array();
         foreach ($business as $busi)
         {
-            ($busi->getStatus()) ? $business_on[] = $busi : $business_off[] = $busi;
+            ($busi->isActive()) ? $business_on[] = $busi : $business_off[] = $busi;
         }
         return array_merge($business_on, $business_off);
     }
@@ -61,12 +61,15 @@ class ETBusinessManager
 
     /**
      * @param $name
+     * @param $address
      * @return Business
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function addBusiness($name)
+    public function addBusiness($name, $address)
     {
         $business = new Business();
         $business->setName($name);
+        $business->setAddress($address);
         $this->em->persist($business);
         $this->em->flush();
         $this->addUserToBusiness($this->user->getId(), $business->getId());
@@ -80,6 +83,7 @@ class ETBusinessManager
      * @param $id_user
      * @param $id_business
      * @return bool
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function addUserToBusiness($id_user, $id_business)
     {
@@ -101,6 +105,7 @@ class ETBusinessManager
      * @param $id_business
      * @return bool
      * @internal param $id_user
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function changeStatus($id_business)
     {
@@ -113,6 +118,12 @@ class ETBusinessManager
         return true;
     }
 
+    /**
+     * @param $id_user
+     * @param $id_business
+     * @return bool
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function deleteUserFromBusiness($id_user, $id_business) {
 
         $user = $this->em->getRepository('ETPlatformBundle:User')

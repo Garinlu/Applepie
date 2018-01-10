@@ -81,6 +81,9 @@ class ETUserManager
         if (!$userData['role']) {
             $errors[] = 'Veuillez sélectionner un rôle.';
         }
+        if (!$userData['phone']) {
+            $errors[] = 'Veuillez indiquer votre numéro de téléphone.';
+        }
 
         $user = new User();
         $user->setFirstname($userData['firstname']);
@@ -91,6 +94,7 @@ class ETUserManager
         $user->setGender($userData['gender']);
         if (isset($userData['role']))
             $user->setRoles([$userData['role']]);
+        $user->setPhone($userData['phone']);
         $user->setEnabled(true);
 
         if (count($errors) == 0) {
@@ -119,6 +123,9 @@ class ETUserManager
         if ($userData['roles']) {
             $user->setRoles($userData['roles']);
         }
+        if ($userData['phone']) {
+            $user->setPhone($userData['phone']);
+        }
 
         $user->setEnabled(true);
 
@@ -128,6 +135,6 @@ class ETUserManager
 
     public function getAllUsers()
     {
-        return $this->em->getRepository('ETPlatformBundle:User')->findAll();
+        return $this->em->getRepository('ETPlatformBundle:User')->findBy(array('enabled' => true));
     }
 }

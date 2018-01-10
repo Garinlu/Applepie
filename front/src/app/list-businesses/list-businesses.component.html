@@ -1,12 +1,9 @@
 <div class="ui middle aligned one column centered grid">
     <div class="row">
         <div class="column">
-            <div class="ui action icon input">
-                <input id="search_busi" type="text" placeholder="Recherche..."
+            <div class="ui input">
+                <input id="search_busi" type="text" placeholder="Nom du chantier..."
                        [(ngModel)]="dataSearch" (keyup)="setFilter()">
-                <select class="ui compact selection dropdown">
-                    <option value="all">Nom du chantier</option>
-                </select>
             </div>
         </div>
     </div>
@@ -21,22 +18,22 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let business of myBusiness" [ngClass]="(!business.status)? 'negative' : ''" aplp-shadow-row-table>
+                <tr *ngFor="let business of myBusiness" [ngClass]="(!business.active)? 'negative' : ''" aplp-shadow-row-table>
                     <td>{{business.name}}</td>
                     <td>
                         <div class="ui toggle checkbox">
-                            <input *ngIf="business.status" type="checkbox" name="public" checked disabled>
-                            <input *ngIf="!business.status" type="checkbox" name="public" disabled>
+                            <input *ngIf="business.active" type="checkbox" name="public" checked disabled>
+                            <input *ngIf="!business.active" type="checkbox" name="public" disabled>
                             <label></label>
                         </div>
                     </td>
                     <td>
-                        <button *ngIf="business.status" class="ui right labeled icon button"
+                        <button *ngIf="business.active" class="ui right labeled icon button"
                                 (click)="goToDetail(business.id)">
                             <i class="right arrow icon"></i>
                             Détails
                         </button>
-                        <button *ngIf="!business.status" class="ui right labeled icon button disabled"
+                        <button *ngIf="!business.active" class="ui right labeled icon button disabled"
                                 (click)="goToDetail(business.id)">
                             <i class="right arrow icon"></i>
                             Détails
@@ -45,7 +42,7 @@
                 </tr>
                 </tbody>
             </table>
-            <div class="ui pagination menu">
+            <div class="ui pagination menu" *ngIf="listPage">
                 <a class="active item" *ngFor="let i of listPage" [ngClass]="{'active': i ===currentPage}"
                 (click)="goToPage(i)">
                     {{i}}

@@ -93,7 +93,7 @@ class UserController extends Controller
 
         $productOrder = $manager->getRepository('ETPlatformBundle:User')
             ->find($id);
-        $manager->remove($productOrder);
+        $productOrder->setEnabled(false);
         $manager->flush();
 
     }

@@ -29,27 +29,18 @@ class Business
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="string", length=255)
+     */
+    private $address;
+
+    /**
      * @var boolean
      *
-     * @ORM\Column(name="status", type="boolean")
+     * @ORM\Column(name="active", type="boolean", options={"default":true})
      */
-    private $status = true;
-
-    /**
-     * @return bool
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param bool $status
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    }
+    private $active;
 
     /**
      * Get id
@@ -85,5 +76,36 @@ class Business
         return $this->name;
     }
 
+    /**
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param bool $active
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    }
 }
 

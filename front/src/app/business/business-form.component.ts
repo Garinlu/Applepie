@@ -15,7 +15,7 @@ export class BusinessFormComponent {
     constructor(private businessService: BusinessService, private router: Router) {
     }
     onSubmit(value): void {
-        const business = new Business(0, value.name);
+        const business = new Business(0, value.name, value.address);
         this.businessService.putBusiness(business).subscribe(mess => {
             if (mess) {
                 this.router.navigate(['/businesses']);
