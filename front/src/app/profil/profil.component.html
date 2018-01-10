@@ -11,7 +11,7 @@
                 <label>Prénom</label>
                 <div class="fields">
                     <div class="field">
-                        <input type="text" value="{{me.firstname}}" disabled>
+                        <input [(ngModel)]="me.firstname" type="text" value="{{me.firstname}}">
                     </div>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                 <label>Nom</label>
                 <div class="fields">
                     <div class="field">
-                        <input type="text" value="{{me.lastname}}" disabled>
+                        <input type="text" [(ngModel)]="me.lastname" value="{{me.lastname}}">
                     </div>
                 </div>
             </div>
@@ -27,7 +27,14 @@
                 <label>Pseudo</label>
                 <div class="fields">
                     <div class="field">
-                        <input type="text" value="{{me.username}}" disabled>
+                        <input type="text" [(ngModel)]="me.username" value="{{me.username}}">
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <div class="fields">
+                    <div class="field">
+                        <button class="ui inverted red button" (click)="updateUser()">Mettre à jour</button>
                     </div>
                 </div>
             </div>

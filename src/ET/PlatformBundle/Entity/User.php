@@ -41,6 +41,13 @@ class User extends BaseUser
     private $gender;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string", length=13, nullable=true)
+     */
+    private $phone;
+
+    /**
      * @var Business
      *
      * @ORM\ManyToMany(targetEntity="ET\PlatformBundle\Entity\Business")
@@ -94,6 +101,22 @@ class User extends BaseUser
     public function setGender($gender)
     {
         $this->gender = $gender;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $phone
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
     }
 
     /**

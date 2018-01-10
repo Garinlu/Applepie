@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from "../user/user.model";
 import {TemplateComponent} from "../template/template.component";
+import {UserService} from "../user/user.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-profil',
@@ -10,12 +12,19 @@ import {TemplateComponent} from "../template/template.component";
 export class ProfilComponent implements OnInit {
     me: User;
 
-    constructor(private template: TemplateComponent) {
+    constructor(private template: TemplateComponent, private userService: UserService, private router: Router) {
     }
 
     ngOnInit() {
         this.me = this.template.user;
-        console.log(this.me);
+    }
+
+    updateUser() {
+        this.userService.post(this.me)
+            .subscribe();
+
+        let link = ['/profil'];
+        this.router.navigate(link);
     }
 
 }

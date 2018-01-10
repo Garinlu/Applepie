@@ -105,6 +105,7 @@ class BusinessController extends Controller
      *
      * @Rest\Route("/users/{id}")
      * @param Request $request
+     * @return
      */
     public function getUsersNotBusinessAction(Request $request)
     {
@@ -149,8 +150,9 @@ class BusinessController extends Controller
     public function putBusinessAction(Request $request)
     {
         $name = $request->request->get('name');
+        $address = $request->request->get('address');
         $productsMana = $this->container->get('et_platform.business');
-        return $productsMana->addBusiness($name);
+        return $productsMana->addBusiness($name, $address);
     }
 
     /**
