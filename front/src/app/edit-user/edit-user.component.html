@@ -1,2 +1,8 @@
-<h1 class="ui header centered">Editer {{ user?.name }}</h1>
+<h1 class="ui header centered">Editer {{ user?.username }}</h1>
+<a routerLink="/users" routerLinkActive="active">
+    <button class="ui left labeled icon button">
+        <i class="left arrow icon"></i>
+        Retour à la liste des utilisateurs
+    </button>
+</a>
 <user-form [user]="user"></user-form>

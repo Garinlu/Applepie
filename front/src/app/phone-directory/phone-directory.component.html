@@ -13,7 +13,7 @@
     <tbody>
     <tr *ngFor="let user of users; let i = index" [(ngModel)]="users[i]" ngDefaultControl aplp-shadow-row-table>
         <td>{{user.firstname}} {{user.lastname}}</td>
-        <td>{{user.phone}}</td>
+        <td><a href="tel:+33{{user.phone}}">{{user.phone}}</a></td>
     </tr>
     </tbody>
 </table>
