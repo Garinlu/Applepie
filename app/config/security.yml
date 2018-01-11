@@ -15,7 +15,10 @@ security:
             pattern: ^/
             form_login:
                 provider: fos_userbundle
+                require_previous_session: false
             logout:       true
+            remember_me:
+              secret: %secret%
             anonymous:    true
 
     access_control:
