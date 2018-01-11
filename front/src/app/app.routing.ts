@@ -21,6 +21,10 @@ const APP_ROUTES: Routes = [
         path: '', component: TemplateComponent,
         children: [
             {
+                path: '',
+                component: IndexComponent
+            },
+            {
                 path: 'index',
                 component: IndexComponent
             },
