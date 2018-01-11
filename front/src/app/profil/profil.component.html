@@ -6,51 +6,37 @@
 <br>
 <div class="ui grid">
     <div class="seven wide column centered">
-        <div class="ui form">
-            <div class="field">
-                <label>Prénom</label>
-                <div class="fields">
-                    <div class="field">
-                        <input [(ngModel)]="me.firstname" type="text" value="{{me.firstname}}">
-                    </div>
+        <div class="ui message">
+            <div class="ui form">
+                <div class="field">
+                    <label>Prénom</label>
+                    <input [(ngModel)]="me.firstname" type="text" value="{{me.firstname}}">
                 </div>
-            </div>
-            <div class="field">
-                <label>Nom</label>
-                <div class="fields">
-                    <div class="field">
-                        <input type="text" [(ngModel)]="me.lastname" value="{{me.lastname}}">
-                    </div>
+                <div class="field">
+                    <label>Nom</label>
+
+                    <input type="text" [(ngModel)]="me.lastname" value="{{me.lastname}}">
                 </div>
-            </div>
-            <div class="field">
-                <label>Pseudo</label>
-                <div class="fields">
-                    <div class="field">
-                        <input type="text" [(ngModel)]="me.username" value="{{me.username}}">
-                    </div>
+                <div class="field">
+                    <label>Pseudo</label>
+                    <input type="text" [(ngModel)]="me.username" value="{{me.username}}">
                 </div>
-            </div>
-            <div class="field">
-                <label>Téléphone</label>
-                <div class="fields">
-                    <div class="field">
-                        <input type="text" [(ngModel)]="me.phone" value="{{me.phone}}">
-                    </div>
+                <div class="field">
+                    <label>Téléphone</label>
+                    <input type="text" [(ngModel)]="me.phone" value="{{me.phone}}">
                 </div>
-            </div>
-            <div class="field">
-                <div class="fields">
-                    <div class="field">
-                        <button class="ui inverted red button" (click)="updateUser()">Mettre à jour</button>
-                    </div>
+                <div class="field">
+                    <button class="ui inverted red button" (click)="updateUser()">Mettre à jour</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="one wide column centered"></div>
     <div class="seven wide column centered">
-        <h3 class="ui header" style="color: white; font-weight: bold">Mes chantiers</h3>
-        <app-list-businesses></app-list-businesses>
+
+        <div class="ui message">
+            <h3 class="ui header" style="color: white; font-weight: bold">Mes chantiers</h3>
+            <app-list-businesses></app-list-businesses>
+        </div>
     </div>
 </div>
