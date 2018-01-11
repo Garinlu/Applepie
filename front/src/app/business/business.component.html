@@ -33,7 +33,8 @@
                 </button>
             </a>
             <br>
-            <div *ngFor="let user of users" class="ui image label">
+            <div *ngFor="let user of users" class="ui image label"  suiPopup popupHeader="{{user.firstname}} {{user.lastname}}"
+                 popupText="Tèl. : {{user.phone}}">
                 <div *ngIf="users_print[user.id]">
                     {{user.firstname}} {{user.lastname}}
                     <i class="delete icon" (click)="deleteUser(user.id)" style="cursor: pointer;"></i>

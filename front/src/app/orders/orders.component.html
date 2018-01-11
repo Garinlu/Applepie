@@ -29,7 +29,9 @@
         <td aplp-hammer [id]="order.id" (onGesture)="doSwipe($event)">{{order.quantity}}</td>
         <td aplp-hammer [id]="order.id" (onGesture)="doSwipe($event)">{{order.product.price}}€</td>
         <td aplp-hammer [id]="order.id" (onGesture)="doSwipe($event)">{{order.product.price * order.quantity}}€</td>
-        <td aplp-hammer [id]="order.id" (onGesture)="doSwipe($event)">{{order.user.firstname}} {{order.user.lastname}}</td>
+        <td aplp-hammer [id]="order.id" suiPopup popupHeader="{{order.user.firstname}} {{order.user.lastname}}"
+            popupText="Tèl. : {{order.user.phone}}">{{order.user.firstname}} {{order.user.lastname}}
+        </td>
         <td aplp-hammer [id]="order.id" (onGesture)="doSwipe($event)">{{order.creationDate | date:'dd/MM/yyyy'}}<br>
             <i>{{order.creationDate | date:'HH:mm'}}</i></td>
         <td>
