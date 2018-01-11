@@ -20,7 +20,7 @@
                 <tbody>
                 <tr *ngFor="let business of myBusiness" [ngClass]="(!business.active)? 'negative' : ''" aplp-shadow-row-table>
                     <td suiPopup popupHeader="{{business.name}}"
-                        popupText="Adresse : {{business.address}}">{{business.name}}</td>
+                        popupText="{{business.address}}">{{business.name}}</td>
                     <td>
                         <div class="ui toggle checkbox">
                             <input *ngIf="business.active" type="checkbox" name="public" checked disabled>
