@@ -7,6 +7,10 @@
     </button>
 </a>
 <hr class="my-4">
+<div class="ui input">
+    <input id="search_busi" type="text" placeholder="Filtrer..."
+           [(ngModel)]="dataSearch" (keyup)="setFilter()">
+</div>
 <table class="ui celled unstackable table">
     <thead>
     <tr>

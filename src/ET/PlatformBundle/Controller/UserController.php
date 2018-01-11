@@ -30,12 +30,11 @@ class UserController extends Controller
      *
      * @return mixed
      */
-    public function getAllUserAction()
+    public function getAllUserAction(Request $request)
     {
-        if (!$this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN'))
-            throw new HttpException(401, 'Seul un administrateur peut ajouter un utilisateur');
+        $name = $request->get('name');
         $userManager = $this->container->get('et_platform.user');
-        $response = $userManager->getAllUsers();
+        $response = $userManager->getAllUsers($name);
         return $response;
     }
 

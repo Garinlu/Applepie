@@ -54,8 +54,8 @@ export class UserService {
         return this.http.get('/user/' + id).map(user => user as User);
     }
 
-    getAll(): Observable<User[]> {
-        return this.http.get('/user/all').map(users => users as User[]);
+    getAll(name:string): Observable<User[]> {
+        return this.http.get('/user/all?name=' + name).map(users => users as User[]);
     }
 
     getUserNotBusiness(id_business): Observable<User[]> {

@@ -45,6 +45,7 @@ import { ResponsiveMenuDirective } from './responsive-menu.directive';
 import { HammerDirective } from './hammer.directive';
 import {RmColumnDirective} from "./rm-column.directive";
 import { ProfilComponent } from './profil/profil.component';
+import { PhoneDirectoryComponent } from './phone-directory/phone-directory.component';
 
 @NgModule({
     declarations: [
@@ -75,7 +76,8 @@ import { ProfilComponent } from './profil/profil.component';
         ResponsiveMenuDirective,
         HammerDirective,
         RmColumnDirective,
-        ProfilComponent
+        ProfilComponent,
+        PhoneDirectoryComponent
     ],
     imports: [
         BrowserModule,

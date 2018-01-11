@@ -10,6 +10,7 @@ namespace ET\PlatformBundle\Service;
 
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use ET\PlatformBundle\Entity\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -132,8 +133,16 @@ class ETUserManager
         return;
     }
 
-    public function getAllUsers()
+    public function getAllUsers($name)
     {
+        $sqlQuery = "SELECT * 
+FROM `fos_user` 
+WHERE `firstname` LIKE '%$name%' OR `firstname` LIKE '%$name%' OR `firstname` LIKE '%$name%' 
+ORDER BY lastname;";
+        $rsm = new ResultSetMappingBuilder($this->em);
+        $rsm->addRootEntityFromClassMetadata(User::class, 'fos_user');
+        $q = $this->em->createNativeQuery($sqlQuery, $rsm);
+        return $q->getResult();
         return $this->em->getRepository('ETPlatformBundle:User')->findBy(array('enabled' => true));
     }
 }

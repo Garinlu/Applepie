@@ -13,12 +13,17 @@ import {Router} from "@angular/router";
 })
 export class UsersComponent implements OnInit {
     users;
+    dataSearch;
 
     constructor(private userServ: UserService, private modalService: SuiModalService, private router: Router) {
     }
 
     ngOnInit() {
-        this.userServ.getAll().subscribe(data => this.users = data);
+        this.userServ.getAll('').subscribe(data => this.users = data);
+    }
+
+    setFilter() {
+        this.userServ.getAll(this.dataSearch).subscribe(data => this.users = data);
     }
 
     getRole(userRole) {

@@ -1,0 +1,19 @@
+<h3 class="ui header">Annuaire téléphonique</h3>
+<div class="ui input">
+    <input id="search_busi" type="text" placeholder="Filtrer..."
+           [(ngModel)]="dataSearch" (keyup)="setFilter()">
+</div>
+<table class="ui celled unstackable table">
+    <thead>
+    <tr>
+        <th>Prénom et nom</th>
+        <th>Tèl.</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users; let i = index" [(ngModel)]="users[i]" ngDefaultControl aplp-shadow-row-table>
+        <td>{{user.firstname}} {{user.lastname}}</td>
+        <td>{{user.phone}}</td>
+    </tr>
+    </tbody>
+</table>
